@@ -37,3 +37,6 @@ Next we need to setup our ShareX to use the custom uploader
     - name, this is how the files will be named, for mine, i use '%h.%mi.%s-%d.%mo.%yy'
 6. The setup is now complete, test your uploader and it 'should' work!
 ```
+
+#Preview of the gallery page
+![Preview of gallery](http://jiy.io/01.25.28-30.04.16.png)
