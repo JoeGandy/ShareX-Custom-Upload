@@ -2,7 +2,9 @@
 A little PHP script created for uploading custom sharex files to your own webserver
 
 # Setup
-First start with the configuration file, found in /u/config.php here there are a few key settings
+First we start by uploading the contents of the 'src' directory to the root of our website
+
+Next is the configuration file, found in /u/config.php here there are a few key settings
 ```
 /* This is a secure key that only you should know, an added layer of security for the image upload */
   'secure_key' => 'somerandomlongstringoftextforkey',
