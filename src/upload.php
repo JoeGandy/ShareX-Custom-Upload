@@ -1,5 +1,5 @@
 <?php
-$config = include('config.php');
+$config = include('u/config.php');
 
 $key = $config['secure_key'];
 $uploadhost = $config['output_url'];
