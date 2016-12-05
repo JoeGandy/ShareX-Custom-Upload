@@ -40,3 +40,8 @@ Next we need to setup our ShareX to use the custom uploader
 
 #Preview of the gallery page
 ![Preview of gallery](http://jiy.io/01.25.28-30.04.16.png)
+
+#Planned Features
+1. Create an option to backup your files as a zip archive (optional through config)
+2. Add a way to display images on hover, so you can quickly scan through (optional through config)
+3. Password login for the page as an option in the config
