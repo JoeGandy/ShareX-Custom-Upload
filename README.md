@@ -39,7 +39,7 @@ Next we need to setup our ShareX to use the custom uploader
 ```
 
 #Preview of the gallery page
-![Preview of gallery](http://jiy.io/22.38.35-07.03.17.png)
+![Preview of gallery](http://jiy.io/22.40.35-07.03.17.png)
 
 #Planned Features
 1. Create an option to backup your files as a zip archive (optional through config)
