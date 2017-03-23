@@ -15,7 +15,7 @@ if (isset($_POST['key'])) {
             $target_parts = explode("/u/", $target);
             echo $uploadhost . end($target_parts);
         } else {
-            echo "Sorry, there was a problem uploading your file.";
+            echo "Sorry, there was a problem uploading your file. (Ensure your directory has 777 permissions)";
         }
     } else {
         header('Location: '.$redirect);
