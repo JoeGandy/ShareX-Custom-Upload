@@ -29,7 +29,6 @@
 					$ignore = Array("index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php");
 					$files1 = scandir(".");
 					?>
-				<!--<a href="gallery.php">View full gallery</a>-->
 				<br>
 				<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 			        <thead>

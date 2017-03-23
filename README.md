@@ -25,7 +25,7 @@ Next is the configuration file, found in /u/config.php here there are a few key 
   'heading_text' => 'Uploading Site',
 ```
 
-#ShareX Configuration
+# ShareX Configuration
 Next we need to setup our ShareX to use the custom uploader
 ```
 1. From the ShareX main application we go to Destinations > Destination Settings
@@ -38,10 +38,10 @@ Next we need to setup our ShareX to use the custom uploader
 6. The setup is now complete, test your uploader and it 'should' work!
 ```
 
-#Preview of the gallery page
+# Preview of the gallery page
 ![Preview of gallery](http://jiy.io/22.40.35-07.03.17.png)
 
-#Planned Features
+# Planned Features
 1. Create an option to backup your files as a zip archive (optional through config)
 2. Add a way to display images on hover, so you can quickly scan through (optional through config)
 3. Password login for the page as an option in the config
