@@ -5,7 +5,7 @@ return array(
     'secure_key' => 'somerandomlongstringoftextforkey',
 
     /* This is the url your output will be, usually http://www.domain.com/u/, also going to this url will be the gallery page */
-    'output_url' => 'http://example.com/u/',
+    'output_url' => 'http://example.com/u/data',
 
     /* This is a redirect url if the script is accessed directly */
     'redirect_url' => 'http://example.com/',

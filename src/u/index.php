@@ -10,11 +10,11 @@
 		<div class="container main_container">
 			<h3><b><?php echo $config['heading_text'];?><br></b></h3>
 
-			<?php 
+			<?php
 			    $si_prefix = array( 'B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB' );
 			    $base = 1024;
 
-			    $bytes = disk_free_space("/"); 
+			    $bytes = disk_free_space("/");
 			    $class = min((int)log($bytes , $base) , count($si_prefix) - 1);
 			    echo "Free space: ";
 			    echo sprintf('%1.2f' , $bytes / pow($base,$class)) . ' ' . $si_prefix[$class] . ' / ';
@@ -27,7 +27,7 @@
 			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){?>
 					<?php
 					$ignore = Array("index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php");
-					$files1 = scandir(".");
+					$files1 = scandir("./data/");
 					?>
 				<br>
 				<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -39,7 +39,7 @@
 			                <th>Type</th>
 			            </tr>
 			        </thead>
-			 
+
 			        <tbody>
 			        	<?php foreach($files1 as $file){
 			        		if(!in_array($file, $ignore)){?>
