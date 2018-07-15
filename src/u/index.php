@@ -1,17 +1,17 @@
 <?php $config = include('config.php'); ?>
 <html>
 	<head>
-		<link href="css/main.css" rel="stylesheet" type="text/css"/>
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-		<link href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+		<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
 		<title><?php echo $config['page_title'];?></title>
 	</head>
-	<body style="overflow:hidden;">
-		<div class="container main_container">
-			<h3><b><?php echo $config['heading_text'];?><br></b></h3>
+	<body>
+		<div class="container">
+			<h3 class="text-center"><?php echo $config['heading_text'];?></h3>
 
-			<?php 
-			    $si_prefix = array( 'B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB' );
+			<p class="text-center"><?php 
+			    $si_prefix = [ 'B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB' ];
 			    $base = 1024;
 
 			    $bytes = disk_free_space("/"); 
@@ -21,12 +21,11 @@
 
 			    $bytes = disk_total_space("/");
 			    $class = min((int)log($bytes , $base) , count($si_prefix) - 1);
-			    echo sprintf('%1.2f' , $bytes / pow($base,$class)) . ' ' . $si_prefix[$class] . '<br />';
+			    echo sprintf('%1.2f' , $bytes / pow($base,$class)) . ' ' . $si_prefix[$class];
 			?>
-			<br>
-			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){?>
-					<?php
-					$ignore = Array("index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php");
+			</p>
+			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){
+					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php"];
 					$files1 = scandir(".");
 					?>
 				<br>
@@ -54,10 +53,10 @@
 			    </table>
 			<?php }?>
 		</div>
-		<script src="//code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
-		<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="text/javascript"></script>
-		<script src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
 	</body>
 </html>
