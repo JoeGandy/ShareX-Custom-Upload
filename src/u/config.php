@@ -19,6 +19,6 @@ return [
     /* Heading text at the top of the gallery page */
     'heading_text' => 'Uploading Site',
 
-    /* Delete file option */
-    'enable_delete' => true,
+    /* Delete file option (true to enable, dissabled by default) */
+    'enable_delete' => false,
 ];
