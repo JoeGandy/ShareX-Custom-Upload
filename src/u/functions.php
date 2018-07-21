@@ -8,7 +8,7 @@ return "<div class=\"alert text-center alert-".$type."\" role=\"alert\">
 
 function isImage($file)
 {
-	$image_formats = ['image/png','image/jpeg','image/jpeg','image/jpeg','image/gif','image/svg+xml','image/svg+xml'];
+	$image_formats = ['image/png','image/jpeg','image/gif','image/svg+xml'];
   if (!in_array($file,$image_formats) )
    return FALSE;
 
