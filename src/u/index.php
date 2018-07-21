@@ -56,7 +56,7 @@
 			                <td><?php echo date ("d M Y H:i", filemtime($file))?></td>
 			                <td><?php echo pathinfo($file, PATHINFO_EXTENSION);?></td>
 					 <?php if($config['enable_delete']){?>   
-					<td><a href="index.php?action=delete&filename=<?php echo $file;?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this File - <?=$file;?> ?');">delete file</a></td>
+					<td><a href="index.php?action=delete&filename=<?php echo $file;?>" class="btn btn-danger"  onclick="return confirm('Are you sure you want to permanently delete this file (<?php echo($file);?>) ?');">delete file</a></td>
 			            	<?php }?> 
 					</tr>
 			            <?php } }?>
