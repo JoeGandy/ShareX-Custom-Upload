@@ -8,7 +8,8 @@ return "<div class=\"alert text-center alert-".$type."\" role=\"alert\">
 
 function isImage($file)
 {
-  if( false === exif_imagetype($file) )
+	$image_formats = ["svg","SVG","jpg","JPG","png","PNG","gif","GIF","JPEG","jpeg"];
+  if (!in_array($file,$image_formats) )
    return FALSE;
 
    return TRUE;

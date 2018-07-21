@@ -67,7 +67,7 @@
 			        		if(!in_array($file, $ignore)){?>
 			            <tr>
 			                <td><a target="_blank" href="<?php echo $config['output_url']; echo($file);?>"
-							<?php if($config['enable_tooltip'] && isImage($file)){?>
+							<?php if($config['enable_tooltip'] && isImage(pathinfo($file, PATHINFO_EXTENSION))){?>
 							data-toggle="tooltip" data-html="true" data-placement="right" title="<img src='<?php echo $config['output_url']; echo($file);?>' width='150px' alt='<?php echo($file);?>'>"
 							<?php }?>><?php echo($file);?></a></td>
 			                <td><?php echo filesize($file);?></td>
