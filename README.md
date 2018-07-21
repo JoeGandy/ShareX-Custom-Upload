@@ -26,6 +26,9 @@ Next is the configuration file, found in /u/config.php here there are a few key 
   
 /* Delete file option (true to enable, disabled by default) */
     'enable_delete' => false,
+    
+/* Show image in tooltip  (true to enable, disabled by default) */
+    'enable_tooltip' => false,
 ```
 
 # ShareX Configuration
