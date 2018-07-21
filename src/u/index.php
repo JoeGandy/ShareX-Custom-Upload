@@ -1,8 +1,18 @@
 <?php $config = include('config.php');
+   	  session_start();
+	  include('functions.php');
    if($config['enable_delete'] && $_GET['action'] && $_GET['action'] == 'delete') {
-       unlink($_GET['filename']);
-       die(header("Location: index.php"));
-   }
+    if(file_exists($_GET['filename'])) {
+    		unlink($_GET['filename']);
+	    	$_SESSION['type'] = 'success';
+	    	$_SESSION['message'] = 'You have successfully deleted <strong>'.$_GET['filename'].'</strong>';
+			die(header('Location: index.php'));
+	}else{
+	    	$_SESSION['type'] = 'danger';
+	    	$_SESSION['message'] = 'File Does Not Exist!';
+			die(header("Location: index.php"));
+		 }
+																				  }
 ?>
 <html>
 	<head>
@@ -30,10 +40,15 @@
 			?>
 			</p>
 			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){
-					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php"];
+					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php","funcitons.php"];
 					$files1 = scandir(".");
+					if(!empty($_SESSION)){
+					echo displayAlert($_SESSION['message'] , $_SESSION['type']);
+					session_destroy();
+					}
 					?>
 				<br>
+
 				<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
@@ -64,7 +79,7 @@
 			    </table>
 			<?php }?>
 		</div>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
 		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
