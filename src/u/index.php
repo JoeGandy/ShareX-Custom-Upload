@@ -1,8 +1,7 @@
 <?php $config = include('config.php');
    if($config['enable_delete'] && $_GET['action'] && $_GET['action'] == 'delete') {
        unlink($_GET['filename']);
-       header("Location:index.php");
-       exit();
+       die(header("Location: index.php"));
    }
 ?>
 <html>
