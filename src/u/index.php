@@ -40,7 +40,7 @@
 			?>
 			</p>
 			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){
-					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php","funcitons.php"];
+					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php","functions.php"];
 					$files1 = scandir(".");
 					if(!empty($_SESSION)){
 					echo displayAlert($_SESSION['message'] , $_SESSION['type']);
