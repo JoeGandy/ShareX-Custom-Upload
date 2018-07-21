@@ -1,4 +1,10 @@
-<?php $config = include('config.php'); ?>
+<?php $config = include('config.php');
+   if($config['enable_delete'] && $_GET['action'] && $_GET['action'] == 'delete') {
+       unlink($_GET['filename']);
+       header("Location:index.php");
+       exit();
+   }
+?>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
@@ -36,6 +42,9 @@
 			                <th>Size (Bytes)</th>
 			                <th>Date</th>
 			                <th>Type</th>
+					<?php if($config['enable_delete']){?>
+					<th>Delete</th>
+					 <?php }?> 
 			            </tr>
 			        </thead>
 			 
@@ -47,7 +56,10 @@
 			                <td><?php echo filesize($file);?></td>
 			                <td><?php echo date ("d M Y H:i", filemtime($file))?></td>
 			                <td><?php echo pathinfo($file, PATHINFO_EXTENSION);?></td>
-			            </tr>
+					 <?php if($config['enable_delete']){?>   
+					<td><a href="index.php?action=delete&filename=<?php echo $file;?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this File - <?=$file;?> ?');">delete file</a></td>
+			            	<?php }?> 
+					</tr>
 			            <?php } }?>
 			        </tbody>
 			    </table>
