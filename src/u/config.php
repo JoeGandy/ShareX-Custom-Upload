@@ -21,4 +21,7 @@ return [
 
     /* Delete file option (true to enable, disabled by default) */
     'enable_delete' => false,
+
+    /* Show image in tooltip  (true to enable, disabled by default) */
+    'enable_tooltip' => false,
 ];
