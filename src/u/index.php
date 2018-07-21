@@ -42,7 +42,7 @@
 			                <th>Date</th>
 			                <th>Type</th>
 					<?php if($config['enable_delete']){?>
-					<th>Delete</th>
+					<th>Option</th>
 					 <?php }?> 
 			            </tr>
 			        </thead>
