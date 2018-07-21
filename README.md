@@ -23,6 +23,9 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 
 /* Heading text at the top of the gallery page */
   'heading_text' => 'Uploading Site',
+  
+/* Delete file option (true to enable, disabled by default) */
+    'enable_delete' => false,
 ```
 
 # ShareX Configuration
