@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 	/* This is a secure key that only you should know, an added layer of security for the image upload */
     'secure_key' => 'somerandomlongstringoftextforkey',
 
@@ -11,11 +11,14 @@ return array(
     'redirect_url' => 'http://example.com/',
 
     /* This is a list of IPs that can access the gallery page (Leave empty for universal access) */
-    'allowed_ips' => array('192.168.0.0', '0.0.0.0'),
+    'allowed_ips' => ['192.168.0.0', '0.0.0.0'],
 
     /* Page title of the gallery page */
     'page_title' => 'My Upload Site',
 
     /* Heading text at the top of the gallery page */
     'heading_text' => 'Uploading Site',
-);
+
+    /* Delete file option */
+    'enable_delete' => true,
+];
