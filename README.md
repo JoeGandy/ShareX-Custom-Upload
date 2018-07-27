@@ -48,4 +48,4 @@ Next we need to setup our ShareX to use the custom uploader
 ![Preview of gallery](http://jiy.io/22.40.35-07.03.17.png)
 
 # Planned Features
-![View the tasks board here](https://github.com/JoeGandy/ShareX-Custom-Upload/projects/1)
+[View the tasks board here](https://github.com/JoeGandy/ShareX-Custom-Upload/projects/1)
