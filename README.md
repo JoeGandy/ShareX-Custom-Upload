@@ -23,6 +23,12 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 
 /* Heading text at the top of the gallery page */
   'heading_text' => 'Uploading Site',
+  
+/* Delete file option (true to enable, disabled by default) */
+    'enable_delete' => false,
+    
+/* Show image in tooltip  (true to enable, disabled by default) */
+    'enable_tooltip' => false,
 ```
 
 # ShareX Configuration
@@ -43,5 +49,5 @@ Next we need to setup our ShareX to use the custom uploader
 
 # Planned Features
 1. Create an option to backup your files as a zip archive (optional through config)
-2. Add a way to display images on hover, so you can quickly scan through (optional through config)
+2. ~~Add a way to display images on hover, so you can quickly scan through (optional through config)~~
 3. Password login for the page as an option in the config
