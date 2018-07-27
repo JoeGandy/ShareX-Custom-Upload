@@ -48,6 +48,4 @@ Next we need to setup our ShareX to use the custom uploader
 ![Preview of gallery](http://jiy.io/22.40.35-07.03.17.png)
 
 # Planned Features
-1. Create an option to backup your files as a zip archive (optional through config)
-2. ~~Add a way to display images on hover, so you can quickly scan through (optional through config)~~
-3. Password login for the page as an option in the config
+![View the tasks board here](https://github.com/JoeGandy/ShareX-Custom-Upload/projects/1)
