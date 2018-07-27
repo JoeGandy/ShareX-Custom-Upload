@@ -16,7 +16,7 @@ Next is the configuration file, found in /u/config.php here there are a few key 
   'redirect_url' => 'http://example.com/',
 
 /* This is a list of IPs that can access the gallery page (Leave empty for universal access) */
-  'allowed_ips' => array('192.168.0.0', '0.0.0.0'),
+  'allowed_ips' => ['192.168.0.0', '0.0.0.0'],
 
 /* Page title of the gallery page */
   'page_title' => 'My Upload Site',
