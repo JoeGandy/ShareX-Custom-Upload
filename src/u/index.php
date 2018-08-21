@@ -26,7 +26,7 @@
 			<h3 class="text-center"><?php echo $config['heading_text'];?></h3>
 
 			<p class="text-center"><?php 
-			    $si_prefix = [ 'B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB' ];
+			    $si_prefix = [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB' , 'EB', 'ZB', 'YB' ];
 			    $base = 1024;
 
 			    $bytes = disk_free_space("/"); 
@@ -40,8 +40,7 @@
 			?>
 			</p>
 			<?php if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){
-					$ignore = ["index.php", "js", "css", ".", "..", "gallery.php", "img", "upload.php","config.php","functions.php"];
-					$files1 = scandir(".");
+					$files1 = preg_grep('/^([^.])/', scandir("."));
 					$finfo = finfo_open(FILEINFO_MIME_TYPE);
 					if(!empty($_SESSION)){
 					echo displayAlert($_SESSION['message'] , $_SESSION['type']);
@@ -65,7 +64,9 @@
 			 
 			        <tbody>
 			        	<?php foreach($files1 as $file){
-			        		if(!in_array($file, $ignore)){?>
+			        		 if(is_dir($file) OR pathinfo($file, PATHINFO_EXTENSION) == 'php'){
+								unset($files1[$key]);
+							} else {?>
 			            <tr>
 			                <td><a target="_blank" href="<?php echo $config['output_url']; echo($file);?>"
 							<?php if($config['enable_tooltip'] && isImage(finfo_file($finfo, $file))){?>
