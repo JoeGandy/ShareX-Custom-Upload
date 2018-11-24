@@ -39,8 +39,8 @@ Next we need to setup our ShareX to use the custom uploader
 3. Request type POST, the url should be http://www.example.com/upload.php
 4. File form name: "d" (without quotation marks)
 5. Arguments are:
-    - key, this should be set to the 'secure key' you set in your config.php
-    - name, this is how the files will be named, for mine, I use '%h.%mi.%s-%d.%mo.%yy'
+    - "key"(without quotation marks), this should be set to the 'secure key' you set in your config.php
+    - "name"(without quotation marks), this is how the files will be named, for mine, I use '%h.%mi.%s-%d.%mo.%yy'
 6. The setup is now complete, test your uploader and it 'should' work!
 ```
 
