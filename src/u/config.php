@@ -25,3 +25,4 @@ return [
     /* Show image in tooltip  (true to enable, disabled by default) */
     'enable_tooltip' => false,
 ];
+?>
