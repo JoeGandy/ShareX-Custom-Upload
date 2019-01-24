@@ -15,12 +15,12 @@ function isImage($file)
    return TRUE;
 }
 
-function generateRandomName($type,$length = 10) {
+function generateRandomName($type,$length) {
 
 	$name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 	 if ( ! file_exists(__DIR__ . "/" . $name . "." . $type)) {
         return $name. "." .$type;
     } else {
-        return generateRandomName($type);
+        return generateRandomName($type,$length);
     }
 }
