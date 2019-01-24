@@ -64,7 +64,7 @@
 			 
 			        <tbody>
 			        	<?php foreach($files1 as $file){
-			        		 if(is_dir($file) OR pathinfo($file, PATHINFO_EXTENSION) == 'php'){
+			        		 if(is_dir($file) || pathinfo($file, PATHINFO_EXTENSION) == 'php'){
 								unset($files1[$key]);
 							} else {?>
 			            <tr>
