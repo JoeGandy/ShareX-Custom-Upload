@@ -28,7 +28,7 @@ return [
     /* Generate random name (true to enable, disabled by default) */
     'enable_random_name' => false,
 
-    /* Select lengh of random name (10 symbols by default) */
+    /* Select lenght of random name (10 symbols by default) */
     'random_name_length' => 10,
 
 ];
