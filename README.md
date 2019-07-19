@@ -14,7 +14,7 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 
 
 /* This request url, so the path pointing to the uplaod.php file */
-'request_url' => 'http://example.com/upload.php',
+  'request_url' => 'http://example.com/upload.php',
 
 /* This is a redirect url if the script is accessed directly */
   'redirect_url' => 'http://example.com/',
