@@ -61,7 +61,7 @@ Alteratively if you have a trouble with the above, below is the old manual setup
 ```
 
 # Preview of the gallery page
-![Preview of gallery](http://jiy.io/22.40.35-07.03.17.png)
+![Preview of gallery](http://u.jiy.io/u/20.54.45-19.07.19.png)
 
 # Planned Features
 [View the tasks board here](https://github.com/JoeGandy/ShareX-Custom-Upload/projects/1)
