@@ -12,7 +12,6 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 /* This is the url your output will be, usually http://www.domain.com/u/, also going to this url will be the gallery page */
   'output_url' => 'http://example.com/u/',
 
-
 /* This request url, so the path pointing to the uplaod.php file */
   'request_url' => 'http://example.com/upload.php',
 
