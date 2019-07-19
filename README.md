@@ -12,11 +12,15 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 /* This is the url your output will be, usually http://www.domain.com/u/, also going to this url will be the gallery page */
   'output_url' => 'http://example.com/u/',
 
+
+/* This request url, so the path pointing to the uplaod.php file */
+'request_url' => 'http://example.com/upload.php',
+
 /* This is a redirect url if the script is accessed directly */
   'redirect_url' => 'http://example.com/',
 
 /* This is a list of IPs that can access the gallery page (Leave empty for universal access) */
-  'allowed_ips' => ['192.168.0.0', '0.0.0.0'],
+  'allowed_ips' => ['::1', '127.0.0.1'],
 
 /* Page title of the gallery page */
   'page_title' => 'My Upload Site',
@@ -38,10 +42,16 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 ```
 
 # ShareX Configuration
-Next we need to setup our ShareX to use the custom uploader
+
+## Automatic setup
+We've added a auto generater to get you up and running quickly in ShareX, simply go to the gallery site, in the config above thats: `http://example.com/u/`
+Once you have access to the gallery, a link will appear the bottom that will generate an import file for shareX to automagically setup the enviroment for you.
+
+## Manual setup
+Alteratively if you have a trouble with the above, below is the old manual setup process
 ```
-1. From the ShareX main application we go to Destinations > Destination Settings
-2. Scroll down to 'custom uploaders' add a new profile
+1. From the ShareX main application we go to Destinations > Custom uploader settings
+2. Add a new profile (Uploaders onthe left)
 3. Request type POST, the url should be http://www.example.com/upload.php
 4. File form name: "d" (without quotation marks)
 5. Arguments are:

@@ -24,3 +24,18 @@ function generateRandomName($type,$length) {
         return generateRandomName($type,$length);
     }
 }
+
+function get_latest_sharex_version() {
+  $opts = [
+      'http' => [
+              'method' => 'GET',
+              'header' => [
+                      'User-Agent: PHP'
+              ]
+      ]
+  ];
+
+  $context = stream_context_create($opts);
+  $content = json_decode(file_get_contents("https://api.github.com/repos/ShareX/ShareX/releases/latest", false, $context));
+  return str_replace('v', '', $content->tag_name);
+}
