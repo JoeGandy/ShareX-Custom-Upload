@@ -1,6 +1,8 @@
 <?php
     $config = include 'config.php';
     include 'functions.php';
+    
+    auth_or_kill();
 
     $result_json = [
         'Version' => get_latest_sharex_version(),

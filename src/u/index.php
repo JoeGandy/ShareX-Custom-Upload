@@ -96,7 +96,23 @@
 				<?php }?>
 				</tbody>
 			</table>
-			<a href="/u/generate_custom_uploader_file.php" target="_blank">Click here</a> to download your custom uploader file for shareX <i>If this gets leaked, change your secure_key and re download this file</i>
+			<br />
+			<br />
+			<p>
+				<a href="/u/generate_custom_uploader_file.php" target="_blank">
+					Click here
+				</a>
+				to download your custom uploader file for shareX
+				<i>If this gets leaked, change your secure_key and re download this file</i>
+			</p>
+				<?php if(isset($config['enable_zip_dump']) && $config['enable_zip_dump']){ ?>
+				<p>
+					<a href="/u/generate_zip_of_files.php" target="_blank">
+						Click here
+					</a>
+					to download your files as a zip archive</a>
+				<p>
+				<?php }?>
 			<?php }else{ ?>
 				<h2>Your IP is blocked from access, whitelist this ip to gain access: "<?php echo $_SERVER['REMOTE_ADDR']; ?>"</h2>
 			<?php } ?>

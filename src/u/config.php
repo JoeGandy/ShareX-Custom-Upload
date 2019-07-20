@@ -28,6 +28,9 @@ return [
     /* Show image in tooltip  (true to enable, disabled by default) */
     'enable_tooltip' => false,
 
+    /* Show link to download all files as .zip (Untested with large archives of files) */
+    'enable_zip_dump' => false,
+
     /* Generate random name (true to enable, disabled by default) */
     'enable_random_name' => false,
 

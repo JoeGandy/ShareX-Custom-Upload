@@ -59,3 +59,14 @@ function get_total_space_string(){
   return sprintf('%1.2f', $bytes / pow($base, $class)).' '.$si_prefix[$class];
 
 }
+
+function auth_or_kill(){
+  $config = include 'config.php';
+  
+  if(
+      !empty($config['allowed_ips']) && 
+      !in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])
+    ){
+    die('You are not authed to continue this action, this ip needs to be whitelisted in the config: \'' . $_SERVER['REMOTE_ADDR'] . '\'');
+  }
+}
