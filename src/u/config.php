@@ -1,7 +1,7 @@
 <?php
 
 return [
-	/* This is a secure key that only you should know, an added layer of security for the image upload */
+    /* This is a secure key that only you should know, an added layer of security for the image upload */
     'secure_key' => 'somerandomlongstringoftextforkey',
 
     /* This is the url your output will be, usually http://www.domain.com/u/, also going to this url will be the gallery page */
@@ -33,5 +33,4 @@ return [
 
     /* Select lenght of random name (10 symbols by default) */
     'random_name_length' => 10,
-
 ];
