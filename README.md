@@ -28,19 +28,19 @@ Next is the configuration file, found in /u/config.php here there are a few key 
   'heading_text' => 'Uploading Site',
   
 /* Delete file option (true to enable, disabled by default) */
-    'enable_delete' => false,
+  'enable_delete' => false,
     
 /* Show image in tooltip  (true to enable, disabled by default) */
-    'enable_tooltip' => false,
+  'enable_tooltip' => false,
 
 /* Show link to download all files as .zip (Untested with large archives of files) */
-    'enable_zip_dump' => false,
+  'enable_zip_dump' => false,
 
 /* Generate random name (true to enable, disabled by default) */
-    'enable_random_name' => false,
+  'enable_random_name' => false,
 
 /* Select length of random name (10 symbols by default) */
-    'random_name_length' => 10,
+  'random_name_length' => 10,
 ```
 
 # ShareX Configuration
