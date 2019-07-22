@@ -15,11 +15,23 @@ if (isset($_POST['key'])) {
     if ($_POST['key'] === $key) {
         $parts = explode('.', $_FILES['d']['name']);
 
-        if ($config['enable_random_name']) {
-            $target = getcwd().'/u/'.generateRandomName(end($parts), $config['random_name_length']);
-        } else {
-            $target = getcwd().'/u/'.$_POST['name'].'.'.end($parts);
+        $first_run = true;
+        $files_exist_counter = 0;
+
+        while($first_run || file_exists($target)){
+            $first_run = false;
+
+            if ($config['enable_random_name']) {
+                $target = getcwd().'/u/'.generateRandomName(end($parts), $config['random_name_length']);
+            } else {
+                if($files_exist_counter++ < 1){
+                    $target = getcwd().'/u/'.$_POST['name'].'.'.end($parts);
+                }else{
+                    $target = getcwd().'/u/'.$_POST['name'].'_'.$files_exist_counter.'.'.end($parts);
+                }
+            }
         }
+
         if (move_uploaded_file($_FILES['d']['tmp_name'], $target)) {
             $target_parts = explode('/u/', $target);
             echo $uploadhost.end($target_parts);
