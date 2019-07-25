@@ -37,7 +37,7 @@
                 ?>
 			</p>
 			<?php
-                if(empty($config['allowed_ips']) || in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])){
+                if(auth_user(false)){
                     $files1 = preg_grep('/^([^.])/', scandir('.'));
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
@@ -114,7 +114,7 @@
 				<p>
 				<?php }?>
 			<?php }else{ ?>
-				<h2>Your IP is blocked from access, whitelist this ip to gain access: "<?php echo $_SERVER['REMOTE_ADDR']; ?>"</h2>
+				<h2>Your IP is blocked from access, whitelist this ip to gain access: "<?php echo get_ip(); ?>"</h2>
 			<?php } ?>
 		</div>
 		<?php if($config['enable_tooltip']){?>

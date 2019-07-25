@@ -60,13 +60,26 @@ function get_total_space_string(){
 
 }
 
-function auth_or_kill(){
+function auth_user($kill_page_if_fail=true){
   $config = include 'config.php';
   
   if(
       !empty($config['allowed_ips']) && 
-      !in_array($_SERVER['REMOTE_ADDR'], $config['allowed_ips'])
+      !in_array(get_ip(), $config['allowed_ips'])
     ){
-    die('You are not authed to continue this action, this ip needs to be whitelisted in the config: \'' . $_SERVER['REMOTE_ADDR'] . '\'');
+      if($kill_page_if_fail){
+        die('You are not authed to continue this action, this ip needs to be whitelisted in the config: \'' . get_ip() . '\'');
+      }else{
+        return false;
+      }
+  }
+  return true;
+}
+
+function get_ip(){
+  if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+    return $_SERVER["HTTP_CF_CONNECTING_IP"];
+  }else{
+    return $_SERVER['REMOTE_ADDR'];
   }
 }
