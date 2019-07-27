@@ -36,11 +36,11 @@ if (isset($_POST['key'])) {
             $target_parts = explode('/u/', $target);
             echo $uploadhost.end($target_parts);
         } else {
-            echo 'Sorry, there was a problem uploading your file. (Ensure your directory has 777 permissions)';
+            echo 'File upload failed, ensure permissions are writeable on the directory (777), see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
         }
     } else {
-        header('Location: '.$redirect);
+        echo 'The key provided does not match your config.php, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
     }
 } else {
-    header('Location: '.$redirect);
+    echo 'You may not upload with the key parameter, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
 }
