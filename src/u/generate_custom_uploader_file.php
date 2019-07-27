@@ -2,7 +2,7 @@
     $config = include 'config.php';
     include 'functions.php';
     
-    auth_or_kill();
+    auth_user();
 
     $result_json = [
         'Version' => get_latest_sharex_version(),

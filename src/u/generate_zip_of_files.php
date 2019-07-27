@@ -2,7 +2,7 @@
 $config = include 'config.php';
 include 'functions.php';
 
-auth_or_kill();
+auth_user();
 
 if(isset($config['enable_zip_dump']) && $config['enable_zip_dump']){
   ini_set("memory_limit", "-1");
