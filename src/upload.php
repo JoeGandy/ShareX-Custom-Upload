@@ -42,5 +42,5 @@ if (isset($_POST['key'])) {
         echo 'The key provided does not match your config.php, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
     }
 } else {
-    echo 'You may not upload with the key parameter, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
+    echo 'You may not upload without the key parameter, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
 }
