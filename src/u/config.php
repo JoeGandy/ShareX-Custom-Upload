@@ -36,4 +36,10 @@ return [
 
     /* Select lenght of random name (10 symbols by default) */
     'random_name_length' => 10,
+    
+    /* if set to false the directory_for_uploads will define the folder for uploads */
+    'upload_to_root' => false,
+    
+    /* defines an custom upload directory (default is u) */
+    'directory_for_uploads' => 'u',
 ];
