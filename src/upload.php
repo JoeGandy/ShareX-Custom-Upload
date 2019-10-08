@@ -17,23 +17,29 @@ if (isset($_POST['key'])) {
 
         $first_run = true;
         $files_exist_counter = 0;
-
+        
+        if ($config['upload_to_root']) {
+            $target_dir = '/';
+        }else {
+            $target_dir = '/'. $config['directory_for_uploads'] . '/';
+        }
+            
         while($first_run || file_exists($target)){
             $first_run = false;
 
             if ($config['enable_random_name']) {
-                $target = getcwd().'/u/'.generateRandomName(end($parts), $config['random_name_length']);
+                $target = getcwd(). $target_dir .generateRandomName(end($parts), $config['random_name_length']);
             } else {
                 if($files_exist_counter++ < 1){
-                    $target = getcwd().'/u/'.$_POST['name'].'.'.end($parts);
+                    $target = getcwd(). $target_dir .$_POST['name'].'.'.end($parts);
                 }else{
-                    $target = getcwd().'/u/'.$_POST['name'].'_'.$files_exist_counter.'.'.end($parts);
+                    $target = getcwd(). $target_dir .$_POST['name'].'_'.$files_exist_counter.'.'.end($parts);
                 }
             }
         }
 
         if (move_uploaded_file($_FILES['d']['tmp_name'], $target)) {
-            $target_parts = explode('/u/', $target);
+            $target_parts = explode($target_dir, $target);
             echo $uploadhost.end($target_parts);
         } else {
             echo 'File upload failed, ensure permissions are writeable on the directory (777), see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
