@@ -41,6 +41,12 @@ Next is the configuration file, found in /u/config.php here there are a few key 
 
 /* Select length of random name (10 symbols by default) */
   'random_name_length' => 10,
+
+/* if set to false the directory_for_uploads will define the folder for uploads, else the root directory will be used */
+  'upload_to_root' => false,
+    
+/* defines an custom upload directory (default is u) */
+   'directory_for_uploads' => 'u',
 ```
 
 # ShareX Configuration
