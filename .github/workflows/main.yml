@@ -8,6 +8,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: MilesChou/composer-action@master
-        with:
-          args: install
+      - name: GitHub Action for PHPUnit
+        uses: pxgamer/phpunit-action@v1.0.0
