@@ -8,5 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: GitHub Action for PHPUnit
-        uses: pxgamer/phpunit-action@v1.0.0
+      - uses: actions/checkout@v1
+      - uses: pxgamer/phpunit-action@master
+        with:
+          command: tests/
