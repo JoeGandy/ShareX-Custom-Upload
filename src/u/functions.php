@@ -24,6 +24,31 @@ function generateRandomName($type, $length) {
     }
 }
 
+function get_file_target($config_overides, $file_name, $name) {
+  $config = include 'config.php';
+  $config = array_merge($config, $config_overides);
+
+  $parts = explode('.', $file_name);
+  $target = null;
+  $first_run = true;
+  $files_exist_counter = 0;
+
+  while($first_run || file_exists($target)){
+    $first_run = false;
+
+    if ($config['enable_random_name']) {
+      $target = getcwd().'/u/'.generateRandomName(end($parts), $config['random_name_length']);
+    } else {
+        if($files_exist_counter++ < 1){
+          $target = getcwd().'/u/'.$name.'.'.end($parts); 
+        }else{
+          $target = getcwd().'/u/'.$name.'_'.$files_exist_counter.'.'.end($parts);
+        }
+    }
+  }
+  return $target;
+}
+
 function get_latest_sharex_version() {
   $opts = [
       'http' => [
