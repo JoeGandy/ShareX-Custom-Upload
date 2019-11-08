@@ -8,5 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: PHPUnit (php-actions)
-        uses: php-actions/phpunit@v0.1.0
+      - uses: MilesChou/composer-action@master
+        with:
+          args: install
