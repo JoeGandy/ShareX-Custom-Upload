@@ -14,7 +14,7 @@
             $_SESSION['message'] = 'File Does Not Exist!';
             die(header('Location: index.php'));
         }
-    }
+		}
 ?>
 <html>
 	<head>
