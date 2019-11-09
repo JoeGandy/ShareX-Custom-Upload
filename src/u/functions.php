@@ -8,7 +8,7 @@ return '<div class="alert text-center alert-'.$type.'" role="alert">
 
 function isImage($file)
 {
-    $image_formats = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml'];
+  $image_formats = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml'];
   if (!in_array($file, $image_formats))
    return false;
 
@@ -64,25 +64,21 @@ function get_latest_sharex_version() {
   return str_replace('v', '', $content->tag_name);
 }
 
-function get_total_free_space_string() {
+function bytes_to_string($bytes) {
   $si_prefix = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
   $base = 1024;
 
-  $bytes = disk_free_space('/');
   $class = min((int) log($bytes, $base), count($si_prefix) - 1);
 
   return sprintf('%1.2f', $bytes / pow($base, $class)).' '.$si_prefix[$class];
 }
 
-function get_total_space_string(){
-  $si_prefix = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  $base = 1024;
+function get_total_free_space_string() {
+  return bytes_to_string(disk_free_space('/'));
+}
 
-  $bytes = disk_total_space('/');
-  $class = min((int) log($bytes, $base), count($si_prefix) - 1);
-
-  return sprintf('%1.2f', $bytes / pow($base, $class)).' '.$si_prefix[$class];
-
+function get_total_space_string() {
+  return bytes_to_string(disk_total_space('/'));
 }
 
 function auth_user($kill_page_if_fail=true){
@@ -105,6 +101,9 @@ function get_ip(){
   if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
     return $_SERVER["HTTP_CF_CONNECTING_IP"];
   }else{
-    return $_SERVER['REMOTE_ADDR'];
+    if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+      return $_SERVER['REMOTE_ADDR'];
+    }
+    return "0.0.0.0";
   }
 }

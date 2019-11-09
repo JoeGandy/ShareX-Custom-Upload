@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-include 'src/u/functions.php';
+require_once 'src/u/functions.php';
 
 $GLOBALS['config'] = include 'src/u/config.php';
 
@@ -43,6 +43,19 @@ final class FileNameTest extends TestCase
         $this->assertEquals(
             pathinfo($correct)['extension'],
             pathinfo($test)['extension']
+        );
+    }
+
+    /** @test */
+    public function fileNameRandomTestLength(): void
+    {
+        $correct_length = 15;
+        
+        $testLength = strlen(generateRandomName('png', $correct_length - 4));
+
+        $this->assertEquals(
+            $testLength,
+            $correct_length
         );
     }
 }
