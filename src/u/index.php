@@ -8,7 +8,7 @@
             unlink($_GET['filename']);
             $_SESSION['type'] = 'success';
             $_SESSION['message'] = 'You have successfully deleted <strong>'.$_GET['filename'].'</strong>';
-            die(header('Location: /'));
+            die(header('Location: index.php'));
         }else{
             $_SESSION['type'] = 'danger';
             $_SESSION['message'] = 'File Does Not Exist!';
