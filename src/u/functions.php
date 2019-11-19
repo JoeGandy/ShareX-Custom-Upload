@@ -101,7 +101,7 @@ function get_ip(){
   if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
     return $_SERVER["HTTP_CF_CONNECTING_IP"];
   }else{
-    if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+    if(isset($_SERVER["REMOTE_ADDR"])) {
       return $_SERVER['REMOTE_ADDR'];
     }
     return "0.0.0.0";
