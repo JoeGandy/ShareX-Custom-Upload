@@ -8,7 +8,7 @@ auth_user();
 $result_json = [
     'Version' => get_latest_sharex_version(),
     'RequestMethod' => 'POST',
-    'RequestURL' => $config['request_url'],
+    'RequestURL' => stripslashes($config['request_url']),
     'Body' => 'MultipartFormData',
     'FileFormName' => 'd',
     'Arguments' => [

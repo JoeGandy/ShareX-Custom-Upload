@@ -1,4 +1,27 @@
 <?php
+if (isset($_POST['save'])) {
+
+    $settings = new \stdClass;
+    $settingsjson = null;
+    $file = 'settings.json';
+
+    foreach ($_POST as $key => $value) {
+
+        if ($key == "allowed_ips") {
+            $value = str_replace(' ', '', $value);
+            $value = explode(",", $value);
+        }
+
+        $settings->$key = $value;
+
+        $settingsjson = json_encode($settings, JSON_UNESCAPED_SLASHES);
+    }  
+
+    // Write the contents to the file.
+    file_put_contents($file, $settingsjson);
+    die(header('Location: index.php'));
+}
+
 $config = include '../config.php';
 include '../functions.php';
 session_start();
@@ -36,7 +59,11 @@ session_start();
                 }
                 ?>
                 <br>
-                <form method="POST">
+                <p>
+                    <a href="/u" class=" btn btn-primary">
+                        Back</a>
+                <p>
+                <form method="POST" action="index.php">
                     <div class="form-group row">
                         <label for="page_title" class="col-3 col-form-label">Page title</label> 
                         <div class="col-9">
@@ -44,6 +71,7 @@ session_start();
                             <span id="page_titleHelpBlock" class="form-text text-muted">Page title of the gallery page</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="heading_text" class="col-3 col-form-label">Heading text</label> 
                         <div class="col-9">
@@ -68,8 +96,6 @@ session_start();
                         </div>
                     </div>
 
-
-
                     <div class="form-group row">
                         <label for="output_url" class="col-3 col-form-label">Output url</label> 
                         <div class="col-9">
@@ -77,6 +103,7 @@ session_start();
                             <span id="output_urlHelpBlock" class="form-text text-muted">This is the url your output will be, usually http://www.domain.com/u/, also going to this url will be the gallery page</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="request_url" class="col-3 col-form-label">Request url</label> 
                         <div class="col-9">
@@ -84,6 +111,7 @@ session_start();
                             <span id="request_urlHelpBlock" class="form-text text-muted">This request url, so the path pointing to the uplaod.php file</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="redirect_url" class="col-3 col-form-label">Redirect url</label> 
                         <div class="col-9">
@@ -91,6 +119,7 @@ session_start();
                             <span id="redirect_urlHelpBlock" class="form-text text-muted">This is a redirect url if the script is accessed directly</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="allowed_ips" class="col-3 col-form-label">Allowed IPs</label> 
                         <div class="col-9">
@@ -98,6 +127,7 @@ session_start();
                             <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Seperate with ","</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="enable_random_name" class="col-3 col-form-label">Generate random name</label> 
                         <div class="col-9">
@@ -107,6 +137,7 @@ session_start();
                             <span id="enable_random_nameHelpBlock" class="form-text text-muted">Generate random name</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="enable_delete" class="col-3 col-form-label">Enable delete button</label> 
                         <div class="col-9">
@@ -116,6 +147,7 @@ session_start();
                             <span id="enable_deleteHelpBlock" class="form-text text-muted">Delete file option</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="enable_tooltip" class="col-3 col-form-label">Enable tooltip hover</label> 
                         <div class="col-9">
@@ -125,6 +157,7 @@ session_start();
                             <span id="enable_tooltipHelpBlock" class="form-text text-muted">Show image in tooltip</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="enable_zip_dump" class="col-3 col-form-label">Enable Zip dump download</label> 
                         <div class="col-9">
@@ -134,6 +167,7 @@ session_start();
                             <span id="enable_zip_dumpHelpBlock" class="form-text text-muted">how link to download all files as .zip</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="random_name_length" class="col-3 col-form-label">Random name length</label> 
                         <div class="col-9">
@@ -141,6 +175,7 @@ session_start();
                             <span id="random_name_lengthHelpBlock" class="form-text text-muted">Select lenght of random name</span>
                         </div>
                     </div> 
+
                     <div class="form-group row">
                         <div class="offset-3 col-9">
                             <button type="submit" name="save" class="btn btn-primary">Save</button>
@@ -148,35 +183,7 @@ session_start();
                     </div>
                 </form>
 
-                <?php
-                if (isset($_POST['save'])) {
 
-                    $settings = new \stdClass;
-                    $settingsjson = null;
-
-                    foreach ($_POST as $key => $value) {
-
-                        if ($key == "allowed_ips") {
-                            $value = str_replace(' ', '', $value);
-                            $value = explode(",", $value);
-                        }
-
-                        $settings->$key = $value;
-
-                        $settingsjson = json_encode($settings);
-                    }
-
-                    //print_r($_POST);
-
-                    $file = 'settings.json';
-                    // Write the contents back to the file
-                    file_put_contents($file, $settingsjson);
-
-                    $_SESSION['type'] = 'success';
-                    $_SESSION['message'] = 'Settings saved';
-                    die(header('Location: index.php'));
-                }
-                ?>
 
 
                 <!-- Modal -->
@@ -206,9 +213,11 @@ session_start();
             </div>
 
 
-        <?php } else { // if auth_user  ?> 
+        <?php } else { // if auth_user   ?> 
             <h2>Your IP is blocked from access, whitelist this ip to gain access: "<?php echo get_ip(); ?>"</h2>
-        <?php } //if auth_user  ?>
+        <?php } //if auth_user   ?>
+
+
     </div>
 
     <?php if ($config['enable_tooltip']) { ?>
@@ -240,7 +249,7 @@ session_start();
 
         $("#newkey").on('click', function (event) {
             event.preventDefault();
-            var key = makeid();
+            const key = makeid();
             $('#secure_key').attr('value', key);
             $('#secure_keyModal').attr('value', key);
 

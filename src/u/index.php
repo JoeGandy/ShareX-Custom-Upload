@@ -121,6 +121,13 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
             <?php } else { ?>
                 <h2>Your IP is blocked from access, whitelist this ip to gain access: "<?php echo get_ip(); ?>"</h2>
         <?php } ?>
+
+        <p>
+                        <a href="/u/setup" >
+                            Click here
+                        </a>
+                        to change settings</a>
+                    <p>
         </div>
 
         <?php if ($config['enable_tooltip']) { ?>
