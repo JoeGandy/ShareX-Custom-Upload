@@ -2,6 +2,12 @@
 A little PHP script created for uploading custom sharex files to your own webserver
 
 # Setup
+
+## Important note for nginx users
+We use .htaccess for important files to ensure they can't be viewed outside of the correct scope, but since nginx has no directory level configurations you must prevent access manually in the server configuration.
+
+## Step by step
+
 First we start by uploading the contents of the 'src' directory to the root of our website
 
 Next is the configuration file, found in /u/config.php here there are a few key settings
