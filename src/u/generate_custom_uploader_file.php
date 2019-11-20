@@ -1,22 +1,21 @@
 <?php
+    $config = include 'config.php';
+    include 'functions.php';
+    
+    auth_user();
 
-$config = include 'config.php';
-include 'functions.php';
+    $result_json = [
+        'Version' => get_latest_sharex_version(),
+        'RequestMethod' => 'POST',
+        'RequestURL' => $config['request_url'],
+        'Body' => 'MultipartFormData',
+        'FileFormName' => 'd',
+        'Arguments' => [
+            'key' => $config['secure_key'],
+            'name' => '%h.%mi.%s-%d.%mo.%yy',
+        ],
+    ];
 
-auth_user();
-
-$result_json = [
-    'Version' => get_latest_sharex_version(),
-    'RequestMethod' => 'POST',
-    'RequestURL' => stripslashes($config['request_url']),
-    'Body' => 'MultipartFormData',
-    'FileFormName' => 'd',
-    'Arguments' => [
-        'key' => $config['secure_key'],
-        'name' => '%h.%mi.%s-%d.%mo.%yy',
-    ],
-];
-
-header('Content-disposition: attachment; filename=sharex_custom_uploader_import_file.sxcu');
-header('Content-Type: application/json');
-echo json_encode($result_json);
+    header('Content-disposition: attachment; filename=sharex_custom_uploader_import_file.sxcu');
+    header('Content-Type: application/json');
+    echo json_encode($result_json);
