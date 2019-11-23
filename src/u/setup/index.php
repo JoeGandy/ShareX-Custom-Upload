@@ -8,8 +8,16 @@ if (isset($_POST['save'])) {
     foreach ($_POST as $key => $value) {
 
         if ($key == "allowed_ips") {
-            $value = str_replace(' ', '', $value);
-            $value = explode(",", $value);
+            
+
+            if($value == ""){
+                $value = "";
+                echo "empty";
+            }else{
+                $value = str_replace(' ', '', $value);
+                $value = explode(",", $value);
+                echo "not empty";
+            }
         }
 
         if($value == "true"){
@@ -40,10 +48,43 @@ session_start();
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
         <!-- Bootstrap / Fontawesome  -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Include Choices CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+        />
+        <!-- Include Choices JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
         
         <!-- DataTables -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.20/datatables.min.css"/>
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+
+
+        <style>
+        
+        .badge-tag {
+            color: #ffffff;
+            background-color: #595dea;
+            padding: 6px 10px;
+            font-size: .9em;
+            margin-right: 10px;
+        }
+
+        .choices[data-type*=select-multiple] .choices__button, .choices[data-type*=text] .choices__button{
+            border-left: 1px solid #ffffff;
+        }
+
+        .choices__inner {
+            background-color:#ffffff;
+        }
+        .choices {
+             margin-bottom: 0px;
+         }
+
+         .choices__input {
+            background-color: #ffffff;
+        }
+
+        </style>
         
     </head>
     <body>
@@ -60,7 +101,7 @@ session_start();
                 ?>
             </p>
             <?php
-            if (auth_user(false)) {
+            if (auth_user(true)) {
                 $files1 = preg_grep('/^([^.])/', scandir('.'));
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
@@ -134,8 +175,10 @@ session_start();
                     <div class="form-group row">
                         <label for="allowed_ips" class="col-3 col-form-label">Allowed IPs</label> 
                         <div class="col-9">
-                            <input id="allowed_ips" name="allowed_ips" type="text" aria-describedby="allowed_ipsHelpBlock" class="form-control" value="<?php setFieldContent("allowed_ips") ?>"> 
-                            <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Seperate with ","</span>
+                            
+                            <input class="form-control" id="allowed_ips" name="allowed_ips" type="text" value="<?php setFieldContent("allowed_ips") ?>" aria-describedby="allowed_ipsHelpBlock" placeholder="Enter allowed IPs"/>
+                            <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Your current ip is: <strong><?php echo get_ip(); ?></strong></span>
+
                         </div>
                     </div>
 
@@ -240,44 +283,43 @@ session_start();
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
  
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.20/datatables.min.js"></script>
-    <script src="../js/main.js" type="text/javascript"></script>
+        <script src="../js/main.js" type="text/javascript"></script>
+        <script>
 
-    <script>
+            $("#show_hide").on('click', function (event) {
 
-        $("#show_hide").on('click', function (event) {
+                if ($('#secure_key').attr("type") == "text") {
+                    $('#secure_key').attr('type', 'password');
+                    $('#show_hide_password i').addClass("fa-eye-slash");
+                    $('#show_hide_password i').removeClass("fa-eye");
+                } else if ($('#secure_key').attr("type") == "password") {
+                    $('#secure_key').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash");
+                    $('#show_hide_password i').addClass("fa-eye");
+                }
+            });
 
-            if ($('#secure_key').attr("type") == "text") {
-                $('#secure_key').attr('type', 'password');
-                $('#show_hide_password i').addClass("fa-eye-slash");
-                $('#show_hide_password i').removeClass("fa-eye");
-            } else if ($('#secure_key').attr("type") == "password") {
+            $("#newkey").on('click', function (event) {
+                event.preventDefault();
+                const key = makeid(33);
+                $('#secure_key').attr('value', key);
+                $('#secure_keyModal').attr('value', key);
+
+                $('#newkeygenerated').modal('show');
+
+            });
+
+            $("#copykey").on('click', function (event) {
+                event.preventDefault();
+                CopyKey();
                 $('#secure_key').attr('type', 'text');
                 $('#show_hide_password i').removeClass("fa-eye-slash");
                 $('#show_hide_password i').addClass("fa-eye");
-            }
-        });
+                $('#newkeygenerated').modal('hide');
 
-        $("#newkey").on('click', function (event) {
-            event.preventDefault();
-            const key = makeid(33);
-            $('#secure_key').attr('value', key);
-            $('#secure_keyModal').attr('value', key);
+            });
 
-            $('#newkeygenerated').modal('show');
-
-        });
-
-        $("#copykey").on('click', function (event) {
-            event.preventDefault();
-            CopyKey();
-            $('#secure_key').attr('type', 'text');
-            $('#show_hide_password i').removeClass("fa-eye-slash");
-            $('#show_hide_password i').addClass("fa-eye");
-            $('#newkeygenerated').modal('hide');
-
-        });
-
-    </script>
+        </script>
 
 </body>
 </html>

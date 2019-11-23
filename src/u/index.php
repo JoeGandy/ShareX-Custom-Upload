@@ -24,11 +24,13 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
         <!-- Bootstrap / Fontawesome  -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
         
         <!-- DataTables -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.20/datatables.min.css"/>
-        
+        <!-- theme -->
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+
     </head>
     </head>
     <body>
@@ -84,12 +86,12 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                                                data-toggle="tooltip" data-html="true" data-placement="right" title="<img src='<?php echo $config['output_url'];
                                                echo $file;
                                                ?>' width='150px' alt='<?php echo $file; ?>'>"
-            <?php } ?>>
-            <?php echo $file; ?>
+                                    <?php } ?>>
+                                    <?php echo $file; ?>
                                         </a>
                                     </td>
                                     <td>
-                                        <?php echo filesize($file); ?>
+                                        <?php echo bytes_to_string(filesize($file)); ?>
                                     </td>
                                     <td>
                                         <?php echo date('d M Y H:i', filemtime($file)); ?>

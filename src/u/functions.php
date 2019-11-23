@@ -112,7 +112,12 @@ function setFieldContent($fieldname) {
     $config = include 'config.php';
 
     if ($fieldname == "allowed_ips") {
+        if($config[$fieldname] == ""){
+            $config[$fieldname] = "";
+            echo "";
+        }else{
         echo implode(",", $config[$fieldname]);
+        }
     } else {
         echo $config[$fieldname];
     }

@@ -29,3 +29,18 @@ function CopyKey() {
     /* Copy the text inside the text field */
     document.execCommand("copy");
 }
+
+var textRemove = new Choices(
+    document.getElementById('allowed_ips'),
+    {
+        delimiter: ',',
+        editItems: true,
+        removeItemButton: true,
+        classNames: {
+            item: 'badge',
+            itemSelectable: 'badge-tag',
+            highlightedState: 'badge-tag',
+            selectedState: 'badge-tag'
+        }
+    }
+);
