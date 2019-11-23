@@ -62,7 +62,7 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                     <thead>
                         <tr>
                             <th>FileName</th>
-                            <th>Size (Bytes)</th>
+                            <th>Size</th>
                             <th>Date</th>
                             <th>Type</th>
                             <?php if ($config['enable_delete']) { ?>
