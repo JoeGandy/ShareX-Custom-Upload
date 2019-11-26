@@ -1,6 +1,7 @@
 <?php
 
 // remove setup files if they exists
+
 function rmdir_recursive($dir) {
     foreach (scandir($dir) as $file) {
         if ('.' === $file || '..' === $file)
@@ -27,8 +28,6 @@ if (isset($_GET['removeinstallfiles'])) {
     Files has been removed
   </div>';
 }
-
-// Functions
 
 function displayAlert($text, $type) {
     return '<div class="alert text-center alert-' . $type . '" role="alert">
