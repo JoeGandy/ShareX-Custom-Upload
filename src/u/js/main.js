@@ -95,7 +95,7 @@ $("#copyurl").on('click', function (event) {
 });
 
 var textRemove = new Choices(
-    document.getElementById('allowed_ips'), {
+        document.getElementById('allowed_ips'), {
     delimiter: ',',
     editItems: true,
     removeItemButton: true,

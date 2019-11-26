@@ -49,10 +49,8 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
     </head>
 </head>
 <body>
-
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -64,12 +62,28 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                     <li class="nav-item">
                         <a class="nav-link" href="./setup">Settings</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./login.php?logout">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tools
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php if (isset($config['enable_zip_dump']) && $config['enable_zip_dump']) { ?>
+                                <a class="dropdown-item" href="../generate_zip_of_files.php">Create & download zip backup</a>
+                                <div class="dropdown-divider"></div>
+                            <?php } ?>
+                            <a class="dropdown-item" href="../generate_custom_uploader_file.php" data-toggle="tooltip" data-html="true" data-placement="right" title="If this gets leaked, change your secure_key and re download this file">Download setup file for ShareX</a>
+                        </div></a>                                
+
+                    </li>
+                    <li class="nav-item ml-auto">
+                        <a class="nav-link" href="./login.php?logout" data-toggle="tooltip" data-html="true" data-placement="bottom" title="This will log you out">Logout</a>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <div class="container">
+
         <br />
         <h3 class="text-center"><?php echo $config['page_title']; ?></h3>
 
@@ -84,7 +98,6 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
         <?php
         $files1 = preg_grep('/^([^.])/', scandir('.'));
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-
         if (!empty($_SESSION)) {
             //echo displayAlert($_SESSION['message'], $_SESSION['type']);
             // session_destroy();
@@ -114,85 +127,60 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                         <tr>
                             <td>
                                 <a href="#" class=" mr-2 fa-lg fas fa-copy" id="copyurl" data-copyurl="<?php
-                                echo $config['output_url'];
-                                echo $file;
-                                ?>"></a>
+                echo $config['output_url'];
+                echo $file;
+                        ?>" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Copy image url"></a>
                                 <a target="_blank" 
                                 <?php
                                 if ($config['enable_lightbox']) {
                                     ?>
                                        data-lightbox="gallery" data-title="<?php
-                                       echo $config['output_url'];
-                                       echo $file;
-                                       ?>" 
+                        echo $config['output_url'];
+                        echo $file;
+                                    ?>" 
                                        <?php
                                    }
                                    ?>
                                    href="<?php
-                                   echo $config['output_url'];
-                                   echo $file;
+                           echo $config['output_url'];
+                           echo $file;
                                    ?>"
                                    <?php if ($config['enable_tooltip'] && isImage(finfo_file($finfo, $file))) { ?> 
-                                       data-toggle="tooltip" data-html="true" data-placement="right" title="<img src='<?php
-                                       echo $config['output_url'];
-                                       echo $file;
+                                       data-toggle="tooltip" data-html="true" data-placement="right" title="<img src=' <?php
+                           echo $config['output_url'];
+                           echo $file;
                                        ?>' width='150px' alt='<?php echo $file; ?>'>"
                                    <?php } ?>>
-                                       <?php echo $file; ?>
+                                   <?php echo $file; ?>
                                 </a>
 
                             </td>
                             <td>
-                                <?php echo bytes_to_string(filesize($file)); ?>
+        <?php echo bytes_to_string(filesize($file)); ?>
                             </td>
                             <td>
-                                <?php echo date('d M Y H:i', filemtime($file)); ?>
+        <?php echo date('d M Y H:i', filemtime($file)); ?>
                             </td>
                             <td>
-                                <?php echo pathinfo($file, PATHINFO_EXTENSION); ?> 
+        <?php echo pathinfo($file, PATHINFO_EXTENSION); ?> 
                             </td>
-                            <?php if ($config['enable_delete']) { ?>   
+                                <?php if ($config['enable_delete']) { ?>   
                                 <td>
-                                    <a href="index.php?action=delete&filename=<?php echo $file; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete this file (<?php echo $file; ?>) ?');">
+                                    <a href="index.php?action=delete&filename= <?php echo $file; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete this file (<?php echo $file; ?>) ?');">
                                         delete file
                                     </a>
                                 </td>
-                            <?php } ?> 
+        <?php } ?> 
                         </tr>
-                    <?php } ?>
+                        <?php } ?>
                 <?php } ?>
             </tbody>
-        </table>
-        <br />
-        <br />
-        <p>
-            <a href="/generate_custom_uploader_file.php" target="_blank">
-                Click here
-            </a>
-            to download your custom uploader file for shareX
-            <i>If this gets leaked, change your secure_key and re download this file</i>
-        </p>
-        <?php if (isset($config['enable_zip_dump']) && $config['enable_zip_dump']) { ?>
-            <p>
-                <a href="/generate_zip_of_files.php" target="_blank">
-                    Click here
-                </a>
-                to download your files as a zip archive</a>
-            <p>
-            <?php } ?>
-
-
-        <p>
-            <a href="./setup" >
-                Click here
-            </a>
-            to change settings</a>
-        <p>
+        </table>        
     </div>
 
-    <?php if ($config['enable_tooltip']) { ?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <?php } ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
 
@@ -204,9 +192,9 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
     <script src="js/main.js" type="text/javascript"></script>
 
 
-    <?php
-    if (isset($alert['message'])) {
-        ?>
+<?php
+if (isset($alert['message'])) {
+    ?>
         <script>
                                 $.notify({
                                     // options
@@ -216,9 +204,9 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                                     type: '<?php echo $alert['type'] ?>'
                                 });
         </script>
-        <?php
-    }
-    ?>
+    <?php
+}
+?>
 
 </body>
 </html>
