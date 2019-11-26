@@ -54,6 +54,8 @@ function generateRandomName($type, $length) {
 
 function get_file_target($random_name_length, $enable_random_name, $file_name, $name) {
 
+    $enable_random = $enable_random_name;
+    $name_length = $random_name_length;
 
     $parts = explode('.', $file_name);
     $target = null;
@@ -63,8 +65,8 @@ function get_file_target($random_name_length, $enable_random_name, $file_name, $
     while ($first_run || file_exists($target)) {
         $first_run = false;
 
-        if ($enable_random_name) {
-            $target = getcwd() . '/u/' . generateRandomName(end($parts), $random_name_length);
+        if ($enable_random) {
+            $target = getcwd() . '/u/' . generateRandomName(end($parts), $name_length);
         } else {
             if ($files_exist_counter++ < 1) {
                 $target = getcwd() . '/u/' . $name . '.' . end($parts);
