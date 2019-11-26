@@ -36,14 +36,14 @@ function CopyKey() {
 
 function CopyUrl(value) {
     /* Get the text field */
-    var copyText = document.getElementById("secure_keyModal");
+    var copyText = document.getElementById("copyurl");
 
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
+    const el = document.createElement('textarea');
+    el.value = copyText.dataset.copyurl;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
 }
 
 function goBack() {
@@ -95,7 +95,7 @@ $("#copyurl").on('click', function (event) {
 });
 
 var textRemove = new Choices(
-        document.getElementById('allowed_ips'), {
+    document.getElementById('allowed_ips'), {
     delimiter: ',',
     editItems: true,
     removeItemButton: true,
