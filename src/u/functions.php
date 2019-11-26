@@ -36,12 +36,12 @@ function get_file_target($config_overides, $file_name, $name) {
         $first_run = false;
 
         if ($config['enable_random_name']) {
-            $target = getcwd() . '/u/' . generateRandomName(end($parts), $config['random_name_length']);
+            $target = getcwd() . '/' . generateRandomName(end($parts), $config['random_name_length']);
         } else {
             if ($files_exist_counter++ < 1) {
-                $target = getcwd() . '/u/' . $name . '.' . end($parts);
+                $target = getcwd() . '/' . $name . '.' . end($parts);
             } else {
-                $target = getcwd() . '/u/' . $name . '_' . $files_exist_counter . '.' . end($parts);
+                $target = getcwd() . '/' . $name . '_' . $files_exist_counter . '.' . end($parts);
             }
         }
     }
@@ -112,11 +112,11 @@ function setFieldContent($fieldname) {
     $config = include 'config.php';
 
     if ($fieldname == "allowed_ips") {
-        if($config[$fieldname] == ""){
+        if ($config[$fieldname] == "") {
             $config[$fieldname] = "";
             echo "";
-        }else{
-        echo implode(",", $config[$fieldname]);
+        } else {
+            echo implode(",", $config[$fieldname]);
         }
     } else {
         echo $config[$fieldname];
@@ -128,12 +128,17 @@ function setFieldTrueFalse($fieldname) {
 
     $field = $config[$fieldname];
 
-    if ($field == "true") {
+    if ($field) {
         // true
-        echo '<option value="true" selected >Enabled</option>
-          <option value="false" >Disabled</option>';
-    } else {
-        echo '<option value="true"  >Enabled</option>
-          <option value="false" selected>Disabled</option>';
+        echo 'checked';
     }
+}
+
+function url() {
+    return sprintf(
+            "%s://%s%s",
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+            $_SERVER['SERVER_NAME'],
+            $_SERVER['REQUEST_URI']
+    );
 }

@@ -1,7 +1,7 @@
 <?php
 
-include 'u/functions.php';
-$config = include 'u/config.php';
+include 'functions.php';
+$config = include 'config.php';
 
 $key = $config['secure_key'];
 $uploadhost = $config['output_url'];
@@ -17,7 +17,7 @@ if (isset($_POST['key'])) {
 
         if (move_uploaded_file($_FILES['d']['tmp_name'], $target)) {
             $target_parts = explode('/u/', $target);
-            echo $uploadhost.end($target_parts);
+            echo $uploadhost . end($target_parts);
         } else {
             echo 'File upload failed, ensure permissions are writeable on the directory (777), see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
         }
@@ -26,4 +26,6 @@ if (isset($_POST['key'])) {
     }
 } else {
     echo 'You may not upload without the key parameter, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
+    sleep(5);
+    header('Location: ' . $redirect);
 }
