@@ -6,6 +6,8 @@ $config = include 'u/config.php';
 $key = $config['secure_key'];
 $uploadhost = $config['output_url'];
 $redirect = $config['redirect_url'];
+$enable_random_name = $config['enable_random_name'];
+$random_name_length = $config['random_name_length'];
 
 if ('/robot.txt' === $_SERVER['REQUEST_URI']) {
     die("User-agent: *\nDisallow: /");
@@ -13,7 +15,7 @@ if ('/robot.txt' === $_SERVER['REQUEST_URI']) {
 
 if (isset($_POST['key'])) {
     if ($_POST['key'] === $key) {
-        $target = get_file_target($config['enable_random_name'], $config['random_name_length'], $_FILES['d']['name'], $_POST['name']);
+        $target = get_file_target($random_name_length, $enable_random_name, $_FILES['d']['name'], $_POST['name']);
 
         if (move_uploaded_file($_FILES['d']['tmp_name'], $target)) {
             $target_parts = explode('/u/', $target);

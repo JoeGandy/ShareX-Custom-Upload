@@ -1,7 +1,6 @@
 <?php
 
 // remove setup files if they exists
-
 function rmdir_recursive($dir) {
     foreach (scandir($dir) as $file) {
         if ('.' === $file || '..' === $file)
@@ -13,6 +12,7 @@ function rmdir_recursive($dir) {
     }
     rmdir($dir);
 }
+
 $first = './first/index.php';
 if (file_exists($first) && !isset($_GET['removeinstallfiles'])) {
     echo ' <div class="bg-danger text-white p-3">
@@ -52,10 +52,7 @@ function generateRandomName($type, $length) {
     }
 }
 
-function get_file_target($random_name_length, $enable_random_name, $file_name, $name) {
-
-    $enable_random = $enable_random_name;
-    $name_length = $random_name_length;
+function get_file_target($name_length, $enable_random, $file_name, $name) {
 
     $parts = explode('.', $file_name);
     $target = null;
@@ -66,7 +63,7 @@ function get_file_target($random_name_length, $enable_random_name, $file_name, $
         $first_run = false;
 
         if ($enable_random) {
-            $target = getcwd() . '/u/' . generateRandomName(end($parts), $name_length);
+            $target = getcwd() . '/u/' . generateRandomName(end($parts), intval($name_length));
         } else {
             if ($files_exist_counter++ < 1) {
                 $target = getcwd() . '/u/' . $name . '.' . end($parts);
