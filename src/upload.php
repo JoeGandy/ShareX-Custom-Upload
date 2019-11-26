@@ -1,7 +1,7 @@
 <?php
 
-include 'functions.php';
-$config = include 'config.php';
+include 'u/functions.php';
+$config = include 'u/config.php';
 
 $key = $config['secure_key'];
 $uploadhost = $config['output_url'];
@@ -13,7 +13,7 @@ if ('/robot.txt' === $_SERVER['REQUEST_URI']) {
 
 if (isset($_POST['key'])) {
     if ($_POST['key'] === $key) {
-        $target = get_file_target($config, $_FILES['d']['name'], $_POST['name']);
+        $target = get_file_target($config['enable_random_name'], $config['random_name_length'], $_FILES['d']['name'], $_POST['name']);
 
         if (move_uploaded_file($_FILES['d']['tmp_name'], $target)) {
             $target_parts = explode('/u/', $target);
@@ -26,6 +26,4 @@ if (isset($_POST['key'])) {
     }
 } else {
     echo 'You may not upload without the key parameter, see full config: https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/README.md#automatic-setup';
-    sleep(5);
-    header('Location: ' . $redirect);
 }

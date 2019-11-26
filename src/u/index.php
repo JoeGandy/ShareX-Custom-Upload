@@ -49,6 +49,8 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
     </head>
 </head>
 <body>
+    <?php
+    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,52 +129,52 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                         <tr>
                             <td>
                                 <a href="#" class=" mr-2 fa-lg fas fa-copy" id="copyurl" data-copyurl="<?php
-                echo $config['output_url'];
-                echo $file;
-                        ?>" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Copy image url"></a>
+                                echo $config['output_url'];
+                                echo $file;
+                                ?>" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Copy image url"></a>
                                 <a target="_blank" 
                                 <?php
                                 if ($config['enable_lightbox']) {
                                     ?>
                                        data-lightbox="gallery" data-title="<?php
-                        echo $config['output_url'];
-                        echo $file;
-                                    ?>" 
+                                       echo $config['output_url'];
+                                       echo $file;
+                                       ?>" 
                                        <?php
                                    }
                                    ?>
                                    href="<?php
-                           echo $config['output_url'];
-                           echo $file;
+                                   echo $config['output_url'];
+                                   echo $file;
                                    ?>"
                                    <?php if ($config['enable_tooltip'] && isImage(finfo_file($finfo, $file))) { ?> 
                                        data-toggle="tooltip" data-html="true" data-placement="right" title="<img src=' <?php
-                           echo $config['output_url'];
-                           echo $file;
+                                       echo $config['output_url'];
+                                       echo $file;
                                        ?>' width='150px' alt='<?php echo $file; ?>'>"
                                    <?php } ?>>
-                                   <?php echo $file; ?>
+                                       <?php echo $file; ?>
                                 </a>
 
                             </td>
                             <td>
-        <?php echo bytes_to_string(filesize($file)); ?>
+                                <?php echo bytes_to_string(filesize($file)); ?>
                             </td>
                             <td>
-        <?php echo date('d M Y H:i', filemtime($file)); ?>
+                                <?php echo date('d M Y H:i', filemtime($file)); ?>
                             </td>
                             <td>
-        <?php echo pathinfo($file, PATHINFO_EXTENSION); ?> 
+                                <?php echo pathinfo($file, PATHINFO_EXTENSION); ?> 
                             </td>
-                                <?php if ($config['enable_delete']) { ?>   
+                            <?php if ($config['enable_delete']) { ?>   
                                 <td>
                                     <a href="index.php?action=delete&filename= <?php echo $file; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete this file (<?php echo $file; ?>) ?');">
                                         delete file
                                     </a>
                                 </td>
-        <?php } ?> 
+                            <?php } ?> 
                         </tr>
-                        <?php } ?>
+                    <?php } ?>
                 <?php } ?>
             </tbody>
         </table>        
@@ -192,9 +194,9 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
     <script src="js/main.js" type="text/javascript"></script>
 
 
-<?php
-if (isset($alert['message'])) {
-    ?>
+    <?php
+    if (isset($alert['message'])) {
+        ?>
         <script>
                                 $.notify({
                                     // options
@@ -204,9 +206,9 @@ if (isset($alert['message'])) {
                                     type: '<?php echo $alert['type'] ?>'
                                 });
         </script>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
 
 </body>
 </html>

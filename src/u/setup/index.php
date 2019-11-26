@@ -182,13 +182,13 @@ if (isset($_POST['save'])) {
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="allowed_ips" class="col-3 col-form-label">Allowed IPs</label> 
                     <div class="col-9">
-                        <input class="form-control" id="allowed_ips" name="allowed_ips" type="text" value="<?php setFieldContent("allowed_ips") ?>" aria-describedby="allowed_ipsHelpBlock" placeholder="Enter allowed IPs"/>
-                        <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Your current ip is: <strong><?php echo get_ip(); ?></strong></span>
+                        <input class="form-control" id="allowed_ips" name="allowed_ips" type="text" value="<?php //setFieldContent("allowed_ips")   ?>" aria-describedby="allowed_ipsHelpBlock" placeholder="Enter allowed IPs"/>
+                        <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Your current ip is: <strong><?php //echo get_ip();   ?></strong></span>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                     <label for="enable_random_name" class="col-3 col-form-label">Generate random name</label> 
@@ -213,10 +213,7 @@ if (isset($_POST['save'])) {
                 <div class="form-group row">
                     <label for="enable_delete" class="col-3 col-form-label">Enable delete button</label> 
                     <div class="col-9">
-                        <!-- <select id="enable_delete" name="enable_delete" class="custom-select" aria-describedby="enable_deleteHelpBlock">
-                        <?php setFieldTrueFalse("enable_delete") ?>
-                        </select>  -->
-                        <!-- switch -->
+
                         <label class="switch">
                             <input type="hidden" name="enable_delete" class="custom-select" aria-describedby="enable_deleteHelpBlock" value="false">
                             <input type="checkbox" name="enable_delete" class="custom-select" aria-describedby="enable_deleteHelpBlock" value="true" <?php setFieldTrueFalse("enable_delete") ?>>

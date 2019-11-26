@@ -1,5 +1,34 @@
 <?php
 
+// remove setup files if they exists
+function rmdir_recursive($dir) {
+    foreach (scandir($dir) as $file) {
+        if ('.' === $file || '..' === $file)
+            continue;
+        if (is_dir("$dir/$file"))
+            rmdir_recursive("$dir/$file");
+        else
+            unlink("$dir/$file");
+    }
+    rmdir($dir);
+}
+$first = './first/index.php';
+if (file_exists($first) && !isset($_GET['removeinstallfiles'])) {
+    echo ' <div class="bg-danger text-white p-3">
+                <p>Setup files detected!<br>
+                this can cause security problems if accessed.
+                <strong><a href="?removeinstallfiles" class="text-white">click here to remove the files</a></strong></p>
+                <a href="./first" class="btn btn-warning">Want to run setup again?</a> <br><i>this will overwrite existing settings</i>
+            </div>';
+}
+if (isset($_GET['removeinstallfiles'])) {
+    rmdir_recursive('./first');
+    echo '<div class="alert m-0 rounded-0 alert-success" role="alert">
+    Files has been removed
+  </div>';
+}
+Functions
+
 function displayAlert($text, $type) {
     return '<div class="alert text-center alert-' . $type . '" role="alert">
         <p>' . $text . '</p>
@@ -23,9 +52,8 @@ function generateRandomName($type, $length) {
     }
 }
 
-function get_file_target($config_overides, $file_name, $name) {
-    $config = include 'config.php';
-    $config = array_merge($config, $config_overides);
+function get_file_target($random_name_length, $enable_random_name, $file_name, $name) {
+
 
     $parts = explode('.', $file_name);
     $target = null;
@@ -35,13 +63,13 @@ function get_file_target($config_overides, $file_name, $name) {
     while ($first_run || file_exists($target)) {
         $first_run = false;
 
-        if ($config['enable_random_name']) {
-            $target = getcwd() . '/' . generateRandomName(end($parts), $config['random_name_length']);
+        if ($enable_random_name) {
+            $target = getcwd() . '/u/' . generateRandomName(end($parts), $random_name_length);
         } else {
             if ($files_exist_counter++ < 1) {
-                $target = getcwd() . '/' . $name . '.' . end($parts);
+                $target = getcwd() . '/u/' . $name . '.' . end($parts);
             } else {
-                $target = getcwd() . '/' . $name . '_' . $files_exist_counter . '.' . end($parts);
+                $target = getcwd() . '/u/' . $name . '_' . $files_exist_counter . '.' . end($parts);
             }
         }
     }

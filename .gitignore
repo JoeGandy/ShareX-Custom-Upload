@@ -1,1 +1,3 @@
 src/u/config.php
+*.json
+src/u/backups
