@@ -1,14 +1,56 @@
 body {
-    margin-bottom: 3.5rem !important;
+    height: 100vh;
+    padding: 60px 0 0 0;
+    background-color: #537895;
+    background-image: linear-gradient(0deg, #09203f, #537895);
 }
 
-.navbar-nav {
-    width: 100%;
+.card {
+    padding: 60px 70px 120px 70px;
+    position: relative;
+}
 
+.card-body {
+    padding: 0;
+}
+
+.github-btn {
+    left: 70px;
+    bottom: 60px;
+    position: absolute;
+}
+
+.checklist {
+    font-size: 1.2em;
+}
+
+.fa-check-circle,
+.fa-minus-circle {
+    margin-right: 10px;
+}
+
+.browser-svg {
+    height: 230px;
+    overflow: hidden;
+    position: relative;
 }
 
 
-/* setup/index */
+ul {
+    margin: 0 0 0 20px;
+    padding: 0;
+
+}
+
+li {
+    list-style: none;
+}
+
+.step-buttons {
+    right: 70px;
+    bottom: 60px;
+    position: absolute;
+}
 
 .badge-tag {
     color: #ffffff;
@@ -35,65 +77,36 @@ body {
     background-color: #ffffff;
 }
 
-/* index */
-
-.page-link {
-    background-color: #2C3E50;
-
+.cls-1 {
+    fill: #ebeced;
 }
 
-.page-link:hover {
-    background-color: #1e2b37;
-
-}
-
-.page-item.active .page-link {
-    color: #fff;
-    background-color: #2f6496;
-}
-
-.page-item.disabled .page-link {
-    color: #a0a0a0;
-    background-color: #2C3E50;
-}
-
-
-
-
-
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-}
-
-.form-signin .checkbox {
-    font-weight: 400;
-}
-
-.form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
+.cls-2 {
+    fill: #707070;
     font-size: 16px;
+    font-family: Lato;
 }
 
-.form-signin .form-control:focus {
-    z-index: 2;
+.cls-3 {
+    fill: #fff;
 }
 
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+.cls-4 {
+    fill: #16ac2f;
 }
 
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.cls-5,
+.cls-7 {
+    fill: none;
+}
+
+.cls-5 {
+    stroke: #16ac2f;
+    stroke-width: 2px;
+}
+
+.cls-6 {
+    stroke: none;
 }
 
 /* The switch - the box around the slider */

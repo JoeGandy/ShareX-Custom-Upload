@@ -3,7 +3,7 @@ session_start();
 $config = include 'config.php';
 
 if ($config['username'] == "" || $config['password'] == "" || $config['secure_key'] == "") {
-    //header('Location: ./first');
+    header('Location: ./first');
 }
 
 if (isset($_POST['submit'])) {

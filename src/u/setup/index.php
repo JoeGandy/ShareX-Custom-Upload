@@ -109,7 +109,7 @@ if (isset($_POST['save'])) {
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container pb-5">
 
             <br>
             <h3 class="text-center"><?php echo $config['page_title']; ?></h3>
@@ -185,8 +185,8 @@ if (isset($_POST['save'])) {
                 <!-- <div class="form-group row">
                     <label for="allowed_ips" class="col-3 col-form-label">Allowed IPs</label> 
                     <div class="col-9">
-                        <input class="form-control" id="allowed_ips" name="allowed_ips" type="text" value="<?php //setFieldContent("allowed_ips")   ?>" aria-describedby="allowed_ipsHelpBlock" placeholder="Enter allowed IPs"/>
-                        <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Your current ip is: <strong><?php //echo get_ip();   ?></strong></span>
+                        <input class="form-control" id="allowed_ips" name="allowed_ips" type="text" value="<?php //setFieldContent("allowed_ips")         ?>" aria-describedby="allowed_ipsHelpBlock" placeholder="Enter allowed IPs"/>
+                        <span id="allowed_ipsHelpBlock" class="form-text text-muted">This is a list of IPs that can access the gallery page (Leave empty for universal access) <br>Your current ip is: <strong><?php //echo get_ip();         ?></strong></span>
                     </div>
                 </div> -->
 
@@ -326,5 +326,6 @@ if (isset($_POST['save'])) {
     <script src="../js/bootstrap-notify.min.js" type="text/javascript"></script>
     <script src="../js/main.js" type="text/javascript"></script>
 
+    <?php require '../components/footer.php' ?>
 </body>
 </html>

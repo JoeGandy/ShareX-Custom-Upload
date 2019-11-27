@@ -70,10 +70,10 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php if (isset($config['enable_zip_dump']) && $config['enable_zip_dump']) { ?>
-                                <a class="dropdown-item" href="../generate_zip_of_files.php">Create & download zip backup</a>
+                                <a class="dropdown-item" href="./generate_zip_of_files.php">Create & download zip backup</a>
                                 <div class="dropdown-divider"></div>
                             <?php } ?>
-                            <a class="dropdown-item" href="../generate_custom_uploader_file.php" data-toggle="tooltip" data-html="true" data-placement="right" title="If this gets leaked, change your secure_key and re download this file">Download setup file for ShareX</a>
+                            <a class="dropdown-item" href="./generate_custom_uploader_file.php" data-toggle="tooltip" data-html="true" data-placement="right" title="If this gets leaked, change your secure_key and re download this file">Download setup file for ShareX</a>
                         </div></a>                                
 
                     </li>
@@ -209,6 +209,6 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
         <?php
     }
     ?>
-
+    <?php require 'components/footer.php' ?>
 </body>
 </html>
