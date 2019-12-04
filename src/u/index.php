@@ -1,10 +1,14 @@
 <?php
 session_start();
-
-if ($_SESSION['AUTH_ID'] != 34234) {
-    header('Location: login.php');
-}
 $config = include 'config.php';
+
+if($user_auth){    
+    
+    if ($_SESSION['AUTH_ID'] != 34234 ) {
+        header('Location: login.php');
+    }    
+}
+
 include 'functions.php';
 
 if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['action']) {
@@ -128,7 +132,7 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
                         ?>
                         <tr>
                             <td>
-                                <a href="#" class=" mr-2 fa-lg fas fa-copy" id="copyurl" data-copyurl="<?php
+                                <a href="#" class=" mr-2 fa-lg fas fa-copy" onclick="CopyURL('<?php echo $config['output_url']; echo $file; ?>')" id="copyurl" data-copyurl="<?php
                                 echo $config['output_url'];
                                 echo $file;
                                 ?>" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Copy image url"></a>
@@ -209,6 +213,6 @@ if ($config['enable_delete'] && isset($_GET['action']) && 'delete' === $_GET['ac
         <?php
     }
     ?>
-    <?php require 'components/footer.php' ?>
+    
 </body>
 </html>

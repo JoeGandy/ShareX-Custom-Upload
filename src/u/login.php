@@ -13,8 +13,11 @@ if (isset($_POST['submit'])) {
     $password = sha1($_POST['password']);
 
     if ($username == $config['username'] AND $password == $config['password']) {
+        
         $_SESSION['AUTH_ID'] = 34234;
+
         header('Location: index.php');
+
     } else {
         $error = "Username and Password doesn't match";
     }
@@ -32,7 +35,7 @@ if (isset($_GET['logout'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>Login</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>

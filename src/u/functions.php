@@ -75,40 +75,6 @@ function get_file_target($name_length, $enable_random, $file_name, $name) {
     return $target;
 }
 
-function get_latest_version() {
-    $config = include 'config.php';
-
-    $opts = [
-        'http' => [
-            'ignore_errors' => true,
-            'method' => 'GET',
-            'header' => [
-                'User-Agent: PHP',
-            ],
-        ],
-    ];
-
-
-    $context = stream_context_create($opts);
-    $content = json_decode(file_get_contents('https://api.github.com/repos/JoeGandy/ShareX-Custom-Upload/releases/latest', false, $context));
-
-    preg_match("#HTTP/[0-9\.]+\s+([0-9]+)#", $http_response_header[0], $match);
-    $statusCode = intval($match[1]);
-
-
-
-    if ($statusCode == 200) {
-
-        $version = str_replace('v', '', $content->tag_name);
-
-        if ($version != $config['version']) {
-            echo '<div class="bg-warning text-white p-2 my-2">
-                    <p class="p-0 m-0">There is a new version available <a target="_blank" class="text-primary" href="https://github.com/JoeGandy/ShareX-Custom-Upload/releases">Download it here</a></p>
-                    
-                </div>';
-        }
-    }
-}
 
 function get_latest_sharex_version() {
     $opts = [

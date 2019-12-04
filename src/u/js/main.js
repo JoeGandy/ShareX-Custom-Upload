@@ -34,16 +34,25 @@ function CopyKey() {
     document.execCommand("copy");
 }
 
-function CopyUrl(value) {
+function CopyURL(value) {
     /* Get the text field */
-    var copyText = document.getElementById("copyurl");
+
+
 
     const el = document.createElement('textarea');
-    el.value = copyText.dataset.copyurl;
+    el.value = value;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+
+    $.notify({
+        // options
+        message: 'Link copied <strong>' + value + '</strong>'
+    }, {
+        // settings
+        type: 'success'
+    });
 }
 
 function goBack() {
@@ -81,15 +90,23 @@ $("#copykey").on('click', function (event) {
 
 });
 
-$("#copyurl").on('click', function (event) {
-    event.preventDefault();
-    var value = $("#copyurl").data('copyurl');
-    $.notify({
-        // options
-        message: 'Link copied <strong>' + value + '</strong>'
-    }, {
-        // settings
-        type: 'success'
-    });
-    CopyUrl();
-});
+
+
+
+
+
+// $("#copyurl").on('click', function (event) {
+
+//     event.preventDefault();
+
+//     var value = this.data('copyurl');
+
+//     $.notify({
+//         // options
+//         message: 'Link copied <strong>' + value + '</strong>'
+//     }, {
+//         // settings
+//         type: 'success'
+//     });
+//     CopyUrl();
+// });
