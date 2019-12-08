@@ -21,7 +21,11 @@ if (isset($_POST['key'])) {
         if ($config['upload_to_root']) {
             $target_dir = '/';
         }else {
-            $target_dir = '/'. $config['directory_for_uploads'] . '/';
+            if (is_dir('/' . $config['direcotry_for_uploads']) {
+                $target_dir = '/'. $config['directory_for_uploads'] . '/';
+            }else {
+             echo 'The Directory does not exist, yet. Please create the directory first.';   
+            }
         }
             
         while($first_run || file_exists($target)){
