@@ -2,11 +2,8 @@
 A little PHP script created for uploading custom sharex files to your own webserver
 
 ## Manual Download - Stable Release
-If toy would like to download the latest stable release please follow the link below
+If you would like to download the latest stable release please follow the link below
 - [Stable Release](https://github.com/JoeGandy/ShareX-Custom-Upload/releases/latest)
-
-Please keep in mind that the master branch may contain bugs or broken code. 
-Please use the link above if you are not able to debug and correct issues in the master branch. Thank you.
 
 # Setup
 First we start by uploading the contents of the 'src' directory to the root of our website
