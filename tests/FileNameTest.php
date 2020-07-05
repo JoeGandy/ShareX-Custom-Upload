@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-require_once 'src/u/functions.php';
+require_once 'src/functions.php';
 
-$GLOBALS['config'] = include 'src/u/config.php';
+$GLOBALS['config'] = include 'src/config.php';
+
+$GLOBALS['config']['default_naming_scheme'] = 'random';
 
 
 use PHPUnit\Framework\TestCase;
@@ -17,34 +19,47 @@ final class FileNameTest extends TestCase
     }
 
     /** @test */
-    public function fileNameHasRightExtensionRandomNameRandom(): void
+    public function fileNameHasRightExtensionRandomName(): void
     {
-        $orginal_file_name = "TestPngFile.png";
+        $original_file_name = "TestPngFile.png";
         $post_name = "07.53.17-08.11.19";
 
-        $correct = $orginal_file_name;
-        $test = get_file_target(['enable_random_name' => true], $orginal_file_name, $post_name);
+        $correct = $original_file_name;
+        $test = get_file_target($original_file_name, true, $post_name);
 
         $this->assertEquals(
-            pathinfo($correct)['extension'],
-            pathinfo($test)['extension']
+            pathinfo($correct, PATHINFO_EXTENSION),
+            pathinfo($test, PATHINFO_EXTENSION)
         );
     }
 
     /** @test */
-    public function fileNameHasRightExtensionShareXNameNoRandom(): void
+    public function fileNameHasRightExtensionNoRandomName(): void
     {
-        $orginal_file_name = "TestPngFile.png";
+        $original_file_name = "TestPngFile.png";
         $post_name = "07.53.17-08.11.19";
-        $enable_random_name = true;
-        $random_name_length = 8;
 
-        $correct = $orginal_file_name;
-        $test = get_file_target(['enable_random_name' => true], $orginal_file_name, $post_name);
+        $correct = $original_file_name;
+        $test = get_file_target($original_file_name, false, $post_name);
 
         $this->assertEquals(
-            pathinfo($correct)['extension'],
-            pathinfo($test)['extension']
+            pathinfo($correct, PATHINFO_EXTENSION),
+            pathinfo($test, PATHINFO_EXTENSION)
+        );
+    }
+
+    /** @test */
+    public function fileNameHasRightNameNoRandomName(): void
+    {
+        $original_file_name = "TestPngFile.png";
+        $post_name = "testname";
+
+        $correct = $post_name.'.png';
+        $test = get_file_target($original_file_name, false, $post_name);
+
+        $this->assertEquals(
+            $correct,
+            basename($test),
         );
     }
 
@@ -53,16 +68,45 @@ final class FileNameTest extends TestCase
     {
         $correct_length = 15;
         
-        $testLength = strlen(generateRandomName('png', $correct_length - 4));
+        $testLength = strlen(generate_random_name('png', $correct_length - 4));
 
         $this->assertEquals(
             $testLength,
             $correct_length
         );
     }
+
+    /** @test */
+    public function joinPathsNoUrl(): void
+    {
+        $segment1 = '/real/paths/go/here/';
+        $segment2 = 'little/slash///mishap';
+        $segment3 = '/free/me/from/the/robot/overlords.png';
+
+        $expected = '/real/paths/go/here/little/slash/mishap/free/me/from/the/robot/overlords.png';
+        
+        $result = join_paths($segment1, $segment2, $segment3);
+
+        $this->assertEquals(
+            $expected,
+            $result,
+        );
+    }
+
+    /** @test */
+    public function joinPathsUrl(): void
+    {
+        $segment1 = 'https://robotfactory.com/';
+        $segment2 = '/test/professional';
+        $segment3 = 'woweetxt';
+
+        $expected = 'https://robotfactory.com/test/professional/woweetxt';
+        
+        $result = join_paths($segment1, $segment2, $segment3);
+
+        $this->assertEquals(
+            $expected,
+            $result,
+        );
+    }
 }
-
-
-
-
-

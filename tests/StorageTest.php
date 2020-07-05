@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require_once 'src/u/functions.php';
+require_once 'src/functions.php';
 
-$GLOBALS['config'] = include 'src/u/config.php';
+$GLOBALS['config'] = include 'src/config.php';
 
 
 use PHPUnit\Framework\TestCase;
@@ -91,7 +91,7 @@ final class StorageTest extends TestCase
     {
         $test_string = bytes_to_string(disk_free_space('/'));
 
-        $this->assertRegExp('/[0-9]+\.[0-9]+\s(B|KB|MB|GB|TB|PB|EB|ZB|YB)/i', $test_string);
+        $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\s(B|KB|MB|GB|TB|PB|EB|ZB|YB)/i', $test_string);
     }
 
     /** @test */
@@ -99,11 +99,6 @@ final class StorageTest extends TestCase
     {
         $test_string = bytes_to_string(disk_total_space('/'));
 
-        $this->assertRegExp('/[0-9]+\.[0-9]+\s(B|KB|MB|GB|TB|PB|EB|ZB|YB)/i', $test_string);
+        $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\s(B|KB|MB|GB|TB|PB|EB|ZB|YB)/i', $test_string);
     }
 }
-
-
-
-
-

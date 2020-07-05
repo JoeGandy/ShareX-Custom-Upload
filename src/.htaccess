@@ -1,0 +1,21 @@
+Options +FollowSymLinks
+
+<Files "login.json">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+<Files "config.php">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteRule css/(.*) css/$1
+RewriteRule js/(.*) js/$1
+
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule .* rewrite.php [L] 

@@ -1,1 +1,5 @@
-src/u/config.php
+src/login.json
+.vscode/
+tests/.phpunit.result.cache
+src/backups
+src/manifest.webmanifest
