@@ -14,8 +14,8 @@
         'Body' => 'MultipartFormData',
         'FileFormName' => 'fileupload',
         'Arguments' => [
-            'key' => $config['secure_key'],
-        ],
+            'key' => $config['secure_key']
+        ]
     ];
 
     header("Content-Disposition: attachment; filename=sharex_{$config['page_title']}_custom_uploader.sxcu");

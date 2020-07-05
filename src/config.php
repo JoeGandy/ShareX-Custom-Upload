@@ -93,5 +93,5 @@ return [
 
     /* Select the date format to use to generate file names if date is chosen as the default_naming_scheme */
     /* See available options at https://www.php.net/manual/en/function.date.php */
-    'upload_date_format' => 'Y-m-d_H.i.s',
+    'upload_date_format' => 'Y-m-d_H.i.s'
 ];

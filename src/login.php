@@ -9,7 +9,7 @@ if ($config['enable_password_login'] === false) {
 
 $login_file_path = join_paths(
     getcwd(),
-    'login.json',
+    'login.json'
 );
 
 if (!file_exists($login_file_path)) {

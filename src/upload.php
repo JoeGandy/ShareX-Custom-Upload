@@ -32,7 +32,7 @@ if (isset($_POST['key'])) {
         $target = get_file_target($_FILES['fileupload']['name'], $config['use_default_naming_scheme_for_sharex'], $filename);
         $dir_path = join_paths(
             getcwd(),
-            $config['file_storage_folder'],
+            $config['file_storage_folder']
         );
 
         if (!file_exists($dir_path)) {
@@ -58,7 +58,7 @@ if (isset($_POST['key'])) {
     $target = get_file_target($_FILES['fileupload']['name'], $config['use_default_naming_scheme_for_gallery'], $filename);
     $dir_path = join_paths(
         getcwd(),
-        $config['file_storage_folder'],
+        $config['file_storage_folder']
     );
 
     if (!file_exists($dir_path)) {

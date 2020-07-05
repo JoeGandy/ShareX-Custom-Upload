@@ -5,7 +5,7 @@ include 'functions.php';
 
 $login_file_path = join_paths(
     getcwd(),
-    'login.json',
+    'login.json'
 );
 
 if (file_exists($login_file_path)) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $login_file = [
                 'username' => $_POST['register_username'],
                 'password' => password_hash($_POST['register_password'], PASSWORD_DEFAULT),
-                'tokens' => [],
+                'tokens' => []
             ];
 
             if (isset($_POST['remember_me']) && $_POST['remember_me'] === 'on') {

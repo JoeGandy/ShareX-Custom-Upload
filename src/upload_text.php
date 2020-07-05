@@ -33,7 +33,7 @@ if (isset($_POST['key'])) {
 
         $dir_path = join_paths(
             getcwd(),
-            $config['file_storage_folder'],
+            $config['file_storage_folder']
         );
 
         if (!file_exists($dir_path)) {
@@ -68,7 +68,7 @@ if (isset($_POST['key'])) {
 
     $dir_path = join_paths(
         getcwd(),
-        $config['file_storage_folder'],
+        $config['file_storage_folder']
     );
 
     if (!file_exists($dir_path)) {

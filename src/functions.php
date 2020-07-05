@@ -69,22 +69,22 @@ function create_webmanifest() {
             [
                 'src' => join_paths($base_host, 'icons/android-chrome-192x192.png'),
                 'sizes' => '192x192',
-                'type' => 'image/png',
+                'type' => 'image/png'
             ],
             [
                 'src' => join_paths($base_host, 'icons/android-chrome-512x512.png'),
                 'sizes' => '512x512',
-                'type' => 'image/png',
+                'type' => 'image/png'
             ],
             [
                 'src' => join_paths($base_host, 'icons/maskable.png'),
                 'sizes' => '512x512',
                 'type' => 'image/png',
-                'purpose' => 'any maskable',
-            ],
+                'purpose' => 'any maskable'
+            ]
         ],
         'theme_color' => '#5c5cbc',
-        'background_color' => '#5c5cbc',
+        'background_color' => '#5c5cbc'
     ];
     $manifest_path = join_paths(getcwd(), 'manifest.webmanifest');
     $encoded_manifest = json_encode($manifest);
@@ -122,20 +122,20 @@ function get_file_target($original_file_name, $generate_name, $new_name) {
                     $target = join_paths(
                         getcwd(),
                         $config['file_storage_folder'],
-                        date($config['upload_date_format']).'.'.$extension,
+                        date($config['upload_date_format']).'.'.$extension
                     );
                 } else {
                     $target = join_paths(
                         getcwd(),
                         $config['file_storage_folder'],
-                        date($config['upload_date_format']).'_'.$files_exist_counter.'.'.$extension,
+                        date($config['upload_date_format']).'_'.$files_exist_counter.'.'.$extension
                     );
                 }
             } else {
                 $target = join_paths(
                     getcwd(),
                     $config['file_storage_folder'],
-                    generate_random_name($extension, $config['random_name_length']),
+                    generate_random_name($extension, $config['random_name_length'])
                 );
             }
         } else {
@@ -143,13 +143,13 @@ function get_file_target($original_file_name, $generate_name, $new_name) {
                 $target = join_paths(
                     getcwd(),
                     $config['file_storage_folder'],
-                    $new_name.'.'.$extension,
+                    $new_name.'.'.$extension
                 );
             } else {
                 $target = join_paths(
                     getcwd(),
                     $config['file_storage_folder'],
-                    $new_name.'_'.$files_exist_counter.'.'.$extension,
+                    $new_name.'_'.$files_exist_counter.'.'.$extension
                 );
             }
         }
@@ -170,9 +170,9 @@ function get_latest_sharex_version() {
         'http' => [
             'method' => 'GET',
             'header' => [
-                'User-Agent: PHP',
-            ],
-        ],
+                'User-Agent: PHP'
+            ]
+        ]
     ];
 
     $context = stream_context_create($opts);
@@ -203,7 +203,7 @@ function log_out() {
 
     $login_file_path = join_paths(
         getcwd(),
-        'login.json',
+        'login.json'
     );
     
     if (file_exists($login_file_path)) {
@@ -241,7 +241,7 @@ function auth_user($ip_only=false){
     if (!$ip_only && isset($config['enable_password_login']) && $config['enable_password_login']) {
         $login_file_path = join_paths(
             getcwd(),
-            'login.json',
+            'login.json'
         );
         
         if (!file_exists($login_file_path)) {

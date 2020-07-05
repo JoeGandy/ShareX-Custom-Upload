@@ -15,7 +15,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 
 $login_file_path = join_paths(
     getcwd(),
-    'login.json',
+    'login.json'
 );
 
 if (!file_exists($login_file_path)) {

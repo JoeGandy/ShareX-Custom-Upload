@@ -59,7 +59,7 @@ final class FileNameTest extends TestCase
 
         $this->assertEquals(
             $correct,
-            basename($test),
+            basename($test)
         );
     }
 
@@ -89,7 +89,7 @@ final class FileNameTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            $result,
+            $result
         );
     }
 
@@ -106,7 +106,7 @@ final class FileNameTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            $result,
+            $result
         );
     }
 }
