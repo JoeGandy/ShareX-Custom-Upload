@@ -1,5 +1,6 @@
-src/login.json
 .vscode/
 tests/.phpunit.result.cache
+
+src/login.json
 src/backups
 src/manifest.webmanifest
