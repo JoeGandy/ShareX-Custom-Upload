@@ -3,9 +3,7 @@ $(document).ready(function() {
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const localSetting = localStorage.getItem('useDarkMode');
 
-        // Themes are applied to all elements with class and not only body due to bug with
-        // form validation styling in the custom theme (see register.php)
-        const themedElements = $('.bootstrap, .bootstrap-dark');
+        const themedElements = $('body');
 
         if (localSetting === null) {
             if (userPrefersDark) {

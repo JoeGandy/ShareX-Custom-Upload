@@ -63,25 +63,22 @@ create_webmanifest();
                     unset($_SESSION['type']);
                 }
             ?>
-            <!-- The children elements all have the bootstrap and bootstrap-dark classes because
-            the custom themes currently have a bug in which they will not display validation styles
-            if those classes aren't present -->
             <form action="create_account.php" method="POST" id="register-form" novalidate>
                 <?php if ($config['enable_username']) {?>
-                <div class="form-group bootstrap">
+                <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control bootstrap" id="username" name="register_username" placeholder="Enter username" required>
+                    <input type="text" class="form-control" id="username" name="register_username" placeholder="Enter username" required>
                     <div class="invalid-feedback" id="verify-password-feedback">Your username cannot be empty.</div>
                 </div>
                 <?php } ?>
-                <div class="form-group bootstrap">
+                <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control bootstrap" id="password" name="register_password" placeholder="Enter password" required>
+                    <input type="password" class="form-control" id="password" name="register_password" placeholder="Enter password" required>
                     <div class="invalid-feedback" id="verify-password-feedback">Your password cannot be empty.</div>
                 </div>
-                <div class="form-group bootstrap">
+                <div class="form-group">
                     <label for="password">Confirm Your Password</label>
-                    <input type="password" class="form-control bootstrap" id="verify-password" placeholder="Enter password again" required>
+                    <input type="password" class="form-control" id="verify-password" placeholder="Enter password again" required>
                     <div class="invalid-feedback" id="verify-password-feedback">Your passwords do not match.</div>
                 </div>
                 <div class="form-group form-check">

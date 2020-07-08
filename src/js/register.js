@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#verify-password').on('input', (e) => {
+    $('#verify-password, #password').on('input', (e) => {
         if ($('#verify-password').val() !== $('#password').val()) {
             $('#verify-password')[0].setCustomValidity('Your passwords do not match.');
         } else {
