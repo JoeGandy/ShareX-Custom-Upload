@@ -5,12 +5,6 @@ $config = include 'config.php';
 
 session_start();
 
-ob_start();
-var_dump(empty($_FILES));
-var_dump(empty($_POST));
-var_dump($_SERVER['REQUEST_METHOD']);
-error_log(ob_get_clean());
-
 if (empty($_FILES) && empty($_POST) &&
         isset($_SERVER['REQUEST_METHOD']) &&
         strtolower($_SERVER['REQUEST_METHOD']) === 'post') {

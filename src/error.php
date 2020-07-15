@@ -1,5 +1,7 @@
 <?php
 
+$config = include 'config.php';
+
 if (isset($_GET['error_msg'])) {
     $error_msg = $_GET['error_msg'];
 }

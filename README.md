@@ -10,6 +10,10 @@ This script relies on Apache's `.htaccess` configuration files to function and c
 *And if you do make it work, feel free to leave a pull request with your changes :)*
 
 # Setup
+This script requires the `openssl` and `fileinfo` extensions to be enabled in your `php.ini`.
+
+If using Apache, you must also make sure that `mod_rewrite` and `mod_authz_core` are enabled in your `httpd.conf`.
+
 After you've cloned the repository, edit the `config.php` file in the `src` directory to match your setup.
 For your site to start working, the only setting you need to change is `base_url`. This will be the URL where your gallery page is accessible.
 
@@ -97,9 +101,11 @@ This is the most important configuration option. You must set this in order for 
 
 ## `secure_key`
 
-*You must change this*
+*You must change this.*
 
 This sets the token used by ShareX to upload images and files. Since you don't need to memorize this, you should probably set it to something really long and random.
+
+***Important: The `secure_key` cannot contain the `$` character due to limitations of PHP.***
 
 ***Note: This is not the password you use to log in to the gallery.***
 
@@ -111,7 +117,7 @@ This sets the token used by ShareX to upload images and files. Since you don't n
 
 This sets the directory where your uploads are stored. You really shouldn't have to change this. If you want to change the path where your files are accessible on the site, use the `upload_access_path` config option instead.
 
-However, if you change this, you ***must*** copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)
+However, if you change this, you ***must*** change the path of the `Directory` tag in `.htaccess` from `u/` to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)
 
 ## `upload_access_path`
 

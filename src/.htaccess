@@ -1,14 +1,16 @@
 Options +FollowSymLinks
 
 <Files "login.json">  
-  Order Allow,Deny
-  Deny from all
+  Require all denied
 </Files>
 
 <Files "config.php">  
-  Order Allow,Deny
-  Deny from all
+  Require all denied
 </Files>
+
+<Directory "u/">
+  Require all denied
+</Directory>
 
 RewriteEngine On
 RewriteBase /
