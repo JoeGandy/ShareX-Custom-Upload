@@ -4,6 +4,9 @@ A little PHP script created for uploading text, files, and images to your own we
 ## Manual Download - Stable Release
 Just clone the repository to get the latest stable version.
 
+## Migrating from Version 1
+Version 2 introduced major breaking changes that make it incompatible with Version 1 installations. See [the migration guide](MIGRATING.md) for instructions on how to upgrade your uploader.
+
 ## Use with Non-Apache Web Servers
 This script relies on Apache's `.htaccess` configuration files to function and currently will not support other web servers such as NGINX. If you would like to try to make it work with other web servers, you will need to adapt the configuration files.
 

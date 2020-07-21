@@ -14,7 +14,8 @@ return [
 
     /* This is the folder where your uploaded files will be stored.
      * UNLESS YOU HAVE SPECIFIC CIRCUMSTANCES, YOU SHOULDN'T CHANGE THIS.
-     * Instead, change the upload_access_path. If you must change this, copy the .htaccess file from the u/ folder to your new folder 
+     * Instead, change the upload_access_path.
+     * If you must change this, change the path of the `Directory` tag in `.htaccess` from `u/` to your new folder
      * Do not set this to '/'. Your site will either not work, or people will be able to execute arbitrary code on your computer.
      */
     'file_storage_folder' => 'u/',
