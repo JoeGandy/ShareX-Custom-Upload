@@ -1,8 +1,10 @@
 # ShareX-Custom-Upload
 A little PHP script created for uploading text, files, and images to your own webserver. It supports uploading via ShareX, but also on the web interface, and with command line scripts.
 
-## Manual Download - Stable Release
-Just clone the repository to get the latest stable version.
+## Installation
+Download the latest release as a ZIP from the [Releases page](https://github.com/JoeGandy/ShareX-Custom-Upload/releases).
+
+Extract the ZIP and follow the [setup instructions](#setup) below.
 
 ## Migrating from Version 1
 Version 2 introduced major breaking changes that make it incompatible with Version 1 installations. See [the migration guide](MIGRATING.md) for instructions on how to upgrade your uploader.
@@ -17,10 +19,10 @@ This script requires the `openssl` and `fileinfo` extensions to be enabled in yo
 
 If using Apache, you must also make sure that `mod_rewrite` and `mod_authz_core` are enabled in your `httpd.conf`.
 
-After you've cloned the repository, edit the `config.php` file in the `src` directory to match your setup.
+In the `release` folder, edit the `config.php` file to match your setup.
 For your site to start working, the only setting you need to change is `base_url`. This will be the URL where your gallery page is accessible.
 
-Then, upload the contents of the `src` folder to your website.
+Then, upload the contents of the `release` folder to your website.
 
 See the [full configuration documentation](#full-configuration) for more information about how to configure your installation.
 
