@@ -1,0 +1,13 @@
+name: PHPUnit Test
+
+on: [pull_request, push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Tests
+        run: |
+          chmod +x tests/phpunit
+          tests/phpunit tests/

@@ -1,0 +1,65 @@
+.IconButtons {
+    position: relative;
+    font-size: 2.25rem;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#upload-mode button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#gallery-uploader {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.15s ease-in-out;
+}
+
+#gallery-uploader:hover {
+    opacity: 1;
+}
+
+#gallery-uploader .bi {
+    font-size: 2.5rem;
+    opacity: 1;
+}
+
+#gallery-uploader, #text-uploader {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none !important;
+}
+
+.progress-bar {
+    transition: width 0.1s linear;
+}
+
+.bi {
+    display: block;
+    opacity: 0.6;
+    transition: opacity 0.1s ease-in-out;
+    margin: 0 8px;
+}
+
+.bi:hover, .bi:focus {
+    opacity: 0.9;
+}
+
+.bootstrap-dark .bi-sun {
+    display: block;
+}
+.bootstrap-dark .bi-moon {
+    display: none;
+}
+.bootstrap .bi-sun {
+    display: none;
+}
+.bootstrap .bi-moon {
+    display: block;
+}
+
+#textcontent {
+    font-family: monospace;
+    font-size: 14px;
+}

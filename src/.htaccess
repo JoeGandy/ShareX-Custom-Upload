@@ -1,0 +1,23 @@
+Options +FollowSymLinks
+
+<Files "login.json">  
+  Require all denied
+</Files>
+
+<Files "config.php">  
+  Require all denied
+</Files>
+
+<Directory "u/">
+  Require all denied
+</Directory>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteRule css/(.*) css/$1
+RewriteRule js/(.*) js/$1
+
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule .* rewrite.php [L] 
