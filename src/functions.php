@@ -223,7 +223,6 @@ function log_out() {
 }
 
 function show_error_page($message) {
-    $config = include 'config.php';
     $error_msg = $message;
     include 'error.php';
     die();
