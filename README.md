@@ -82,8 +82,8 @@ somecommand | upload
 somecommand | upload myfile.txt
 ```
 
-# Uploading with API
-Want to make something that works with your uploader? You're in luck! We've got some [documentation](UPLOADING.md).
+# Direct Uploading
+Want to upload directly using POST requests? You're in luck! We've got [some documentation](UPLOADING.md).
 
 # Screenshots
 ![Screenshot of gallery page](images/gallery.png)
