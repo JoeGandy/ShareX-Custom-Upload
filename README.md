@@ -125,7 +125,7 @@ This sets the token used by ShareX to upload images and files. Since you don't n
 
 This sets the directory where your uploads are stored. You really shouldn't have to change this. If you want to change the path where your files are accessible on the site, use the `upload_access_path` config option instead.
 
-However, if you change this, you ***must*** change the path of the `Directory` tag in `.htaccess` from `u/` to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)
+However, if you change this, you ***must*** copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)
 
 ## `upload_access_path`
 
