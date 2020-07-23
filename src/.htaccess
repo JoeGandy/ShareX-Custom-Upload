@@ -8,10 +8,6 @@ Options +FollowSymLinks
   Require all denied
 </Files>
 
-<Directory "u/">
-  Require all denied
-</Directory>
-
 RewriteEngine On
 RewriteBase /
 
