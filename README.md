@@ -28,7 +28,7 @@ See the [full configuration documentation](#full-configuration) for more informa
 
 > **Important:** If you choose to not place your uploader in the root of your website, the `base_url` setting needs to include the path to where the uploader code will be accessible. If you do this, you will also need to to change the `RewriteBase` in the `.htaccess` file to incude the path to your uploader.
 > 
-> For example, if you want your uploader to be located at `https://mydomain.com/myfileuploads`, you will need to upload the contents of the `release` directory to `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
+> For example, if you want your uploader to be located at `https://mydomain.com/myfileuploads`, you will need to upload the contents of the `src` directory to `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
 
 # Login Configuration
 
@@ -81,9 +81,6 @@ somecommand | upload
 ```
 somecommand | upload myfile.txt
 ```
-
-# API Documentation
-Want to make something that works with your uploader? You're in luck! We've got [API documentation](API.md).
 
 # Screenshots
 ![Screenshot of gallery page](images/gallery.png)
