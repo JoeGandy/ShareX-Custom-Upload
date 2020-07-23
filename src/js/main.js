@@ -1,4 +1,4 @@
-if (Dropzone) {
+if (window.Dropzone) {
     Dropzone.options.galleryUploader = {
         paramName: 'fileupload',
         init: function() {
