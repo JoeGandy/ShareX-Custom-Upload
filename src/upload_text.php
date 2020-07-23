@@ -48,7 +48,7 @@ if (isset($_POST['key'])) {
     } else {
         echo 'The key provided does not match the secure_key set in your config.php.';
     }
-} else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+} else if (auth_user()) {
     if (isset($_POST['filename'])) {
         $file_basename = basename($_POST['filename']);
     } else {
