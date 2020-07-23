@@ -1,5 +1,5 @@
-# API Documentation
-Want to make something that works with your uploader? You're in luck! We've got API documentation.
+# Uploading Documentation
+Want to make something that works with your uploader? You're in luck! We've got some documentation.
 
 > Throughout this page, `<base_url>` will be used to refer to the `base_url` setting in your configuration, which is the URL where you can access your gallery page.
 
