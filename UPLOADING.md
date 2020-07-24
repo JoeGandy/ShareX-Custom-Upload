@@ -8,13 +8,14 @@ The uploader offers two API endpoints for uploading content. There is currently 
 ## Image/File Uploading
 To upload a file, you'll need to send a POST request to `<base_url>/upload.php`. The data sent must be encoded as `multipart/form-data`, which is the standard HTML form encoding for file uploads.
 
-The file name will follow the settings in your `config.php` for ShareX uploads.
+The file name will follow the settings in your `config.php` for ShareX uploads. If you have `provided` set as your `sharex_upload_naming_scheme`, you can use the `name` parameter to specify the file name to use.
 
 ### ***POST*** `<base_url>/upload.php`
 
 | Field        | Type        | Optional | Description                                |
 | ------------ | ----------- | -------- | ------------------------------------------ |
 | `key`        | text        | no       | The `secure_key` set in your `config.php`. |
+| `name`       | text        | yes      | The file name to use if you have `provided` set as the `sharex_upload_naming_scheme` |
 | `fileupload` | file        | no       | The file to upload                         |
 
 
