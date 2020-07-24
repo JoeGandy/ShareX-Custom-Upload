@@ -41,7 +41,7 @@ if (isset($_POST['key'])) {
     } else {
         echo 'The key provided does not match the secure_key set in your config.php.';
     }
-} else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+} else if (auth_user()) {
     if (!isset($_FILES['fileupload'])) {
         header('Location: '.$config['base_url']);
         die();
@@ -65,7 +65,6 @@ if (isset($_POST['key'])) {
     } else {
         $_SESSION['message'] = 'File upload failed, ensure permissions are writeable (777) on the upload directory ('.$dir_path.')';
         $_SESSION['type'] = 'danger';
-        header('Location: '.$config['base_url']);
     }
 } else {
     echo 'You may not upload without the key parameter. Check your ShareX configuration or try redownloading the ShareX config file from your gallery page.';
