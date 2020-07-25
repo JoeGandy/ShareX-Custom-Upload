@@ -1,4 +1,6 @@
 <?php
+// test
+
 $config = include 'config.php';
 include 'functions.php';
 session_start();
@@ -58,6 +60,26 @@ create_webmanifest();
             }
         ?>
         <br/>
+        <?php
+            $current_version_path = join_paths(getcwd(), 'VERSION');
+            $new_version_path = join_paths(getcwd(), 'release', 'VERSION');
+            if (file_exists(join_paths(getcwd(), 'release', 'update.php')) &&
+                file_exists($current_version_path) &&
+                file_exists($new_version_path)) {
+                $current_version = file_get_contents($current_version_path);
+                $new_version = file_get_contents($new_version_path);
+
+                if (version_compare($current_version, $new_version) === -1) {
+                    ?>
+                        <div class="alert text-center alert-warning" role="alert">
+                            <h4 class="alert-heading">Update Available!</h4>
+                            <p>An update has been detected. Click the button below to update your uploader.</p>
+                            <a href="release/update.php" type="button" class="btn btn-warning">Update</a>
+                        </div><br>
+                    <?php
+                }
+            }
+        ?>
 
         <?php if ($config['enable_gallery_page_uploads']) { ?>
             <div class="btn-group w-100" id="upload-mode" role="group" aria-label="Select File or Text Upload">

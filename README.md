@@ -30,6 +30,18 @@ See the [full configuration documentation](#full-configuration) for more informa
 > 
 > For example, if you want your uploader to be located at `https://mydomain.com/myfileuploads`, you will need to upload the contents of the `release` directory to `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
 
+# Updating
+
+To update your uploader to a new version, download the latest release as a ZIP from the [Releases page](https://github.com/JoeGandy/ShareX-Custom-Upload/releases). Extract the `release` folder from the ZIP and upload the folder (not its contents, the folder itself) to your uploader's install directory. For example, if your uploader is installed at `/website/root/directory/`, make sure the folder is at `/website/root/directory/release/`. Now, open the gallery page and a large banner that prompts you to update should appear. If the update is successful, you can then just delete the `release` folder.
+
+> **Important: The automatic updater does not modify any of your configuration files, so if the configuration format is modified in the future, you will need to manually edit your configuration file to match the new format. *Please read the release notes for any new versions and check for any breaking configuration changes*. You can always check [the latest configuration file](src/config.php) for an example of what your configuration should look like.**
+
+If the update banner does not show up, please make sure that the `VERSION` file exists in both your uploader install directory and the `release` directory. The version number in the `release` directory must also be higher than the version number in your current installation.
+
+If you get an error after pressing the upload button, make sure that the folder where your uploader is installed is writable. If that is the case and you still get an error, please [open an issue](https://github.com/JoeGandy/ShareX-Custom-Upload/issues).
+
+> Note: The uploader only supports automatic updating starting with version 2.1.0. If you are currently using a version older than 2.1.0 and want to update, you will need to complete the update manually by copying the new files into your website. However, after you manually update, you will be able to use the automatic updater for future versions.
+
 # Login Configuration
 
 This application supports login using a username and password. If you would like to enable this, set the `enable_password_login` option in your `config.php` to `true`. Now, the next time you open your gallery page, you will be prompted to register an account. Only one account is allowed per installation. It is recommended that you set up your account soon after enabling this setting, since anyone who attempts to view the gallery before an account is set up will be prompted to register.

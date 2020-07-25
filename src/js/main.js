@@ -167,5 +167,5 @@ $(document).ready(function() {
             'emptyTable': 'You have not uploaded any files yet.<br><br>Press the Share icon below to download a ShareX custom uploader configuration file.<br>You can also upload files directly in the box above.',
         },
     });
-    $('div.alert').delay(5000).fadeOut(500);
+    $('div.alert#session-msg').delay(5000).fadeOut(500);
 });

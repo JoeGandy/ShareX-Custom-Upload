@@ -1,7 +1,7 @@
 <?php
 
 function display_alert($text, $type) {
-    return '<div class="alert text-center alert-'.$type.'" role="alert">
+    return '<div class="alert text-center alert-'.$type.'" id="session-msg" role="alert">
                 <p>'.$text.'</p>
             </div>';
 }
