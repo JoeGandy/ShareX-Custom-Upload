@@ -287,3 +287,19 @@ This setting sets the format used to generate file names if `date` is set as the
 See [the PHP date function options](https://www.php.net/manual/en/function.date.php) for information about how to configure this option.
 
 Since this option is used for file names, there is a limited selection of characters which can be used. See the [Wikipedia Filename article](https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words) for information about what characters can be used in this setting.
+
+## `enable_image_cache`
+
+*Default Value: `true`*
+
+This controls whether the uploader should instruct the browser to cache the uploaded images.
+
+This is enabled by default, but can slightly hurt performance on low power systems.
+
+## `debug_mode`
+
+*Default Value: `false`*
+
+This enables Debug Mode, which will instruct the uploader to log and send additional debug information.
+
+At the moment, this will only enable sending the time it took to generate image hashes for caching.

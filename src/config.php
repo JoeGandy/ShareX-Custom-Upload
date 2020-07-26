@@ -94,5 +94,13 @@ return [
 
     /* Select the date format to use to generate file names if date is chosen as the default_naming_scheme */
     /* See available options at https://www.php.net/manual/en/function.date.php */
-    'upload_date_format' => 'Y-m-d_H.i.s'
+    'upload_date_format' => 'Y-m-d_H.i.s',
+
+    /* This controls whether the uploader should instruct the browser to cache the uploaded images 
+     * This is enabled by default, but can slightly hurt performance on low power systems
+     */
+    'enable_image_cache' => true,
+
+    /* This enables Debug Mode, which will instruct the uploader to log and send additional debug information */
+    'debug_mode' => false
 ];
