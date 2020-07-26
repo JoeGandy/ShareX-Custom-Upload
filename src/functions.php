@@ -58,25 +58,26 @@ function join_paths() {
 
 function create_webmanifest() {
     $config = include 'config.php';
+    $base_host = parse_url($config['base_url'], PHP_URL_PATH);
     $manifest = [
         'name' => $config['page_title'],
         'description' => 'A image, file, and text uploader',
         'display' => 'standalone',
-        'start_url' => $config['base_url'],
-        'scope' => $config['base_url'],
+        'start_url' => $base_host,
+        'scope' => $base_host,
         'icons' => [
             [
-                'src' => join_paths($config['base_url'], 'icons/android-chrome-192x192.png'),
+                'src' => join_paths($base_host, 'icons/android-chrome-192x192.png'),
                 'sizes' => '192x192',
                 'type' => 'image/png'
             ],
             [
-                'src' => join_paths($config['base_url'], 'icons/android-chrome-512x512.png'),
+                'src' => join_paths($base_host, 'icons/android-chrome-512x512.png'),
                 'sizes' => '512x512',
                 'type' => 'image/png'
             ],
             [
-                'src' => join_paths($config['base_url'], 'icons/maskable.png'),
+                'src' => join_paths($base_host, 'icons/maskable.png'),
                 'sizes' => '512x512',
                 'type' => 'image/png',
                 'purpose' => 'any maskable'
