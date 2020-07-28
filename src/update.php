@@ -8,10 +8,25 @@ if (!file_exists(dirname(__FILE__, 2).'/'.'functions.php')) {
     die();
 }
 
-include './functions.php';
+include '../functions.php';
 
 session_start();
 auth_user();
+
+// Check that this isn't a rollback update to not overwrite rollback files
+$update_version_path = join_paths(getcwd(), 'VERSION');
+$current_version_path = join_paths(dirname(__FILE__, 2), 'VERSION');
+
+$save_rollback = false;
+
+if (file_exists($current_version_path) && file_exists($update_version_path)) {
+    $update_version = trim(file_get_contents($update_version_path));
+    $current_version = trim(file_get_contents($current_version_path));
+
+    if (version_compare($current_version, $update_version, '<')) {
+        $save_rollback = true;
+    }
+}
 
 // This should include all files except .htaccess, config.php, and this file (update.php)
 $UPDATE_FILES = [
@@ -37,6 +52,7 @@ $UPDATE_FILES = [
     'js/textViewer.js',
     'create_account.php',
     'delete_files.php',
+    'download_update.php',
     'error.php',
     'favicon.ico',
     'functions.php',
@@ -63,24 +79,11 @@ $OPTIONAL_FILES = [
     'config.php'
 ];
 
-foreach ($UPDATE_FILES as $file) {
-    $source_file = join_paths(dirname(__FILE__, 1), $file);
-    $dest_file = join_paths(dirname(__FILE__, 2), $file);
+// Success is the default state
+$_SESSION['type'] = 'success';
+$_SESSION['message'] = 'Update successful!';
 
-    $dest_dir = dirname($dest_file, 1);
-    if (!file_exists($dest_dir)) {
-        mkdir($dest_dir, 0777, true);
-    }
-
-    if (!copy($source_file, $dest_file)) {
-        $_SESSION['type'] = 'danger';
-        $_SESSION['message'] = 'Update failed. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
-    } else {
-        $_SESSION['type'] = 'success';
-        $_SESSION['message'] = 'Update successful! You can now delete the release folder.';
-    }
-}
-
+// Copy optional files first so config can be loaded
 foreach ($OPTIONAL_FILES as $file) {
     $dest_file = join_paths(dirname(__FILE__, 2), $file);
 
@@ -92,17 +95,75 @@ foreach ($OPTIONAL_FILES as $file) {
             mkdir($dest_dir, 0777, true);
         }
 
+        if (isset($config['enable_update_rollback']) && $config['enable_update_rollback'] && $save_rollback) {
+            $backup_file = join_paths(dirname(__FILE__, 2), 'rollback', $file);
+    
+            $backup_dir = dirname($backup_file, 1);
+            if (!file_exists($backup_dir)) {
+                mkdir($backup_dir, 0777, true);
+            }
+    
+            if (!copy($dest_file, $backup_file)) {
+                $_SESSION['type'] = 'danger';
+                $_SESSION['message'] = 'Update failed while attempting to create a backup of your uploader. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
+            }
+        }
+
         if (!copy($source_file, $dest_file)) {
             $_SESSION['type'] = 'danger';
             $_SESSION['message'] = 'Update failed. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
-        } else {
-            $_SESSION['type'] = 'success';
-            $_SESSION['message'] = 'Update successful! You can now delete the release folder.';
         }
     }
 }
 
 $config = include '../config.php';
+
+foreach ($UPDATE_FILES as $file) {
+    $source_file = join_paths(dirname(__FILE__, 1), $file);
+    $dest_file = join_paths(dirname(__FILE__, 2), $file);
+
+    $dest_dir = dirname($dest_file, 1);
+    if (!file_exists($dest_dir)) {
+        mkdir($dest_dir, 0777, true);
+    }
+
+    if (isset($config['enable_update_rollback']) && $config['enable_update_rollback'] && $save_rollback) {
+        $backup_file = join_paths(dirname(__FILE__, 2), 'rollback', $file);
+
+        $backup_dir = dirname($backup_file, 1);
+        if (!file_exists($backup_dir)) {
+            mkdir($backup_dir, 0777, true);
+        }
+
+        if (!copy($dest_file, $backup_file)) {
+            $_SESSION['type'] = 'danger';
+            $_SESSION['message'] = 'Update failed while attempting to create a backup of your uploader. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
+        }
+    }
+
+    if (!copy($source_file, $dest_file)) {
+        $_SESSION['type'] = 'danger';
+        $_SESSION['message'] = 'Update failed. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
+    }
+}
+
+// Also copy this update script to rollback to make rolling back easier.
+if (isset($config['enable_update_rollback']) && $config['enable_update_rollback'] && $save_rollback) {
+    $source_file = join_paths(dirname(__FILE__, 1), 'update.php');
+    $backup_file = join_paths(dirname(__FILE__, 2), 'rollback/update.php');
+
+    $backup_dir = dirname($backup_file, 1);
+    if (!file_exists($backup_dir)) {
+        mkdir($backup_dir, 0777, true);
+    }
+
+    if (!copy($source_file, $backup_file)) {
+        $_SESSION['type'] = 'danger';
+        $_SESSION['message'] = 'Update failed while attempting to create a backup of your uploader. Please ensure that the directory where your uploader is installed ('.dirname(__FILE__, 2).') is writable (777).';
+    }
+}
+
+$_SESSION['delete_release'] = true;
 
 header('Location: '.$config['base_url']);
 die();

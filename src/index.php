@@ -5,6 +5,16 @@ session_start();
 auth_user();
 
 create_webmanifest();
+
+if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete_release']) {
+    delete_files(join_paths(getcwd(), 'release'));
+    $release_zip_path = join_paths(getcwd(), 'latest-release.zip');
+    if (file_exists($release_zip_path)) {
+        unlink($release_zip_path);
+    }
+    unset($_SESSION['delete_release']);
+}
+
 ?>
 <html>
 <head>
@@ -60,22 +70,26 @@ create_webmanifest();
         <br/>
         <?php
             $current_version_path = join_paths(getcwd(), 'VERSION');
-            $new_version_path = join_paths(getcwd(), 'release', 'VERSION');
-            if (file_exists(join_paths(getcwd(), 'release', 'update.php')) &&
-                file_exists($current_version_path) &&
-                file_exists($new_version_path)) {
-                $current_version = file_get_contents($current_version_path);
-                $new_version = file_get_contents($new_version_path);
+            $current_version = trim(file_get_contents($current_version_path));
+            $new_version = get_latest_uploader_version();
 
-                if (version_compare($current_version, $new_version) === -1) {
-                    ?>
-                        <div class="alert text-center alert-warning" role="alert">
-                            <h4 class="alert-heading">Update Available!</h4>
-                            <p>An update has been detected. Click the button below to update your uploader.</p>
-                            <a href="release/update.php" type="button" class="btn btn-warning">Update</a>
-                        </div><br>
-                    <?php
-                }
+            if (version_compare($current_version, $new_version, '<') && isset($config['enable_updater']) && $config['enable_updater']) {
+                ?>
+                    <div class="alert text-center alert-warning alert-dismissible fade show" role="alert">
+                        <h4 class="alert-heading">Update Available!</h4>
+                        <p>
+                            An update is available for your uploader.
+                            You are using version <strong><?php echo $current_version; ?></strong> but the latest version is <strong><?php echo $new_version; ?></strong>.
+                            <br>
+                            <em>Please read the changelog and check for any breaking changes before updating.</em>
+                        </p>
+                        <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/releases/latest" type="button" class="btn btn-warning">Changelog</a>
+                        <button href="download_update.php" type="button" class="btn btn-warning" id="update-button">Update</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div><br>
+                <?php
             }
         ?>
 

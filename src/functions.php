@@ -180,6 +180,42 @@ function get_latest_sharex_version() {
     return str_replace('v', '', $content->tag_name);
 }
 
+function get_latest_uploader_version() {
+    $release_cache_path = join_paths(getcwd(), 'release_cache.json');
+
+    if (file_exists($release_cache_path)) {
+        $release_cache = json_decode(file_get_contents($release_cache_path), true);
+
+        $release_refresh_time = 3600; // how often to check for new version (seconds)
+
+        if ($release_cache['last_request'] + $release_refresh_time > time()) {
+            return $release_cache['latest_version'];
+        }
+    }
+
+    $opts = [
+        'http' => [
+            'method' => 'GET',
+            'header' => [
+                'User-Agent: PHP'
+            ]
+        ]
+    ];
+
+    $context = stream_context_create($opts);
+
+    $content = json_decode(file_get_contents('https://api.github.com/repos/JoeGandy/ShareX-Custom-Upload/releases/latest', false, $context));
+
+    $release_cache = [
+        'last_request' => time(),
+        'latest_version' => $content->tag_name
+    ];
+
+    file_put_contents($release_cache_path, json_encode($release_cache));
+
+    return $content->tag_name;
+}
+
 function bytes_to_string($bytes) {
     $si_prefix = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     $base = 1024;
@@ -280,4 +316,23 @@ function count_lines_in_file($file_path) {
     fclose($f);
 
     return $lines + (strlen($file_buffer) ? 1 : 0);
+}
+
+/* https://paulund.co.uk/php-delete-directory-and-files-in-directory */
+function delete_files($target) {
+    if(is_dir($target)){
+        $files = glob($target . '{*,.[!.]*,..?*}*', GLOB_MARK | GLOB_BRACE);
+
+        foreach($files as $file){
+            delete_files($file);
+        }
+
+        if (file_exists($target)) {
+            rmdir($target);
+        }
+    } elseif(is_file($target)) {
+        if (file_exists($target)) {
+            unlink($target);
+        }
+    }
 }

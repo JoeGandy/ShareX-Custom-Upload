@@ -121,6 +121,13 @@ $(document).ready(function() {
         $('#text-uploader').removeClass('d-flex');
     });
 
+    $('#update-button').on('click', () => {
+        const confirmation = confirm('Make sure you read the changelog and check for breaking changes before updating.\nAre you sure you would like to update?');
+        if (confirmation) {
+            window.location.replace('download_update.php');
+        }
+    });
+
     $('textarea').keydown(function(e) {
         if (e.keyCode === 9) {
             e.preventDefault();

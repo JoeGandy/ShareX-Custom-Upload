@@ -299,3 +299,21 @@ This setting sets the format used to generate file names if `date` is set as the
 See [the PHP date function options](https://www.php.net/manual/en/function.date.php) for information about how to configure this option.
 
 Since this option is used for file names, there is a limited selection of characters which can be used. See the [Wikipedia Filename article](https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words) for information about what characters can be used in this setting.
+
+## `enable_updater`
+
+*Default Value: `true`*
+
+This controls whether to enable uploader's built in updater.
+
+If enabled, the uploader will prompt you to update when a new version is released and will automatically download and install the update if you agree.
+
+If you disable this, you will need to manually copy the code from the new release to update.
+
+## `enable_update_rollback`
+
+*Default Value: `true`*
+
+This controls whether the uploader should make backups of the old version of the code when performing an update.
+
+If this is enabled, the update will copy the old versions of all modified files to the `rollback` folder. If you an update ever breaks your uploader, you can just go to `<base_url>/rollback/update.php` to roll back the update.
