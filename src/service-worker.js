@@ -6,7 +6,7 @@ self.addEventListener('install', (event) => {
         caches.open(`cache-v${workerVersion}`).then((cache) => {
             return cache.addAll([
                 './css/toggle-bootstrap.min.css',
-                './css/toggle-bootstrap-dark.min.css',
+                './css/toggle-bootstrap-dark-overlay.min.css',
                 './css/main.css',
                 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
                 'https://code.jquery.com/jquery-3.5.1.min.js',
