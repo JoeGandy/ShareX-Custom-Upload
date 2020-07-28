@@ -1,4 +1,4 @@
-const workerVersion = 1;
+const workerVersion = 2;
 
 self.addEventListener('install', (event) => {
     // cache resources necessary for error page
