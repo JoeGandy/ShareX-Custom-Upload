@@ -9,10 +9,8 @@ Extract the ZIP and follow the [setup instructions](#setup) below.
 ## Migrating from Version 1
 Version 2 introduced major breaking changes that make it incompatible with Version 1 installations. See [the migration guide](MIGRATING.md) for instructions on how to upgrade your uploader.
 
-## Use with Non-Apache Web Servers
-This script relies on Apache's `.htaccess` configuration files to function and currently will not support other web servers such as NGINX. If you would like to try to make it work with other web servers, you will need to adapt the configuration files.
-
-*And if you do make it work, feel free to leave a pull request with your changes :)*
+## NGINX Configuration
+By default, this server relies on Apache's `.htaccess` configuration files to function. However, it is possible to configure NGINX to work with the uploader. Please read the [NGINX configuration guide](NGINX.md) for more information.
 
 # Setup
 This script requires the `openssl` and `fileinfo` extensions to be enabled in your `php.ini`.
@@ -26,7 +24,7 @@ Then, upload the contents of the `release` folder to your website.
 
 See the [full configuration documentation](#full-configuration) for more information about how to configure your installation.
 
-> **Important:** If you choose to not place your uploader in the root of your website, the `base_url` setting needs to include the path to where the uploader code will be accessible. If you do this, you will also need to to change the `RewriteBase` in the `.htaccess` file to incude the path to your uploader.
+> **Important:** If you choose to not place your uploader in the root of your website, the `base_url` setting needs to include the path to where the uploader code will be accessible. If you do this and you use Apache, you will also need to to change the `RewriteBase` in the `.htaccess` file to incude the path to your uploader.
 > 
 > For example, if you want your uploader to be located at `https://mydomain.com/myfileuploads`, you will need to upload the contents of the `release` directory to `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
 
@@ -137,7 +135,7 @@ This sets the token used by ShareX to upload images and files. Since you don't n
 
 This sets the directory where your uploads are stored. You really shouldn't have to change this. If you want to change the path where your files are accessible on the site, use the `upload_access_path` config option instead.
 
-However, if you change this, you ***must*** copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)
+> **However, if you change this and you use Apache, you *must* copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)**
 
 ## `upload_access_path`
 
