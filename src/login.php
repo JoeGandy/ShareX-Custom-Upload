@@ -54,8 +54,12 @@ create_webmanifest();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preload" href="js/setTheme.js" as="script">
+
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark.min.css">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
+
     <link rel="stylesheet" href="css/main.css">
     <title>Login - <?php echo $config['page_title']; ?></title>
 
@@ -69,7 +73,9 @@ create_webmanifest();
     <meta name="msapplication-config" content="icons/browserconfig.xml">
     <meta name="theme-color" content="#5c5cbc">
 </head>
-<body class="bootstrap">
+<body style="display: none;" class="bootstrap">
+    <script src="js/setTheme.js"></script>
+
     <div class="container">
         <br/>
         <h1 class="text-center mt-4 mb-5">Login</h1>

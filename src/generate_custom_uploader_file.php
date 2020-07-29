@@ -19,6 +19,6 @@
         ]
     ];
 
-    header("Content-Disposition: attachment; filename=sharex_{$config['page_title']}_custom_uploader.sxcu");
+    header("Content-Disposition: attachment; filename=sharex_custom_uploader_config.sxcu");
     header('Content-Type: application/json');
     echo json_encode($result_json);

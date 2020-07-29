@@ -4,3 +4,6 @@ tests/.phpunit.result.cache
 src/login.json
 src/backups
 src/manifest.webmanifest
+
+src/u
+!src/u/.htaccess
