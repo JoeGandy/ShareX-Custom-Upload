@@ -1,27 +1,4 @@
 $(document).ready(function() {
-    const updateTheme = () => {
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const localSetting = localStorage.getItem('useDarkMode');
-
-        const themedElements = $('body');
-
-        if (localSetting === null) {
-            if (userPrefersDark) {
-                themedElements.removeClass('bootstrap');
-                themedElements.addClass('bootstrap-dark');
-            } else {
-                themedElements.removeClass('bootstrap-dark');
-                themedElements.addClass('bootstrap');
-            }
-        } else if (localSetting === 'true') {
-            themedElements.removeClass('bootstrap');
-            themedElements.addClass('bootstrap-dark');
-        } else {
-            themedElements.removeClass('bootstrap-dark');
-            themedElements.addClass('bootstrap');
-        }
-    };
-
     $('.bi').on('keyup', (e) => {
         if (e.keyCode === 32 || e.keyCode === 13) {
             $(e.target).click();
@@ -30,22 +7,20 @@ $(document).ready(function() {
 
     $('.bi-moon').on('click', () => {
         localStorage.setItem('useDarkMode', true);
-        updateTheme();
+        window.__updateTheme();
         $('.bi-sun')[0].focus();
     });
 
     $('.bi-sun').on('click', () => {
         localStorage.setItem('useDarkMode', false);
-        updateTheme();
+        window.__updateTheme();
         $('.bi-moon')[0].focus();
     });
 
     $('.bi-arrow-clockwise').on('click', () => {
         localStorage.removeItem('useDarkMode');
-        updateTheme()
+        window.__updateTheme()
     });
-
-    updateTheme();
 });
 $('[data-toggle="tooltip"]').tooltip();
 

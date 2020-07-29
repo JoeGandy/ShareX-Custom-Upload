@@ -46,16 +46,17 @@
     opacity: 0.9;
 }
 
-.bootstrap-dark .bi-sun {
+body[data-theme=dark] .bi-sun {
     display: block;
 }
-.bootstrap-dark .bi-moon {
+body[data-theme=dark] .bi-moon {
     display: none;
 }
-.bootstrap .bi-sun {
+
+body[data-theme=light] .bi-sun {
     display: none;
 }
-.bootstrap .bi-moon {
+body[data-theme=light] .bi-moon {
     display: block;
 }
 
