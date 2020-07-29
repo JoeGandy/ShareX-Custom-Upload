@@ -3,35 +3,6 @@ hljs.initHighlightingOnLoad();
 $(document).ready(function() {
     $('.code-box').css('padding-left', `${$('.line-numbers').outerWidth() + 15}px`);
 
-    const updateTheme = () => {
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const localSetting = localStorage.getItem('useDarkMode');
-
-        if (localSetting === null) {
-            if (userPrefersDark) {
-                document.body.classList.remove('bootstrap');
-                document.body.classList.add('bootstrap-dark');
-                $('#highlightjs-dark-theme').prop('disabled', false);
-                $('#highlightjs-light-theme').prop('disabled', true);
-            } else {
-                document.body.classList.remove('bootstrap-dark');
-                document.body.classList.add('bootstrap');
-                $('#highlightjs-dark-theme').prop('disabled', true);
-                $('#highlightjs-light-theme').prop('disabled', false);
-            }
-        } else if (localSetting === 'true') {
-            document.body.classList.remove('bootstrap');
-            document.body.classList.add('bootstrap-dark');
-            $('#highlightjs-dark-theme').prop('disabled', false);
-            $('#highlightjs-light-theme').prop('disabled', true);
-        } else {
-            document.body.classList.remove('bootstrap-dark');
-            document.body.classList.add('bootstrap');
-            $('#highlightjs-dark-theme').prop('disabled', true);
-            $('#highlightjs-light-theme').prop('disabled', false);
-        }
-    };
-
     $('.bi').on('keyup', (e) => {
         if (e.keyCode === 32 || e.keyCode === 13) {
             $(e.target).click();
@@ -40,19 +11,19 @@ $(document).ready(function() {
 
     $('.bi-moon').on('click', () => {
         localStorage.setItem('useDarkMode', true);
-        updateTheme();
+        window.__updateTheme();
         $('.bi-sun')[0].focus();
     });
 
     $('.bi-sun').on('click', () => {
         localStorage.setItem('useDarkMode', false);
-        updateTheme();
+        window.__updateTheme();
         $('.bi-moon')[0].focus();
     });
 
     $('.bi-arrow-clockwise').on('click', () => {
         localStorage.removeItem('useDarkMode');
-        updateTheme()
+        window.__updateTheme()
     });
 
     $('.bi-code-slash').on('click', () => {
@@ -60,8 +31,6 @@ $(document).ready(function() {
         params.set('raw', 'true');
         window.location.search = params.toString();
     });
-
-    updateTheme();
 
     const codeClipboard = new ClipboardJS('.bi-clipboard', {
         text: () => {

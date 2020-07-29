@@ -35,9 +35,11 @@ create_webmanifest();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+
+    <link rel="preload" href="js/setTheme.js" as="script">
+    
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark.min.css">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
     <link rel="stylesheet" href="css/main.css">
     <title>Register - <?php echo $config['page_title']; ?></title>
 
@@ -51,7 +53,9 @@ create_webmanifest();
     <meta name="msapplication-config" content="icons/browserconfig.xml">
     <meta name="theme-color" content="#5c5cbc">
 </head>
-<body class="bootstrap">
+<body style="display: none;" class="bootstrap">
+    <script src="js/setTheme.js"></script>
+
     <div class="container">
         <br/>
         <h1 class="text-center mt-4 mb-5">Create Account</h1>
