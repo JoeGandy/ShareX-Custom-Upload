@@ -2,6 +2,14 @@ html, body {
     margin: 0;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
 .IconButtons {
     position: fixed;
     top: 0;
@@ -26,16 +34,17 @@ html, body {
     opacity: 0.9;
 }
 
-.bootstrap-dark .bi-sun {
+body[data-theme=dark] .bi-sun {
     display: block;
 }
-.bootstrap-dark .bi-moon {
+body[data-theme=dark] .bi-moon {
     display: none;
 }
-.bootstrap .bi-sun {
+
+body[data-theme=light] .bi-sun {
     display: none;
 }
-.bootstrap .bi-moon {
+body[data-theme=light] .bi-moon {
     display: block;
 }
 
@@ -48,7 +57,7 @@ pre.box {
 }
 
 pre code.code-box {
-    min-height: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
     padding: 30px 60px;
     padding-left: 80px;
@@ -64,10 +73,11 @@ pre code.code-box {
     top: 0;
     font-size: 14px;
     font-family: monospace;
-    margin-top: 30px;
+    padding-top: 30px;
     text-align: right;
     color: #808080;
     border-right: 1px solid #808080;
     padding: 0 12px;
     pointer-events: none;
+    min-height: 100vh;
 }

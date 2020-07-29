@@ -1,8 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+
+    <link rel="preload" href="js/setTheme.js" as="script">
+
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark.min.css">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
 
     <link id="highlightjs-light-theme" rel="stylesheet" href="css/solarized-light.css">
     <link id="highlightjs-dark-theme" rel="stylesheet" href="css/solarized-dark.css" disabled>
@@ -10,7 +15,9 @@
     <link rel="stylesheet" href="css/text-viewer.css">
     <title><?php echo $file_name; ?></title>
 </head>
-<body class="bootstrap">
+<body style="display: none;" class="bootstrap">
+    <script src="js/setTheme.js"></script>
+
     <pre class="box"><code class="<?php echo $file_extension; ?> <?php if ($disable_highlight) { echo 'nohighlight'; } ?> code-box hljs"><?php echo htmlspecialchars($file_text); ?></code><div class="line-numbers"><?php for($i = 0; $i < $line_count; $i++) {
             echo ($i+1).'<br>';
         } ?></div></pre>

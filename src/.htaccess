@@ -13,6 +13,7 @@ RewriteBase /
 
 RewriteRule css/(.*) css/$1
 RewriteRule js/(.*) js/$1
+RewriteRule icons/(.*) icons/$1
 
 RewriteCond %{REQUEST_FILENAME} !-f  
 RewriteCond %{REQUEST_FILENAME} !-d  

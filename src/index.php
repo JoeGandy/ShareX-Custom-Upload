@@ -16,16 +16,23 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
 }
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+
+    <link rel="preload" href="js/setTheme.js" as="script">
+
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark.min.css">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
     <link
         href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
         rel="stylesheet"
         type="text/css">
+
     <link rel="stylesheet" href="css/main.css">
+
     <title><?php echo $config['page_title']; ?></title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -37,9 +44,10 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
     <meta name="msapplication-TileColor" content="#5c5cbc">
     <meta name="msapplication-config" content="icons/browserconfig.xml">
     <meta name="theme-color" content="#5c5cbc">
-
 </head>
-<body class="bootstrap" data-dateformat="<?php echo $config['gallery_date_format']; ?>">
+<body style="display: none;" class="bootstrap" data-dateformat="<?php echo $config['gallery_date_format']; ?>">
+    <script src="js/setTheme.js"></script>
+
     <div class="container">
         <br/>
         <h3 class="text-center"><?php echo $config['heading_text']; ?></h3>
