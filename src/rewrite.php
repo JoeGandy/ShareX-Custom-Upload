@@ -23,6 +23,31 @@ if ('register' === $file_name) {
 $config = include 'config.php';
 include 'functions.php';
 
+if (strpos($_SERVER['REQUEST_URI'], '/css/')) {
+    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/css/'))));
+    die();
+}
+
+if (strpos($_SERVER['REQUEST_URI'], '/js/')) {
+    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/js/'))));
+    die();
+}
+
+if (strpos($_SERVER['REQUEST_URI'], '/icons/')) {
+    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/icons/'))));
+    die();
+}
+
+if ('manifest.webmanifest' === $file_name) {
+    header('Location: '.join_paths($config['base_url'], 'manifest.webmanifest'));
+    die();
+}
+
+if ('favicon.ico' === $file_name) {
+    header('Location: '.join_paths($config['base_url'], 'favicon.ico'));
+    die();
+}
+
 $full_url = join_paths($_SERVER['HTTP_HOST'], $req_noquery);
 $desired_url = join_paths($config['base_url'], $config['upload_access_path'], $file_name);
 
@@ -58,7 +83,7 @@ if (file_exists($file_path)) {
     } else {
         header('Content-Type: '.$mime_type);
         header('Content-Length: ' . filesize($file_path));
-        
+
         readfile($file_path);
     }
 } else {
