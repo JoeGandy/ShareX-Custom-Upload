@@ -5,26 +5,35 @@ $config = include 'config.php';
 $error_msg = $_GET['error_msg'] ?? $error_msg;
 
 ?>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-    <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark.min.css">
-    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="preload" href="<?=$config['upload_access_path']?>js/setTheme.js" as="script">
+
+    <link rel="stylesheet" href="<?=$config['upload_access_path']?>css/toggle-bootstrap.min.css">
+    <link rel="stylesheet" href="<?=$config['upload_access_path']?>css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
+
+    <link rel="stylesheet" href="<?=$config['upload_access_path']?>css/main.css">
     <title>Error - <?php echo $config['page_title']; ?></title>
     
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-    <link rel="manifest" href="manifest.webmanifest">
-    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5c5cbc">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=$config['upload_access_path']?>icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?=$config['upload_access_path']?>icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=$config['upload_access_path']?>icons/favicon-16x16.png">
+    <link rel="manifest" href="<?=$config['upload_access_path']?>manifest.webmanifest">
+    <link rel="mask-icon" href="<?=$config['upload_access_path']?>icons/safari-pinned-tab.svg" color="#5c5cbc">
+    <link rel="shortcut icon" href="<?=$config['upload_access_path']?>favicon.ico">
     <meta name="msapplication-TileColor" content="#5c5cbc">
-    <meta name="msapplication-config" content="icons/browserconfig.xml">
+    <meta name="msapplication-config" content="<?=$config['upload_access_path']?>icons/browserconfig.xml">
     <meta name="theme-color" content="#5c5cbc">
+
+    <script src="<?=$config['upload_access_path']?>js/setTheme.js"></script>
 </head>
-<body class="bootstrap">
+<body style="display: none;" class="bootstrap">
+    <script src="js/setTheme.js"></script>
+
     <div class="container">
         <h2 class="text-center mt-4 mb-4">
             <?php echo $error_msg; ?>
@@ -61,6 +70,6 @@ $error_msg = $_GET['error_msg'] ?? $error_msg;
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-    <script src="js/common.js" type="text/javascript"></script>
+    <script src="<?=$config['upload_access_path']?>js/common.js" type="text/javascript"></script>
 </body>
 </html>
