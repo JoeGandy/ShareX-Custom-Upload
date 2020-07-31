@@ -1,7 +1,7 @@
 <?php
 
 include 'functions.php';
-$config = include 'config.php';
+$config = include 'merge_config.php';
 
 session_start();
 

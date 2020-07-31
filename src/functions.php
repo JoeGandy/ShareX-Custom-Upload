@@ -57,7 +57,7 @@ function join_paths() {
 }
 
 function create_webmanifest() {
-    $config = include 'config.php';
+    $config = include 'merge_config.php';
     $base_host = parse_url($config['base_url'], PHP_URL_PATH);
     $manifest = [
         'name' => $config['page_title'],
@@ -94,7 +94,7 @@ function create_webmanifest() {
 }
 
 function get_file_target($original_file_name, $generate_name, $new_name) {
-    $config = include 'config.php';
+    $config = include 'merge_config.php';
 
     $parts = explode('.', $original_file_name);
     $extension = end($parts);
@@ -265,7 +265,7 @@ function show_error_page($message) {
 }
 
 function auth_user($ip_only=false){
-    $config = include 'config.php';
+    $config = include 'merge_config.php';
     
     if(
         !empty($config['allowed_ips']) && 

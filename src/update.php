@@ -2,7 +2,7 @@
 
 if (!file_exists(dirname(__FILE__, 2).'/'.'functions.php')) {
     // If this isn't running in a release folder, we can just assume this is the normal uploader and load config
-    $config = include 'config.php';
+    $config = include 'merge_config.php';
 
     header('Location: '.$config['base_url']);
     die();
@@ -62,6 +62,7 @@ $UPDATE_FILES = [
     'index.php',
     'login.php',
     'logout.php',
+    'merge_config.php',
     'register.php',
     'rename_file.php',
     'rewrite.php',
@@ -116,7 +117,7 @@ foreach ($OPTIONAL_FILES as $file) {
     }
 }
 
-$config = include '../config.php';
+$config = include '../merge_config.php';
 
 foreach ($UPDATE_FILES as $file) {
     $source_file = join_paths(dirname(__FILE__, 1), $file);

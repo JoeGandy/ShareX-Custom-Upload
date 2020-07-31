@@ -1,6 +1,6 @@
 <?php
 
-$config = include 'config.php';
+$config = include 'merge_config.php';
 
 $error_msg = $_GET['error_msg'] ?? $error_msg;
 

@@ -1,5 +1,5 @@
 <?php
-$config = include 'config.php';
+$config = include 'merge_config.php';
 include 'functions.php';
 session_start();
 auth_user();
@@ -96,6 +96,24 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                    </div><br>
+                <?php
+            }
+
+            if (isset($config['default_used_list']) && count($config['default_used_list']) > 0) {
+                ?>
+                    <div class="alert text-center alert-warning" role="alert">
+                        <h4 class="alert-heading">Configuration Warning</h4>
+                        <p>
+                            Your configuration file is not fully filled out. The following settings are missing:
+                                <div>
+                                    <?php foreach ($config['default_used_list'] as $name) { ?>
+                                        <code><?=htmlspecialchars($name)?></code><br>
+                                    <?php } ?>
+                                </div><br>
+                            Please check the <a href="https://github.com/JoeGandy/ShareX-Custom-Upload#full-configuration">documentation</a> for more information about how to configure these settings.
+                            You can also view an example of the latest configuration <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/src/config.php">here</a>.
+                        </p>
                     </div><br>
                 <?php
             }
