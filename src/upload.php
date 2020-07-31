@@ -23,7 +23,21 @@ if (isset($_POST['key'])) {
     if ($_POST['key'] === $config['secure_key']) {
         $filename = pathinfo($_FILES['fileupload']['name'], PATHINFO_FILENAME);
 
-        $target = get_file_target($_FILES['fileupload']['name'], $config['use_default_naming_scheme_for_sharex'], $filename);
+        switch ($config['sharex_upload_naming_scheme']) {
+            case 'keep':
+                $target = get_file_target($_FILES['fileupload']['name'], $filename);
+                break;
+            case 'provided':
+                $target = get_file_target($_FILES['fileupload']['name'], $_POST['name']);
+                break;
+            case 'date':
+                $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']));
+                break;
+            default:
+                $target = get_file_target($_FILES['fileupload']['name'], '');
+                break;
+        }
+
         $dir_path = join_paths(
             getcwd(),
             $config['file_storage_folder']
@@ -49,7 +63,18 @@ if (isset($_POST['key'])) {
 
     $filename = pathinfo($_FILES['fileupload']['name'], PATHINFO_FILENAME);
 
-    $target = get_file_target($_FILES['fileupload']['name'], $config['use_default_naming_scheme_for_gallery'], $filename);
+    switch ($config['gallery_upload_naming_scheme']) {
+        case 'keep':
+            $target = get_file_target($_FILES['fileupload']['name'], $filename);
+            break;
+        case 'date':
+            $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']));
+            break;
+        default:
+            $target = get_file_target($_FILES['fileupload']['name'], '');
+            break;
+    }
+
     $dir_path = join_paths(
         getcwd(),
         $config['file_storage_folder']

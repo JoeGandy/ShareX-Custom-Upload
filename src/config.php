@@ -77,22 +77,38 @@ return [
     /* This sets whether to enable the formatted text viewer or to send all text files as raw text by default */
     'enable_rich_text_viewer' => true,
 
-    /* Sets the method of generating file names. Possible values are 'date' and 'random'.
-     * Random mode will generate a random name with length set in random_name_length
-     * Date mode will name the file with the upload date and time in the format specified in upload_date_format
+    /* This sets the naming scheme to use for ShareX uploads.
+     * Possible values are: 
+     *     keep, provided, date, and random
+     * keep mode will keep the file name sent by ShareX
+     * provided mode will use the name sent in the name parameter. 
+     *     See the ShareX Configuration section in the README for more information.
+     * date mode will generate a name based on the date format specified in upload_date_format
+     * random mode will generate a random name with length set in random_name_length
      */
-    'default_naming_scheme' => 'random',
+    'sharex_upload_naming_scheme' => 'random',
 
-    /* Sets whether to use a generated name (as specified in default_naming_scheme) for ShareX uploads */
-    'use_default_naming_scheme_for_sharex' => true,
+    /* This sets the naming scheme to use for gallery uploads.
+     * Possible values are: 
+     *     keep, date, and random
+     * keep mode will keep the name of the uploaded file
+     * date mode will generate a name based on the date format specified in upload_date_format
+     * random mode will generate a random name with length set in random_name_length
+     */
+    'gallery_upload_naming_scheme' => 'random',
 
-    /* Sets whether to use a generated name (as specified in default_naming_scheme) for gallery uploads */
-    'use_default_naming_scheme_for_gallery' => false,
+    /* This sets the naming scheme to use if no file name is provided for a text upload.
+     * Possible values are: 
+     *     date and random
+     * date mode will generate a name based on the date format specified in upload_date_format
+     * random mode will generate a random name with length set in random_name_length
+     */
+    'text_upload_default_naming_scheme' => 'random',
 
     /* Select length of random name if random is chosen as the default_naming_scheme */
     'random_name_length' => 6,
 
-    /* Select the date format to use to generate file names if date is chosen as the default_naming_scheme */
+    /* Select the date format to use to generate file names if date is chosen as a naming scheme */
     /* See available options at https://www.php.net/manual/en/function.date.php */
     'upload_date_format' => 'Y-m-d_H.i.s',
 

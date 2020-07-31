@@ -14,7 +14,8 @@
         'Body' => 'MultipartFormData',
         'FileFormName' => 'fileupload',
         'Arguments' => [
-            'key' => $config['secure_key']
+            'key' => $config['secure_key'],
+            'name' => '%h.%mi.%s-%d.%mo.%yy'
         ]
     ];
 
