@@ -93,16 +93,15 @@ function create_webmanifest() {
     }
 }
 
-function get_file_target($original_file_name, $generate_name, $new_name) {
+function get_file_target($original_file_name, $new_name) {
     $config = include 'config.php';
 
-    $parts = explode('.', $original_file_name);
-    $extension = end($parts);
+    $extension = pathinfo($original_file_name, PATHINFO_EXTENSION);
     $target = null;
     $first_run = true;
     $files_exist_counter = 0;
 
-    if (count($parts) === 1) {
+    if (!isset($extension) || $extension === null || $extension === '') {
         $extension = 'txt';
     }
 
@@ -116,28 +115,12 @@ function get_file_target($original_file_name, $generate_name, $new_name) {
     while ($first_run || file_exists($target)) {
         $first_run = false;
 
-        if ($generate_name || !isset($new_name) || $new_name === '' || $new_name === null) {
-            if (isset($config['default_naming_scheme']) && $config['default_naming_scheme'] === 'date') {
-                if ($files_exist_counter++ < 1) {
-                    $target = join_paths(
-                        getcwd(),
-                        $config['file_storage_folder'],
-                        date($config['upload_date_format']).'.'.$extension
-                    );
-                } else {
-                    $target = join_paths(
-                        getcwd(),
-                        $config['file_storage_folder'],
-                        date($config['upload_date_format']).'_'.$files_exist_counter.'.'.$extension
-                    );
-                }
-            } else {
-                $target = join_paths(
-                    getcwd(),
-                    $config['file_storage_folder'],
-                    generate_random_name($extension, $config['random_name_length'])
-                );
-            }
+        if (!isset($new_name) || $new_name === '' || $new_name === null) {
+            $target = join_paths(
+                getcwd(),
+                $config['file_storage_folder'],
+                generate_random_name($extension, $config['random_name_length'])
+            );
         } else {
             if ($files_exist_counter++ < 1) {
                 $target = join_paths(
