@@ -57,10 +57,10 @@ pre.box {
 }
 
 pre code.code-box {
-    min-height: 100vh;
+    min-height: 100%;
     box-sizing: border-box;
     padding: 30px 60px;
-    padding-left: 80px;
+    padding-left: 60px; /* this is the amount of padding before being adjusted by JS */
     font-size: 14px;
     font-family: monospace;
     position:  relative;
@@ -73,11 +73,10 @@ pre code.code-box {
     top: 0;
     font-size: 14px;
     font-family: monospace;
-    padding-top: 30px;
     text-align: right;
     color: #808080;
-    border-right: 1px solid #808080;
     padding: 0 12px;
+    padding-top: 30px;
     pointer-events: none;
-    min-height: 100vh;
+    min-height: 100%;
 }

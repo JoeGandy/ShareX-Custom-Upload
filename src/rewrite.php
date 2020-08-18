@@ -84,6 +84,37 @@ if (file_exists($file_path)) {
         header('Content-Type: '.$mime_type);
         header('Content-Length: ' . filesize($file_path));
 
+        if (isset($config['enable_image_cache']) && $config['enable_image_cache']) {
+            $cache_ttl_seconds = 900; // 15 minutes
+            $cache_revalidate_ttl_seconds = 900; // 15 minutes
+
+            header("Cache-Control: public, max-age={$cache_ttl_seconds}, stale-while-revalidate={$cache_revalidate_ttl_seconds}");
+
+            $etag = '';
+            $etag_algo_used = '';
+
+            $time_start = microtime(true); 
+
+            if (PHP_INT_SIZE === 8) {
+                // 64-bit, so we use SHA512 for faster performance
+                $etag = hash_file('sha512', $file_path);
+                $etag_algo_used = 'SHA-512';
+            } else {
+                // 32-bit (or other?), so we use SHA256 for faster performance
+                $etag = hash_file('sha256', $file_path);
+                $etag_algo_used = 'SHA-256';
+            }
+
+            header('ETag: "'.$etag.'"');
+
+            if (isset($config['debug_mode']) && $config['debug_mode']) {
+                $time_diff = round((microtime(true) - $time_start) * 1000, 4);
+                header('X-ETag-Generation-Milliseconds: '.$time_diff);
+            }
+
+            header('X-ETag-Algorithm: '.$etag_algo_used);
+        }
+
         readfile($file_path);
     }
 } else {

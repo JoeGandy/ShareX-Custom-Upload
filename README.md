@@ -341,3 +341,19 @@ If you disable this, you will need to manually copy the code from the new releas
 This controls whether the uploader should make backups of the old version of the code when performing an update.
 
 If this is enabled, the update will copy the old versions of all modified files to the `rollback` folder. If you an update ever breaks your uploader, you can just go to `<base_url>/rollback/update.php` to roll back the update.
+
+## `enable_image_cache`
+
+*Default Value: `true`*
+
+This controls whether the uploader should instruct the browser to cache the uploaded images.
+
+This is enabled by default, but can slightly hurt performance on low power systems.
+
+## `debug_mode`
+
+*Default Value: `false`*
+
+This enables Debug Mode, which will instruct the uploader to log and send additional debug information.
+
+At the moment, this will only enable sending the time it took to generate image hashes for caching.

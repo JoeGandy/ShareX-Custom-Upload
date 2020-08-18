@@ -29,7 +29,9 @@ $default_config = [
     'random_name_length' => 6,
     'upload_date_format' => 'Y-m-d_H.i.s',
     'enable_updater' => true,
-    'enable_update_rollback' => true
+    'enable_update_rollback' => true,
+    'enable_image_cache' => true,
+    'debug_mode' => false
 ];
 
 $config_merged = [];

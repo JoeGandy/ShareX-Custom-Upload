@@ -122,5 +122,13 @@ return [
     /* This controls whether the uploader should make backups of the old version of the code when performing an update
      * If this is enabled, the update will copy the old versions of all modified files to the rollback folder
      * If you an update ever breaks your uploader, you can just go to <base_url>/rollback/update.php to roll back the update */
-    'enable_update_rollback' => true
+    'enable_update_rollback' => true,
+
+    /* This controls whether the uploader should instruct the browser to cache the uploaded images 
+     * This is enabled by default, but can slightly hurt performance on low power systems
+     */
+    'enable_image_cache' => true,
+
+    /* This enables Debug Mode, which will instruct the uploader to log and send additional debug information */
+    'debug_mode' => false
 ];
