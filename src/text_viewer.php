@@ -13,6 +13,17 @@
     <link id="highlightjs-dark-theme" rel="stylesheet" href="css/solarized-dark.css" disabled>
 
     <link rel="stylesheet" href="css/text-viewer.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5c5cbc">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#5c5cbc">
+    <meta name="msapplication-config" content="icons/browserconfig.xml">
+    <meta name="theme-color" content="#5c5cbc">
+
     <title><?php echo $file_name; ?></title>
 </head>
 <body style="display: none;" class="bootstrap">
