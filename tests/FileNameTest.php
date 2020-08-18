@@ -22,10 +22,9 @@ final class FileNameTest extends TestCase
     public function fileNameHasRightExtensionRandomName(): void
     {
         $original_file_name = "TestPngFile.png";
-        $post_name = "07.53.17-08.11.19";
 
         $correct = $original_file_name;
-        $test = get_file_target($original_file_name, true, $post_name);
+        $test = get_file_target($original_file_name, '');
 
         $this->assertEquals(
             pathinfo($correct, PATHINFO_EXTENSION),
@@ -40,7 +39,7 @@ final class FileNameTest extends TestCase
         $post_name = "07.53.17-08.11.19";
 
         $correct = $original_file_name;
-        $test = get_file_target($original_file_name, false, $post_name);
+        $test = get_file_target($original_file_name, $post_name);
 
         $this->assertEquals(
             pathinfo($correct, PATHINFO_EXTENSION),
@@ -55,7 +54,7 @@ final class FileNameTest extends TestCase
         $post_name = "testname";
 
         $correct = $post_name.'.png';
-        $test = get_file_target($original_file_name, false, $post_name);
+        $test = get_file_target($original_file_name, $post_name);
 
         $this->assertEquals(
             $correct,
