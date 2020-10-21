@@ -1,5 +1,5 @@
 <?php
-$config = include 'config.php';
+$config = include 'merge_config.php';
 include 'functions.php';
 
 if ($config['enable_password_login'] === false) {

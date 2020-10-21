@@ -1,10 +1,20 @@
 <?php
-$config = include 'config.php';
+$config = include 'merge_config.php';
 include 'functions.php';
 session_start();
 auth_user();
 
 create_webmanifest();
+
+if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete_release']) {
+    delete_files(join_paths(getcwd(), 'release'));
+    $release_zip_path = join_paths(getcwd(), 'latest-release.zip');
+    if (file_exists($release_zip_path)) {
+        unlink($release_zip_path);
+    }
+    unset($_SESSION['delete_release']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +76,48 @@ create_webmanifest();
             }
         ?>
         <br/>
+        <?php
+            $current_version_path = join_paths(getcwd(), 'VERSION');
+            $current_version = trim(file_get_contents($current_version_path));
+            $new_version = get_latest_uploader_version();
+
+            if (version_compare($current_version, $new_version, '<') && isset($config['enable_updater']) && $config['enable_updater']) {
+                ?>
+                    <div class="alert text-center alert-warning alert-dismissible fade show" role="alert">
+                        <h4 class="alert-heading">Update Available!</h4>
+                        <p>
+                            An update is available for your uploader.
+                            You are using version <strong><?php echo $current_version; ?></strong> but the latest version is <strong><?php echo $new_version; ?></strong>.
+                            <br>
+                            <em>Please read the changelog and check for any breaking changes before updating.</em>
+                        </p>
+                        <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/releases/latest" type="button" class="btn btn-warning">Changelog</a>
+                        <button href="download_update.php" type="button" class="btn btn-warning" id="update-button">Update</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div><br>
+                <?php
+            }
+
+            if (isset($config['default_used_list']) && count($config['default_used_list']) > 0) {
+                ?>
+                    <div class="alert text-center alert-warning" role="alert">
+                        <h4 class="alert-heading">Configuration Warning</h4>
+                        <p>
+                            Your configuration file is not fully filled out. The following settings are missing:
+                                <div>
+                                    <?php foreach ($config['default_used_list'] as $name) { ?>
+                                        <code><?=htmlspecialchars($name)?></code><br>
+                                    <?php } ?>
+                                </div><br>
+                            Please check the <a href="https://github.com/JoeGandy/ShareX-Custom-Upload#full-configuration">documentation</a> for more information about how to configure these settings.
+                            You can also view an example of the latest configuration <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/src/config.php">here</a>.
+                        </p>
+                    </div><br>
+                <?php
+            }
+        ?>
 
         <?php if ($config['enable_gallery_page_uploads']) { ?>
             <div class="btn-group w-100" id="upload-mode" role="group" aria-label="Select File or Text Upload">

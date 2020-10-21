@@ -1,6 +1,6 @@
 <?php
 
-$config = include 'config.php';
+$config = include 'merge_config.php';
 include 'functions.php';
 
 session_start();

@@ -20,7 +20,7 @@ if ('register' === $file_name) {
 }
 
 // These have to be here because prettifying urls will reinclude functions.php
-$config = include 'config.php';
+$config = include 'merge_config.php';
 include 'functions.php';
 
 if (strpos($_SERVER['REQUEST_URI'], '/css/')) {

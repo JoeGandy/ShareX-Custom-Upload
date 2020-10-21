@@ -112,6 +112,18 @@ return [
     /* See available options at https://www.php.net/manual/en/function.date.php */
     'upload_date_format' => 'Y-m-d_H.i.s',
 
+    /* This controls whether to enable uploader's built in updater
+     * If enabled, the uploader will prompt you to update when a new version is released 
+     *      If you agree, it will then automatically download and install the latest version
+     * If you disable this, you will need to manually update the uploader by copying the new files into your website
+     */
+    'enable_updater' => true,
+
+    /* This controls whether the uploader should make backups of the old version of the code when performing an update
+     * If this is enabled, the update will copy the old versions of all modified files to the rollback folder
+     * If you an update ever breaks your uploader, you can just go to <base_url>/rollback/update.php to roll back the update */
+    'enable_update_rollback' => true,
+
     /* This controls whether the uploader should instruct the browser to cache the uploaded images 
      * This is enabled by default, but can slightly hurt performance on low power systems
      */

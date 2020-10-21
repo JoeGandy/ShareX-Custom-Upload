@@ -2,6 +2,7 @@
 tests/.phpunit.result.cache
 
 src/login.json
+src/release_cache.json
 src/backups
 src/manifest.webmanifest
 

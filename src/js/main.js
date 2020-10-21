@@ -121,6 +121,13 @@ $(document).ready(function() {
         $('#text-uploader').removeClass('d-flex');
     });
 
+    $('#update-button').on('click', () => {
+        const confirmation = confirm('Make sure you read the changelog and check for breaking changes before updating.\nAre you sure you would like to update?');
+        if (confirmation) {
+            window.location.replace('download_update.php');
+        }
+    });
+
     $('textarea').keydown(function(e) {
         if (e.keyCode === 9) {
             e.preventDefault();
@@ -167,5 +174,5 @@ $(document).ready(function() {
             'emptyTable': 'You have not uploaded any files yet.<br><br>Press the Share icon below to download a ShareX custom uploader configuration file.<br>You can also upload files directly in the box above.',
         },
     });
-    $('div.alert').delay(5000).fadeOut(500);
+    $('div.alert#session-msg').delay(5000).fadeOut(500);
 });
