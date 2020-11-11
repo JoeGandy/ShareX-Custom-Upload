@@ -68,6 +68,13 @@ if (file_exists($file_path)) {
     $mime_type = finfo_file($finfo, $file_path);
     finfo_close($finfo);
 
+    // MIME overrides to prevent issues around MIME sniffing
+    if (preg_match("/.apk$/", $file_path)) {
+        // APKs are secret ZIPs, but serving them as ZIPs makes some
+        // android devices download them with a `.\zip` extension!
+        $mime_type = "application/vnd.android.package-archive";
+    }
+
     if ((substr($mime_type, 0, 4) === 'text' || $mime_type === 'application/json')
         && !(isset($_GET['raw']) && strtolower($_GET['raw']) === 'true' )
         && $config['enable_rich_text_viewer']) {
