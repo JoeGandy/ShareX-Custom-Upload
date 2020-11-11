@@ -40,7 +40,7 @@ See the [full configuration documentation](#full-configuration) for more informa
 
 # Updating
 
-To update your uploader to a new version, download the latest release as a ZIP from the [Releases page](https://github.com/JoeGandy/ShareX-Custom-Upload/releases). Extract the `release` folder from the ZIP and upload the folder (not its contents, the folder itself) to your uploader's install directory. For example, if your uploader is installed at `/website/root/directory/`, make sure the folder is at `/website/root/directory/release/`. Now, open the gallery page and a large banner that prompts you to update should appear. If the update is successful, you can then just delete the `release` folder.
+Updating to a new version is fully automated, except pressing a button. When a new update is available, a large banner will appear that prompts you to update. Confirm the update, and it'll do the rest for you.
 
 > **Important: The automatic updater does not modify any of your configuration files, so if the configuration format is modified in the future, you will need to manually edit your configuration file to match the new format. _Please read the release notes for any new versions and check for any breaking configuration changes_. You can always check [the latest configuration file](src/config.default.php) for an example of what your configuration should look like.**
 
