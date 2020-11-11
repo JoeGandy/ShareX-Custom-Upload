@@ -5,6 +5,7 @@ src/login.json
 src/release_cache.json
 src/backups
 src/manifest.webmanifest
+src/config.php
 
 src/u
 !src/u/.htaccess
