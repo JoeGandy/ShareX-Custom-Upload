@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 require_once 'src/functions.php';
 
-$GLOBALS['config'] = include 'src/config.php';
+$GLOBALS['config'] = include 'src/config.default.php';
 
 
 use PHPUnit\Framework\TestCase;
