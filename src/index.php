@@ -112,7 +112,7 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
                                     <?php } ?>
                                 </div><br>
                             Please check the <a href="https://github.com/JoeGandy/ShareX-Custom-Upload#full-configuration">documentation</a> for more information about how to configure these settings.
-                            You can also view an example of the latest configuration <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/src/config.php">here</a>.
+                            You can also view an example of the latest configuration <a href="https://github.com/JoeGandy/ShareX-Custom-Upload/blob/master/src/config.default.php">here</a>.
                         </p>
                     </div><br>
                 <?php
