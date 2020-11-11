@@ -2,6 +2,10 @@
 
 $config = null;
 
+// DON'T DELETE ME!
+// We set $error_no_cfg to true if the user doesn't have a base config.
+// If we include `merge_config.php` in this situation, we end up with an
+// infinite include loop.
 if (!isset($error_no_cfg)) {
     $config = include 'merge_config.php';
 }
