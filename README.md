@@ -36,7 +36,7 @@ To update your uploader to a new version, download the latest release as a ZIP f
 
 If the update banner does not show up, please make sure that the `VERSION` file exists in both your uploader install directory and the `release` directory. The version number in the `release` directory must also be higher than the version number in your current installation.
 
-If you get an error after pressing the upload button, make sure that the folder where your uploader is installed is writable. If that is the case and you still get an error, please [open an issue](https://github.com/JoeGandy/ShareX-Custom-Upload/issues).
+If you get an error after pressing the update button, make sure that the folder where your uploader is installed is writable. If that is the case and you still get an error, please [open an issue](https://github.com/JoeGandy/ShareX-Custom-Upload/issues).
 
 > Note: The uploader only supports automatic updating starting with version 2.1.0. If you are currently using a version older than 2.1.0 and want to update, you will need to complete the update manually by copying the new files into your website. However, after you manually update, you will be able to use the automatic updater for future versions.
 
