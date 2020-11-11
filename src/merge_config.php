@@ -1,5 +1,12 @@
 <?php
 
+if (!file_exists("config.php")) {
+    $error_msg = "Your configuration file does not exist. Please make a copy of the default configuration (config.default.php) and rename it to config.php. <a href='https://github.com/JoeGandy/ShareX-Custom-Upload/tree/master#setup'>More info</a>";
+    $error_no_cfg = true;
+    include 'error.php';
+    die();
+}
+
 $user_config = include 'config.php';
 
 $default_config = [
@@ -48,5 +55,3 @@ foreach ($default_config as $key => $value) {
 }
 
 return $config_merged;
-
-?>
