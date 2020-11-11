@@ -1,23 +1,33 @@
 # ShareX-Custom-Upload
+
 A little PHP script created for uploading text, files, and images to your own webserver. It supports uploading via ShareX, but also on the web interface, and with command line scripts.
 
 ## Installation
+
 Download the latest release as a ZIP from the [Releases page](https://github.com/JoeGandy/ShareX-Custom-Upload/releases).
 
 Extract the ZIP and follow the [setup instructions](#setup) below.
 
+If you'd like to run on the bleeding-edge of updates, clone this repo, and replace all references to `release` in the documentation with `src`. Point your web server's document root to this `src` folder, and disable the auto-updater. To update, run `git pull`.
+
 ## Migrating from Version 1
+
 Version 2 introduced major breaking changes that make it incompatible with Version 1 installations. See [the migration guide](MIGRATING.md) for instructions on how to upgrade your uploader.
 
 ## NGINX Configuration
+
 By default, this server relies on Apache's `.htaccess` configuration files to function. However, it is possible to configure NGINX to work with the uploader. Please read the [NGINX configuration guide](NGINX.md) for more information.
 
 # Setup
-This script requires the `openssl` and `fileinfo` extensions to be enabled in your `php.ini`.
 
-If using Apache, you must also make sure that `mod_rewrite` and `mod_authz_core` are enabled in your `httpd.conf`.
+**Note:** this script requires the `openssl` and `fileinfo` extensions to be enabled in your `php.ini`.
 
-In the `release` folder, edit the `config.php` file to match your setup.
+**Note:** If using Apache, you must also make sure that `mod_rewrite` and `mod_authz_core` are enabled in your `httpd.conf`.
+
+1. Enter the `release` folder
+2. Make a copy of the `config.default.php` file and save it as `config.php`
+3. Edit the `config.php` file as you see fit
+
 For your site to start working, the only setting you need to change is `base_url`. This will be the URL where your gallery page is accessible.
 
 Then, upload the contents of the `release` folder to your website.
@@ -25,14 +35,14 @@ Then, upload the contents of the `release` folder to your website.
 See the [full configuration documentation](#full-configuration) for more information about how to configure your installation.
 
 > **Important:** If you choose to not place your uploader in the root of your website, the `base_url` setting needs to include the path to where the uploader code will be accessible. If you do this and you use Apache, you will also need to to change the `RewriteBase` in the `.htaccess` file to incude the path to your uploader.
-> 
+>
 > For example, if you want your uploader to be located at `https://mydomain.com/myfileuploads`, you will need to upload the contents of the `release` directory to `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
 
 # Updating
 
-To update your uploader to a new version, download the latest release as a ZIP from the [Releases page](https://github.com/JoeGandy/ShareX-Custom-Upload/releases). Extract the `release` folder from the ZIP and upload the folder (not its contents, the folder itself) to your uploader's install directory. For example, if your uploader is installed at `/website/root/directory/`, make sure the folder is at `/website/root/directory/release/`. Now, open the gallery page and a large banner that prompts you to update should appear. If the update is successful, you can then just delete the `release` folder.
+Updating to a new version is fully automated, except pressing a button. When a new update is available, a large banner will appear that prompts you to update. Confirm the update, and it'll do the rest for you.
 
-> **Important: The automatic updater does not modify any of your configuration files, so if the configuration format is modified in the future, you will need to manually edit your configuration file to match the new format. *Please read the release notes for any new versions and check for any breaking configuration changes*. You can always check [the latest configuration file](src/config.php) for an example of what your configuration should look like.**
+> **Important: The automatic updater does not modify any of your configuration files, so if the configuration format is modified in the future, you will need to manually edit your configuration file to match the new format. _Please read the release notes for any new versions and check for any breaking configuration changes_. You can always check [the latest configuration file](src/config.default.php) for an example of what your configuration should look like.**
 
 If the update banner does not show up, please make sure that the `VERSION` file exists in both your uploader install directory and the `release` directory. The version number in the `release` directory must also be higher than the version number in your current installation.
 
@@ -54,14 +64,16 @@ To start using your uploader with ShareX, go to your gallery page (which will be
 
 ## ShareX File Name Templates
 
-The uploader supports using names generated by ShareX's templating system, which allows you to use information about this image to generate your file name. To enable this, you will need to set the `sharex_upload_naming_scheme` to `provided` in your `config.php`. 
+The uploader supports using names generated by ShareX's templating system, which allows you to use information about this image to generate your file name. To enable this, you will need to set the `sharex_upload_naming_scheme` to `provided` in your `config.php`.
 
-To customize the format of this name after adding your uploader to ShareX, you will need to open the `Custom uploader settings` from the `Destinations` menu in the ShareX application. Select the name of your uploader in the `Uploaders` menu. Now, you can edit the value of the  `name` field `Body` table on the right.
+To customize the format of this name after adding your uploader to ShareX, you will need to open the `Custom uploader settings` from the `Destinations` menu in the ShareX application. Select the name of your uploader in the `Uploaders` menu. Now, you can edit the value of the `name` field `Body` table on the right.
 
 This `name` field accepts any valid ShareX name template as a value. You can create a ShareX template string by opening the `Task Settings` menu from the ShareX application, opening the `File naming` tab, and selecting the `Name pattern for capture or clipboard upload` field. A dropdown will open on the right, which you can use to create the template string you want to use. You can then copy the string from this field back into the `name` field from the `Custom uploader settings`.
 
 ## Manual Setup
+
 Alternatively, if you have trouble with the above, you can manually add your uploader to ShareX.
+
 1. From the ShareX main application, go to `Destinations` and click on `Custom uploader settings`
 2. In the top left corner, press `New` to add a new uploader profile
 3. Now, set the Request Method to `POST`
@@ -78,37 +90,46 @@ The setup is now complete, test your uploader and it should work!
 This uploader also supports text uploading via shell script. To use this feature, click on the Terminal icon on the bottom of your gallery page and select your shell environment. This will download a shell script which will be able to upload piped inputs to your site. Next, follow the steps for your shell environment.
 
 ## Bash
+
 Move the downloaded script to `/usr/bin/local`.
 
 ## Windows Command Prompt
+
 Move the downloaded script to `C:\Users\yourusername\scripts` (replacing `yourusername` with your Windows user folder).
 Then, add that folder to your PATH.
 
 To do this, type `Environment Variables` into Windows Search. Then, in the window that opens, click on the `Environment Variables...` button. Find the `Path` variable in the User variables section, select it, and press Edit. Then press the `New` button and type the path to the folder where your script is located (`C:\Users\yourusername\scripts`). Press Ok to save all your changes and restart the command prompt.
 
 ## Powershell
+
 Open your Powershell profile file (the path is stored in the `$PROFILE` variable) and copy the contents of the downloaded script to the end of your profile file. Save the profile and restart Powershell.
 
 ## Usage
+
 Now, you can pipe text to the `upload` command and it will return the URL of the uploaded file. You can optionally provide a filename to be used for the upload.
 
 Examples:
+
 ```
 somecommand | upload
 ```
+
 ```
 somecommand | upload myfile.txt
 ```
 
 # Direct Uploading
+
 Want to upload directly using POST requests? You're in luck! We've got [some documentation](UPLOADING.md).
 
 # Screenshots
+
 ![Screenshot of gallery page](images/gallery.png)
 
 ![Screenshot of text viewer](images/textviewer.png)
 
 # Planned Features
+
 [View the tasks board here](https://github.com/JoeGandy/ShareX-Custom-Upload/projects/1).
 
 # Full Configuration
@@ -117,37 +138,37 @@ Below is an explanation of all available configuration options.
 
 ## `base_url`
 
-*You must change this.*
+_You must change this._
 
 This is the most important configuration option. You must set this in order for your site to work. This needs to be set to the location where your uploader site's files can be accessed.
 
 > **Important:** If you choose to not place your uploader in the root of your website, the `base_url` setting needs to include the path to where the uploader code will be accessible. If you do this, you will also need to to change the `RewriteBase` in the `.htaccess` file to incude the path to your uploader.
-> 
+>
 > For example, if your uploader site's files are located at `/website/root/directory/myfileuploads`, set `base_url` to `https://mydomain.com/myfileuploads` and update the `RewriteBase` line to say `RewriteBase /myfileuploads`
 
 ## `secure_key`
 
-*You must change this.*
+_You must change this._
 
 This sets the token used by ShareX to upload images and files. Since you don't need to memorize this, you should probably set it to something really long and random.
 
-***Important: The `secure_key` cannot contain the `$` character due to limitations of PHP.***
+**_Important: The `secure_key` cannot contain the `$` character due to limitations of PHP._**
 
-***Note: This is not the password you use to log in to the gallery.***
+**_Note: This is not the password you use to log in to the gallery._**
 
 [Here's a random string generator you can use.](https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new)
 
 ## `file_storage_folder`
 
-*Default Value: `'u/'`*
+_Default Value: `'u/'`_
 
 This sets the directory where your uploads are stored. You really shouldn't have to change this. If you want to change the path where your files are accessible on the site, use the `upload_access_path` config option instead.
 
-> **However, if you change this and you use Apache, you *must* copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)**
+> **However, if you change this and you use Apache, you _must_ copy the `.htaccess` file from the `u/` directory to your new folder. If you do not do this, people will be able to run arbitrary code on your computer. (This is very bad.)**
 
 ## `upload_access_path`
 
-*Default Value: `'/'`*
+_Default Value: `'/'`_
 
 The sets the path where you will be able to access your uploads from your browser.
 
@@ -158,17 +179,17 @@ If you set this to `/` and your `base_url` is `https://www.example.com`, a file 
 
 If you set this to `myfiles/`, a file called `filename.ext` would be accessible at `https://www.example.com/myfiles/filename.ext`
 
-***Note: For security reasons, this cannot be the same as your `file_storage_folder`.***
+**_Note: For security reasons, this cannot be the same as your `file_storage_folder`._**
 
 ## `zip_storage_folder`
 
-*Default Value: `'backups/'`*
+_Default Value: `'backups/'`_
 
 This sets the folder where ZIP backups will be stored.
 
 ## `allowed_ips`
 
-*Default Value: `['127.0.0.1', '::1']`*
+_Default Value: `['127.0.0.1', '::1']`_
 
 This sets the IP addresses that are allowed to access the gallery page. However, this does not control who can access your uploads—anyone with a direct link to an file can see it. By default, only clients on the same computer as the host can access the page.
 
@@ -176,9 +197,9 @@ Leave this blank to disable IP blocking.
 
 ## `enable_password_login`
 
-*Default Value: `false`*
+_Default Value: `false`_
 
-This sets whether to use the password system to login to the gallery page. Using this setting *will not* disable the `allowed_ips` setting and IP blocking—the two will be used in conjunction.
+This sets whether to use the password system to login to the gallery page. Using this setting _will not_ disable the `allowed_ips` setting and IP blocking—the two will be used in conjunction.
 
 After the first time you enable this, attempting to view the gallery page will prompt you to create an account.
 
@@ -186,13 +207,13 @@ See the [password login](#login-configuration) section above for more details.
 
 ## `enable_username`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This sets whether or not you will be prompted to provide a username when you log in. This setting has no effect if `enable_password_login` is `false`. If this setting is disabled, you will only be prompted for your password.
 
 ## `remember_me_expiration_days`
 
-*Default Value: `30`*
+_Default Value: `30`_
 
 This controls how long Remember Me tokens are valid for.
 
@@ -202,19 +223,19 @@ Remember Me tokens will automatically deleted from your browser if you press the
 
 ## `page_title`
 
-*Default Value: `'My File Uploader'`*
+_Default Value: `'My File Uploader'`_
 
 This sets the title shown for the gallery page tab in your browser.
 
 ## `heading_text`
 
-*Default Value: `'My File Uploader'`*
+_Default Value: `'My File Uploader'`_
 
 This sets the text shown in the header on the gallery page.
 
 ## `gallery_date_format`
 
-*Default Value: `'MMMM Do YYYY, HH:mm:ss'`*
+_Default Value: `'MMMM Do YYYY, HH:mm:ss'`_
 
 This controls the date format used to display file upload dates in the table on the gallery page.
 
@@ -222,45 +243,45 @@ See [the Moment.js format options](https://momentjs.com/docs/#/displaying/format
 
 ## `enable_gallery_page_uploads`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether to enable the upload forms on the gallery page.
 
 ## `enable_delete_all`
 
-*Default Value: `false`*
+_Default Value: `false`_
 
 This controls whether to enable the option to delete all uploads from the gallery page.
 
 ## `enable_delete`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether to show the option to delete individual uploaded files on the gallery page.
 
 ## `enable_rename`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether to show the option to rename files from the gallery page.
 
 ## `enable_tooltip`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether to show image previews in a tooltip when image links are hovered over on the gallery page.
 
 ## `enable_zip_dump`
 
-*Default Value: `false`*
+_Default Value: `false`_
 
 This controls whether to show the option to download all uploads as a ZIP archive. This is untested with large amounts of uploads.
 
-*Note: This option does not control whether you will be able to download uploads as a ZIP using the bulk selector.*
+_Note: This option does not control whether you will be able to download uploads as a ZIP using the bulk selector._
 
 ## `enable_rich_text_viewer`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This sets whether to show text files in the rich text viewer or send all files raw.
 
@@ -268,7 +289,7 @@ The rich text viewer has theme support, line numbers, and syntax highlighting.
 
 ## `sharex_upload_naming_scheme`
 
-*Default Value: `'random'`*
+_Default Value: `'random'`_
 
 This sets the file naming format to use for ShareX uploads.
 
@@ -284,7 +305,7 @@ Random mode will generate a random file name with the length specified in `rando
 
 ## `gallery_upload_naming_scheme`
 
-*Default Value: `'random'`*
+_Default Value: `'random'`_
 
 This sets the file naming format to use for gallery uploads.
 
@@ -298,7 +319,7 @@ Random mode will generate a random file name with the length specified in `rando
 
 ## `text_upload_default_naming_scheme`
 
-*Default Value: `'random'`*
+_Default Value: `'random'`_
 
 This sets the file naming format to use if no file name is provided for a text upload.
 
@@ -310,13 +331,13 @@ Random mode will generate a random file name with the length specified in `rando
 
 ## `random_name_length`
 
-*Default Value: `6`*
+_Default Value: `6`_
 
 This setting sets the length of the random names generated if `random` is chosen as the `default_naming_scheme`.
 
 ## `upload_date_format`
 
-*Default Value: `'Y-m-d_H.i.s'`*
+_Default Value: `'Y-m-d_H.i.s'`_
 
 This setting sets the format used to generate file names if `date` is set as the `default_naming_scheme`.
 
@@ -326,7 +347,7 @@ Since this option is used for file names, there is a limited selection of charac
 
 ## `enable_updater`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether to enable uploader's built in updater.
 
@@ -336,7 +357,7 @@ If you disable this, you will need to manually copy the code from the new releas
 
 ## `enable_update_rollback`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether the uploader should make backups of the old version of the code when performing an update.
 
@@ -344,7 +365,7 @@ If this is enabled, the update will copy the old versions of all modified files 
 
 ## `enable_image_cache`
 
-*Default Value: `true`*
+_Default Value: `true`_
 
 This controls whether the uploader should instruct the browser to cache the uploaded images.
 
@@ -352,7 +373,7 @@ This is enabled by default, but can slightly hurt performance on low power syste
 
 ## `debug_mode`
 
-*Default Value: `false`*
+_Default Value: `false`_
 
 This enables Debug Mode, which will instruct the uploader to log and send additional debug information.
 
