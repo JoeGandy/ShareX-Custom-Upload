@@ -25,7 +25,7 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
     <link rel="preload" href="js/setTheme.js" as="script">
 
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
     <link
         href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
         rel="stylesheet"
