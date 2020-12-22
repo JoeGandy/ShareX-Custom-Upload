@@ -27,7 +27,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
     die();
 }
 
-create_webmanifest();
+create_webmanifest($config);
 
 ?>
 <!DOCTYPE html>

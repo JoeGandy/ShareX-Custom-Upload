@@ -4,7 +4,7 @@ $config = include 'merge_config.php';
 include 'functions.php';
 
 session_start();
-auth_user(true);
+auth_user($config, true);
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
     unset($_SESSION['message']);

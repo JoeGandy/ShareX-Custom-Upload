@@ -10,8 +10,10 @@ if (!file_exists(dirname(__FILE__, 2).'/'.'functions.php')) {
 
 include '../functions.php';
 
+$config = include '../merge_config.php';
+
 session_start();
-auth_user();
+auth_user($config);
 
 // Check that this isn't a rollback update to not overwrite rollback files
 $update_version_path = join_paths(getcwd(), 'VERSION');
@@ -117,6 +119,7 @@ foreach ($OPTIONAL_FILES as $file) {
     }
 }
 
+// Reinclude updated config
 $config = include '../merge_config.php';
 
 foreach ($UPDATE_FILES as $file) {
