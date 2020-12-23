@@ -19,9 +19,9 @@ if (isset($config['enable_rename']) && $config['enable_rename']) {
             $newfile_pathinfo = pathinfo($newfile_basename);
             $extension_exists = isset($newfile_pathinfo['extension']) && $newfile_pathinfo['extension'] !== '';
             if ($extension_exists) {
-                $target = get_file_target($newfile_basename, false, $newfile_pathinfo['filename'], $config);
+                $target = get_file_target($newfile_basename, $newfile_pathinfo['filename'], $config);
             } else {
-                $target = get_file_target(basename($old_path), false, $newfile_pathinfo['filename'], $config);
+                $target = get_file_target(basename($old_path), $newfile_pathinfo['filename'], $config);
             }
 
             if (rename($old_path, $target)) {
