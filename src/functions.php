@@ -7,11 +7,10 @@ function display_alert($text, $type) {
 }
 
 function is_image($file) {
-    $image_formats = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml'];
-    if (!in_array($file, $image_formats))
-        return false;
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img#Supported_image_formats
+    $image_formats = ['apng', 'gif', 'jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'svg','webp'];
 
-    return true;
+    return in_array($file, $image_formats);
 }
 
 function generate_random_name($type, $length) {

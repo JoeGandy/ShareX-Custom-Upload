@@ -67,7 +67,6 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
             }
 
             $files = preg_grep('/^([^.])/', scandir($dir_path));
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
             if (!empty($_SESSION) && isset($_SESSION['message']) && isset($_SESSION['type'])) {
                 echo display_alert($_SESSION['message'], $_SESSION['type']);
@@ -173,7 +172,13 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
 
                 if (is_dir($file)) {
                     unset($files[$key]);
-                } else { ?>
+                } else { 
+                    
+                    // Info
+                    $filesize = bytes_to_string(filesize($file_path));
+                    $filemodifiedtime = filemtime($file_path);
+                    $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                ?>
                     <tr data-filename="<?php echo $file; ?>" >
                         <td>
                             <?php if ($config['enable_bulk_operations']) { ?>
@@ -183,7 +188,7 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
                                 </div>
                             <?php } ?>
                             <a target="_blank" href="<?php echo join_paths($config['base_url'], $config['upload_access_path'], $file); ?>"
-                                <?php if ($config['enable_tooltip'] && is_image(finfo_file($finfo, $file_path))) { ?>
+                                <?php if ($config['enable_tooltip'] && is_image($extension)) { ?>
                                     data-toggle="tooltip" data-html="true" data-placement="right" title="<img src='<?php echo join_paths($config['base_url'], $config['upload_access_path'], $file);
                                 ?>' width='150px' alt='<?php echo $file; ?>'>"
                                 <?php } ?>>
@@ -191,13 +196,13 @@ if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete
                             </a>
                         </td>
                         <td>
-                            <?php echo bytes_to_string(filesize($file_path)); ?>
+                            <?php echo $filesize; ?>
                         </td>
                         <td>
-                            <?php echo filemtime($file_path) ?>
+                            <?php echo $filemodifiedtime; ?>
                         </td>
                         <td>
-                            <?php echo pathinfo($file_path, PATHINFO_EXTENSION); ?>
+                            <?php echo $extension; ?>
                         </td>
                         <?php if ($config['enable_rename'] || $config['enable_delete']) { ?>
                             <td class="text-center">
