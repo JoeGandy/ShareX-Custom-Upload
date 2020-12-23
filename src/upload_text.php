@@ -31,12 +31,12 @@ if (isset($_POST['key'])) {
 
         if ($filename_no_extension === '') {
             if ($config['text_upload_default_naming_scheme'] === 'date') {
-                $target = get_file_target($file_basename, date($config['upload_date_format']));
+                $target = get_file_target($file_basename, date($config['upload_date_format']), $config);
             } else {
-                $target = get_file_target($file_basename, '');
+                $target = get_file_target($file_basename, '', $config);
             }
         } else {
-            $target = get_file_target($file_basename, $filename_no_extension);
+            $target = get_file_target($file_basename, $filename_no_extension, $config);
         }
 
         $dir_path = join_paths(
@@ -74,12 +74,12 @@ if (isset($_POST['key'])) {
 
     if ($filename_no_extension === '') {
         if ($config['text_upload_default_naming_scheme'] === 'date') {
-            $target = get_file_target($file_basename, date($config['upload_date_format']));
+            $target = get_file_target($file_basename, date($config['upload_date_format']), $config);
         } else {
-            $target = get_file_target($file_basename, '');
+            $target = get_file_target($file_basename, '', $config);
         }
     } else {
-        $target = get_file_target($file_basename, $filename_no_extension);
+        $target = get_file_target($file_basename, $filename_no_extension, $config);
     }
 
     $dir_path = join_paths(

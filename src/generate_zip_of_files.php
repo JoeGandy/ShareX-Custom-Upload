@@ -3,7 +3,7 @@ $config = include 'merge_config.php';
 include 'functions.php';
 
 session_start();
-auth_user();
+auth_user($config);
 
 ini_set("memory_limit", "-1");
 set_time_limit(0);

@@ -3,7 +3,7 @@ $config = include 'merge_config.php';
 include 'functions.php';
 
 session_start();
-auth_user();
+auth_user($config);
 
 if (isset($_GET['files']) && is_array($_GET['files'])) {
     if (isset($config['enable_delete']) && $config['enable_delete']) {
