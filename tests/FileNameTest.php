@@ -24,7 +24,7 @@ final class FileNameTest extends TestCase
         $original_file_name = "TestPngFile.png";
 
         $correct = $original_file_name;
-        $test = get_file_target($original_file_name, '');
+        $test = get_file_target($original_file_name, '', $GLOBALS['config']);
 
         $this->assertEquals(
             pathinfo($correct, PATHINFO_EXTENSION),
@@ -39,7 +39,7 @@ final class FileNameTest extends TestCase
         $post_name = "07.53.17-08.11.19";
 
         $correct = $original_file_name;
-        $test = get_file_target($original_file_name, $post_name);
+        $test = get_file_target($original_file_name, $post_name, $GLOBALS['config']);
 
         $this->assertEquals(
             pathinfo($correct, PATHINFO_EXTENSION),
@@ -54,7 +54,7 @@ final class FileNameTest extends TestCase
         $post_name = "testname";
 
         $correct = $post_name.'.png';
-        $test = get_file_target($original_file_name, $post_name);
+        $test = get_file_target($original_file_name, $post_name, $GLOBALS['config']);
 
         $this->assertEquals(
             $correct,

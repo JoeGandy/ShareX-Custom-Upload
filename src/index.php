@@ -2,9 +2,9 @@
 $config = include 'merge_config.php';
 include 'functions.php';
 session_start();
-auth_user();
+auth_user($config);
 
-create_webmanifest();
+create_webmanifest($config);
 
 if (!empty($_SESSION) && isset($_SESSION['delete_release']) && $_SESSION['delete_release']) {
     delete_files(join_paths(getcwd(), 'release'));

@@ -4,7 +4,7 @@ include 'functions.php';
 $config = include 'merge_config.php';
 
 session_start();
-auth_user();
+auth_user($config);
 
 if (!isset($config['enable_updater']) || !$config['enable_updater']) {
     header('Location: '.$config['base_url']);

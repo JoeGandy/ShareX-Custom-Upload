@@ -3,7 +3,7 @@
     include 'functions.php';
     
     session_start();
-    auth_user();
+    auth_user($config);
 
     $result_json = [
         'Name' => "{$config['page_title']}",
