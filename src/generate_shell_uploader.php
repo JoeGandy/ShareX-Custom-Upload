@@ -4,7 +4,7 @@ $config = include 'merge_config.php';
 include 'functions.php';
 
 session_start();
-auth_user();
+auth_user($config);
 
 $upload_url = join_paths($config['base_url'], 'upload_text.php');
 $key = join_paths($config['secure_key']);

@@ -24,27 +24,27 @@ $config = include 'merge_config.php';
 include 'functions.php';
 
 if (strpos($_SERVER['REQUEST_URI'], '/css/')) {
-    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/css/'))));
+    header('Location: ' . join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/css/'))));
     die();
 }
 
 if (strpos($_SERVER['REQUEST_URI'], '/js/')) {
-    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/js/'))));
+    header('Location: ' . join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/js/'))));
     die();
 }
 
 if (strpos($_SERVER['REQUEST_URI'], '/icons/')) {
-    header('Location: '.join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/icons/'))));
+    header('Location: ' . join_paths($config['base_url'], substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '/icons/'))));
     die();
 }
 
 if ('manifest.webmanifest' === $file_name) {
-    header('Location: '.join_paths($config['base_url'], 'manifest.webmanifest'));
+    header('Location: ' . join_paths($config['base_url'], 'manifest.webmanifest'));
     die();
 }
 
 if ('favicon.ico' === $file_name) {
-    header('Location: '.join_paths($config['base_url'], 'favicon.ico'));
+    header('Location: ' . join_paths($config['base_url'], 'favicon.ico'));
     die();
 }
 
@@ -68,16 +68,42 @@ if (file_exists($file_path)) {
     $mime_type = finfo_file($finfo, $file_path);
     finfo_close($finfo);
 
-    // MIME overrides to prevent issues around MIME sniffing
-    if (preg_match("/.apk$/", $file_path)) {
-        // APKs are secret ZIPs, but serving them as ZIPs makes some
-        // android devices download them with a `.\zip` extension!
-        $mime_type = "application/vnd.android.package-archive";
+    //! MIME overrides to prevent issues around MIME sniffing
+    $mime_overrides = [
+        [
+            // APKs are secret ZIPs, but serving them as ZIPs makes some
+            // Android devices download them with a `.\zip` extension!
+            "extension" => "apk",
+            "mime" => "application/vnd.android.package-archive",
+        ],
+        [
+            // Some ZIPs are being detected as other files. E.g. Magisk
+            // for Android is detected as a .jar so Chrome for Android
+            // adds .jar to the end, making it useless.
+            "extension" => "zip",
+            "mime" => "application/zip",
+        ],
+    ];
+
+    // Check against extensions and use the specified override
+    foreach ($mime_overrides as $override) {
+        if (preg_match("/." . $override["extension"] . "$/", $file_path)) {
+            $mime_type = $override["mime"];
+        }
     }
 
+    // PHP hates logical thinking, so let's unset this so we
+    // don't have any odd issues later on
+    unset($override);
+
+    // If the file is a plaintext file (or JSON)...
     if ((substr($mime_type, 0, 4) === 'text' || $mime_type === 'application/json')
-        && !(isset($_GET['raw']) && strtolower($_GET['raw']) === 'true' )
-        && $config['enable_rich_text_viewer']) {
+        // and we don't want the raw file (`?raw=true`)
+        && !(isset($_GET['raw']) && strtolower($_GET['raw']) === 'true')
+        // and the rich text viewer is enabled...
+        && $config['enable_rich_text_viewer']
+    ) {
+        // Set up the rich text viewer
         $file_text = file_get_contents($file_path);
         $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
         if ($file_extension === 'txt') {
@@ -88,9 +114,11 @@ if (file_exists($file_path)) {
         include 'text_viewer.php';
         die();
     } else {
-        header('Content-Type: '.$mime_type);
+        // Otherwise, provide the raw file
+        header('Content-Type: ' . $mime_type);
         header('Content-Length: ' . filesize($file_path));
 
+        // If caching is enabled, set up the caching headers
         if (isset($config['enable_image_cache']) && $config['enable_image_cache']) {
             $cache_ttl_seconds = 900; // 15 minutes
             $cache_revalidate_ttl_seconds = 900; // 15 minutes
@@ -100,7 +128,7 @@ if (file_exists($file_path)) {
             $etag = '';
             $etag_algo_used = '';
 
-            $time_start = microtime(true); 
+            $time_start = microtime(true);
 
             if (PHP_INT_SIZE === 8) {
                 // 64-bit, so we use SHA512 for faster performance
@@ -112,16 +140,17 @@ if (file_exists($file_path)) {
                 $etag_algo_used = 'SHA-256';
             }
 
-            header('ETag: "'.$etag.'"');
+            header('ETag: "' . $etag . '"');
 
             if (isset($config['debug_mode']) && $config['debug_mode']) {
                 $time_diff = round((microtime(true) - $time_start) * 1000, 4);
-                header('X-ETag-Generation-Milliseconds: '.$time_diff);
+                header('X-ETag-Generation-Milliseconds: ' . $time_diff);
             }
 
-            header('X-ETag-Algorithm: '.$etag_algo_used);
+            header('X-ETag-Algorithm: ' . $etag_algo_used);
         }
 
+        // Read file to output (client browser)
         readfile($file_path);
     }
 } else {

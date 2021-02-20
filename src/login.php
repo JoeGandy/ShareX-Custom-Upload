@@ -19,7 +19,7 @@ if (!file_exists($login_file_path)) {
 }
 
 session_start();
-auth_user(true);
+auth_user($config, true);
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
     unset($_SESSION['message']);
@@ -46,7 +46,7 @@ if (isset($_COOKIE['rememberme_authtoken']) && isset($login_file['tokens'])) {
     file_put_contents($login_file_path, json_encode($login_file));
 }
 
-create_webmanifest();
+create_webmanifest($config);
 
 ?>
 <!DOCTYPE html>

@@ -25,16 +25,16 @@ if (isset($_POST['key'])) {
 
         switch ($config['sharex_upload_naming_scheme']) {
             case 'keep':
-                $target = get_file_target($_FILES['fileupload']['name'], $filename);
+                $target = get_file_target($_FILES['fileupload']['name'], $filename, $config);
                 break;
             case 'provided':
-                $target = get_file_target($_FILES['fileupload']['name'], $_POST['name']);
+                $target = get_file_target($_FILES['fileupload']['name'], $_POST['name'], $config);
                 break;
             case 'date':
-                $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']));
+                $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']), $config);
                 break;
             default:
-                $target = get_file_target($_FILES['fileupload']['name'], '');
+                $target = get_file_target($_FILES['fileupload']['name'], '', $config);
                 break;
         }
 
@@ -65,13 +65,13 @@ if (isset($_POST['key'])) {
 
     switch ($config['gallery_upload_naming_scheme']) {
         case 'keep':
-            $target = get_file_target($_FILES['fileupload']['name'], $filename);
+            $target = get_file_target($_FILES['fileupload']['name'], $filename, $config);
             break;
         case 'date':
-            $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']));
+            $target = get_file_target($_FILES['fileupload']['name'], date($config['upload_date_format']), $config);
             break;
         default:
-            $target = get_file_target($_FILES['fileupload']['name'], '');
+            $target = get_file_target($_FILES['fileupload']['name'], '', $config);
             break;
     }
 
