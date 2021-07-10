@@ -7,7 +7,7 @@
     <link rel="preload" href="js/setTheme.js" as="script">
 
     <link rel="stylesheet" href="css/toggle-bootstrap.min.css">
-    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="this.disabled = true; window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
+    <link rel="stylesheet" href="css/toggle-bootstrap-dark-overlay.min.css" onload="window.__darkCssLoaded = true; if (window.__updateTheme) { window.__updateTheme(); }">
 
     <link id="highlightjs-light-theme" rel="stylesheet" href="css/solarized-light.css">
     <link id="highlightjs-dark-theme" rel="stylesheet" href="css/solarized-dark.css" disabled>
