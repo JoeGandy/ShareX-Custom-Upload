@@ -3,7 +3,8 @@ if (window.Dropzone) {
         paramName: 'fileupload',
         init: function() {
             this.on('addedfile', (file, xhr, formData) => {
-                $('#gallery-uploader').html(`
+                $('#gallery-uploader').children().hide();
+                $('#gallery-uploader').append(`
                     <div class="progress w-100">
                         <div class="progress-bar" id="gallery-uploader-progress" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>`
